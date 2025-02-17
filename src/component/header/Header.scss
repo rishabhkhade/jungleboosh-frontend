@@ -1,0 +1,52 @@
+.header-parent {
+    width: 100%;
+    background-color: var(--white);
+    background: var(--lightgrey);
+
+    padding: 10px;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+
+    .header-container {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img {
+            width: 10%;
+        }
+
+        .links {
+            display: flex;
+            gap: calc(var(--unit)/2);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .call-info {
+            border: 1px solid var(--lightgrey);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            gap: calc(var(--unit)/2);
+            border-radius: calc(var(--unit)/2);
+
+
+            .phone-icon {
+                font-size: 26px;
+            }
+
+            .no-text {
+
+                display: flex;
+                flex-direction: column;
+                // gap: calc(var(--unit)/2);
+
+            }
+        }
+    }
+}

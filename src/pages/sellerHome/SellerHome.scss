@@ -1,0 +1,225 @@
+.seller-home-parent {
+    height: calc(100vh - 60px);
+    width: 100%;
+    margin-top: 60px;
+
+    .seller-home-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit)/2);
+
+        .seller-home-left {
+            background: var(--bg-color);
+            width: 50%;
+            border-radius: calc(var(--unit)/2);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        .seller-home-right {
+            background: var(--bg-color);
+            width: 50%;
+            border-radius: calc(var(--unit)/2);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+
+
+        }
+    }
+}
+
+
+
+//second section
+.second-section-parent {
+    background: var(--bg-color);
+    height: auto;
+    width: 100%;
+    padding: 60px 0px;
+
+    .second-section-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit));
+
+        p {
+            text-align: center;
+            width: 70ch;
+        }
+
+        .gif-second-cont {
+            background: var(--white);
+            aspect-ratio: 2/1;
+            width: 50%;
+        }
+    }
+}
+
+
+//video gif
+.video-gif-parent {
+    width: 100%;
+    height: auto;
+    background-color: red;
+}
+
+
+//steps section
+.steps-section-parent {
+    height: auto;
+    width: 100%;
+    padding: 60px 0px;
+
+    .steps-section-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit)*2);
+
+        .steps {
+            display: flex;
+            gap: 10px;
+
+            .step-box {
+                width: 200px;
+                padding: 20px;
+                background: var(--lightgrey);
+                color: black;
+                clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+            }
+        }
+
+    }
+}
+
+//about
+.about-parent {
+    height: auto;
+    width: 100%;
+    padding: 60px 0px;
+    background: var(--bg-color);
+
+    .about-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit));
+
+        h2 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            width: 70ch;
+        }
+    }
+}
+
+//four option
+.four-option-parent {
+    height: auto;
+    width: 100%;
+    padding: 60px 0px;
+
+    .four-option-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .wrapper-icon-heading {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+
+
+            .icon-heading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: calc(var(--unit)/7);
+                flex-direction: column;
+                background: var(--bg-color);
+                padding: 10px;
+                border-radius: calc(var(--unit)/2);
+            }
+
+
+            span {
+                font-size: 25px;
+            }
+        }
+    }
+}
+
+
+//vision mision
+.vision-mision-parent {
+    height: auto;
+    width: 100%;
+    padding: 60px 0px;
+    background: var(--bg-color);
+
+    .vision-mision-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit));
+
+        .left-v-m {
+            width: 50%;
+            height: 300px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            gap: calc(var(--unit));
+        }
+    }
+
+    .v-m-line {
+        height: 100%;
+        width: 20px;
+        background: black;
+    }
+
+    .right-v-m {
+        width: 50%;
+        height: 300px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: var(--unit);
+    }
+
+    .v-m-heading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit));
+
+        .v-m-logo {
+            background: grey;
+            width: 50px;
+            aspect-ratio: 1;
+            padding: 5px;
+            border-radius: calc(var(--unit)/2.5);
+        }
+    }
+}

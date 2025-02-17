@@ -1,11 +1,13 @@
 :root {
+    --black: #1a1a1a;
+    --white: #ffffff;
     --green: #313E35;
     --accent: #B14B34;
     --text: rgb(107, 107, 107);
     --unit: 16px;
     --lightgrey: #6060604b;
     --grey: #606060;
-    --max-width: 1300px;
+    --max-width: 1200px;
     --trans: all 0.4s ease-in-out;
     --shadow: 0px 0px 20px rgba(0, 0, 0, 0.329);
     --unit: 16px;
@@ -28,7 +30,7 @@
 body {
     width: 100%;
     overflow-x: hidden;
- 
+
 }
 
 html {
@@ -90,4 +92,18 @@ a {
     text-decoration: none;
 }
 
-
+.btn {
+    padding:10px 20px;
+    background-color: var(--accent);
+    color: var(--white);
+    border-radius: var(--unit);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--trans);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

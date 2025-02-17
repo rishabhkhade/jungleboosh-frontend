@@ -1,0 +1,40 @@
+.register-parent {
+    height: calc(100vh - 60px);
+    width: 100%;
+    margin-top: 60px;
+
+    .register-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit)*2);
+
+        .steps {}
+
+        .personal-form {
+            border: 1px solid rgba(112, 110, 110, 0.185);
+            border-radius: var(--unit);
+            padding: 20px;
+            background: var(--bg-color);
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--unit)/2);
+
+            label {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                input {
+                    padding: 15px;
+                    border-radius: calc(var(--unit)/2);
+                    outline: none;
+                    width: 100%;
+                    border: none;
+                }
+            }
+        }
+    }
+}
