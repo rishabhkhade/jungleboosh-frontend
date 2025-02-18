@@ -93,7 +93,7 @@ a {
 }
 
 .btn {
-    padding:10px 20px;
+    padding: 10px 20px;
     background-color: var(--accent);
     color: var(--white);
     border-radius: var(--unit);
@@ -106,4 +106,31 @@ a {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    &:hover {
+        background-color: var(--green);
+    }
+}
+
+.border-btn {
+    padding: 10px 20px;
+    background-color: var(--white);
+    color: var(--accent);
+    border-radius: var(--unit);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: var(--trans);
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--accent);
+
+    &:hover {
+        background-color: var(--green);
+        color: var(--white);
+        border: none;
+    }
 }

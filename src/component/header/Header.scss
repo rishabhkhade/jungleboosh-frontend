@@ -2,7 +2,6 @@
     width: 100%;
     background-color: var(--white);
     background: var(--lightgrey);
-
     padding: 10px;
     height: 60px;
     position: fixed;
@@ -21,7 +20,7 @@
 
         .links {
             display: flex;
-            gap: calc(var(--unit)/2);
+            gap: calc(var(--unit));
             align-items: center;
             justify-content: center;
         }

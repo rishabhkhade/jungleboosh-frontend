@@ -26,6 +26,29 @@ function Register() {
                             <input type="text" placeholder='username' />
                         </label>
                     </form>
+
+
+                    {/* Business Details */}
+
+                    <label htmlFor="">
+                        <p>Business name</p>
+                        <input type="text" placeholder='Business name' />
+                    </label>
+
+                    <label>
+                        <p>Product unit</p>
+                        <select  >
+                            <option value="">select unit</option>
+
+                            <option>
+                                Abc
+                            </option>
+
+                        </select>
+
+                    </label>
+
+
                 </div>
             </div>
         </>
