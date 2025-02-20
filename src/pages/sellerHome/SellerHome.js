@@ -2,131 +2,127 @@ import React from 'react'
 import './SellerHome.scss'
 import { AiOutlineSafety } from "react-icons/ai";
 import { MdOutlinePrecisionManufacturing } from "react-icons/md";
+import image_hero from "../../assets/hero_section/hero-img.png";
+import registration from "../../assets/why_choose_us/registration.svg"
+import HeadingTag from '../../component/heading-tag/HeadingTag';
+import { LuCheckCheck } from "react-icons/lu";
+import testimonial_img1 from "../../assets/testimonial/NewProject.webp"
 
-function SellerHome() {
+function SellerHome(props) {
 
-    const data = [
+    const w_c_data = [
         {
-            icons: <AiOutlineSafety />,
-            name: "Safety"
+            image: registration,
+            name: "No Registration Fee",
+            des: "Registering as a JungleBoosh seller is free - no cost of creating your account or getting your products listed."
         },
         {
-            icons: <AiOutlineSafety />,
-            name: "Efficient"
+            image: registration,
+            name: "No Registration Fee",
+            des: "Registering as a JungleBoosh seller is free - no cost of creating your account or getting your products listed."
         },
         {
-            icons: <MdOutlinePrecisionManufacturing />,
-            name: "Precision"
+            image: registration,
+            name: "No Registration Fee",
+            des: "Registering as a JungleBoosh seller is free - no cost of creating your account or getting your products listed."
         },
-        {
-            icons: <AiOutlineSafety />,
-            name: "Innovation"
-        },
+
     ]
 
-    const step = [
-        "Register", "Listing products", "Accepting orders", "Tracking orders", "Manage stocks", "Payments on time"
+
+    const testimonial_data = [
+        {
+            icon: <LuCheckCheck />,
+            des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat ipsa necessitatibus eligendi cum repellat iusto.",
+            image: testimonial_img1,
+            name: "Ram Kumar",
+            city: "Maharastra, Pune"
+        },
+        {
+            icon: <LuCheckCheck />,
+            des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat ipsa necessitatibus eligendi cum repellat iusto.",
+            image: testimonial_img1,
+            name: "Ram Kumar",
+            city: "Maharastra, Pune"
+        },
+        {
+            icon: <LuCheckCheck />,
+            des: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat ipsa necessitatibus eligendi cum repellat iusto.",
+            image: testimonial_img1,
+            name: "Ram Kumar",
+            city: "Maharastra, Pune"
+        },
+
     ]
+
+
 
     return (
         <>
             <div className="parent seller-home-parent">
                 <div className="container seller-home-container">
                     <div className="seller-home-left">
-                        left side
+                        <h1>Sell Smarter, <span>Grow Faster</span> </h1>
+                        <h1> Start Your Journey with <span>Jungleboosh!</span>
+                        </h1>
+                        <p>Jungleboosh – The Smartest Way to Sell Online and Scale Your Business!</p>
                     </div>
-                    <div className="seller-home-right">
-                        right side
+                    <div className="seller-home-right bg-img-cover">
+                        <img src={image_hero} alt="hero image" />
                     </div>
                 </div>
             </div>
 
-            {/* second section */}
+            {/* why choose us */}
 
-            <div className="parent second-section-parent">
-                <div className="container second-section-container">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus quas quaerat et veritatis ex labore, vero facilis illum eligendi accusamus.</p>
-                    <h3>Lorem ipsum dolor sit amet.</h3>
-                    <div className='gif-second-cont'></div>
-                    <div className="btn">Register Now</div>
-                </div>
-            </div>
-
-            {/* video gif */}
-
-            <div className="parent video-gif-parent">
-                <p>video gif goes here</p>
-            </div>
-
-
-            {/* steps */}
-            <div className="parent steps-section-parent">
-                <div className="container steps-section-container">
-                    <h3>Steps to follow</h3>
-                    <div className="steps">
+            <div className="parent why-choose-parent">
+                <div className="container why-choose-container">
+                    <div className="w-c-heading"><HeadingTag text="Why Choose us" /></div>
+                    <div className="w-c-bottom">
                         {
-                            step.map((item, index) => (
-                                <div className="step-box">{item}</div>
+                            w_c_data.map((item, index) => (
+                                <div className="why-choose-box">
+                                    <>
+                                        <div className="w-c-icon">
+                                            <img src={item.image} alt="No Registration Fee" />
+                                        </div>
+                                        <div className="w-c-main-content">
+                                            <h3>{item.name}</h3>
+                                            <p>{item.des}</p>
+                                        </div>
+                                    </>
+                                </div>
                             ))
                         }
                     </div>
-
                 </div>
             </div>
 
+            {/* testimonial */}
+            <div className="parent testimonial-parent">
+                <div className="container testimonial-container">
+                    <div className="testimonial-heading"><HeadingTag text="Testimonial" /></div>
+                    <div className="testimonial-bottom">
+                        {
+                            testimonial_data.map((item, index) => (
+                                <div className="testimonial-box">
+                                    <div className="testimonial-top"> <span>{item.icon}</span>
+                                        <p>{item.des}</p></div>
+                                    <div className="testimonial-bottom-img">
+                                        <div className="testimonial-image bg-img-cover" style={{ background: `url(${item.image})` }}>
+                                        </div>
+                                        <div className="name-designation">
+                                            <h4>{item.name}</h4>
+                                            <span>{item.city}</span>
+                                        </div>
+                                    </div>
 
-            {/* about us */}
-            <div className="parent about-parent">
-                <div className="container about-container">
-
-                    <h3>About Us</h3>
-                    <h3>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eum quisquam, deserunt fugiat architecto.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id iste illum quos ullam debitis placeat quisquam, temporibus omnis soluta vitae tempore quam, explicabo itaque repellat.</p>
-
-                </div>
-            </div>
-
-            {/* four options */}
-
-            <div className="parent four-option-parent">
-                <div className="container four-option-container">
-                    <div className="wrapper-icon-heading">
-                        {data.map((item, index) => (
-                            <>
-                                <div className="icon-heading">
-                                    <span>{item.icons}</span>
-                                    <h4>{item.name}</h4>
                                 </div>
-                            </>
-                        ))}
+                            ))
+                        }
                     </div>
-
-
                 </div>
             </div>
-
-            {/* vission mission */}
-            <div className="parent vision-mision-parent">
-                <div className="container vision-mision-container">
-                    <div className="left-v-m">
-                        <div className="v-m-heading">
-                            <div className="v-m-logo"></div>
-                            <h3>Vision</h3>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic eum reiciendis quam ducimus, quae commodi! Commodi rerum fugiat temporibus consectetur et. Ratione ut architecto perferendis  Hic eum reiciendis quam ducimus, quae commodi! Commodi rerum fugiat temporibus consectetur et. Ratione ut architecto perferendis?</p>
-                    </div>
-                    <div className="v-m-line"></div>
-                    <div className="right-v-m">
-                        <div className="v-m-heading">
-                            <div className="v-m-logo"></div>
-                            <h3>Mision</h3>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic eum reiciendis quam ducimus, quae commodi! Commodi rerum fugiat temporibus consectetur et. Ratione ut architecto perferendis  Hic eum reiciendis quam ducimus, quae commodi! Commodi rerum fugiat temporibus consectetur et. Ratione ut architecto perferendis?</p>
-                    </div>
-
-                </div>
-            </div>
-
         </>
     )
 }

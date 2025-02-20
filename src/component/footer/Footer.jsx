@@ -6,7 +6,7 @@ function Footer() {
     <div>
       <div className="parent footer-parent">
         <div className="container footer-container">
-
+          Footer
         </div>
       </div>
     </div>

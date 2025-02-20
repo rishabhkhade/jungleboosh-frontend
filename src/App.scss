@@ -5,11 +5,10 @@
     --accent: #B14B34;
     --text: rgb(107, 107, 107);
     --unit: 16px;
-    --lightgrey: #6060604b;
     --grey: #606060;
     --max-width: 1200px;
     --trans: all 0.4s ease-in-out;
-    --shadow: 0px 0px 20px rgba(0, 0, 0, 0.329);
+    --shadow: 0px 0px 10px rgba(0, 0, 0, 0.329);
     --unit: 16px;
     --bg-color: #f3f7fc;
 }
@@ -43,20 +42,25 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Gilroy";
+    font-family: "Gilroy";   
+    letter-spacing: 0.7px;
+    word-spacing: 1px; 
 }
 
-h2 {
-    font-size: 50px;
-    text-transform: capitalize;
-    letter-spacing: 0.7px;
-    word-spacing: 1px;
+
+h2{
+    font-size: 30px;
     font-weight: 600;
+}
+
+h3{
+    font-size: 24px;
+    font-weight: 500;
 }
 
 p {
     text-align: justify;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 25px;
     letter-spacing: 0.7px;
     word-spacing: 1px;
@@ -93,10 +97,10 @@ a {
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: 10px 25px;
     background-color: var(--accent);
     color: var(--white);
-    border-radius: var(--unit);
+    border-radius: calc(var(--unit)/2);
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -113,10 +117,10 @@ a {
 }
 
 .border-btn {
-    padding: 10px 20px;
+    padding: 10px 25px;
     background-color: var(--white);
     color: var(--accent);
-    border-radius: var(--unit);
+    border-radius: calc(var(--unit)/2);
     cursor: pointer;
     position: relative;
     overflow: hidden;

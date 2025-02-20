@@ -1,0 +1,11 @@
+.heading-tag{
+    padding: 10px 20px;
+    border: 1.5px solid var(--accent);
+    border-radius: calc(var(--unit)/2);
+
+    p{
+        color: var(--accent);
+        text-transform: capitalize;
+    }
+    
+} 

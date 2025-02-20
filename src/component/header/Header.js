@@ -8,17 +8,12 @@ function Header() {
     <>
       <div className='parent header-parent'>
         <div className='container header-container'>
-          <div className='logo'><img src={logo_header} /></div>
+          {/* <div className='logo'><img src={logo_header} /></div> */}
+          <div className='logo'><h2 style={{color:"var(--accent)"}}>Jungle Boosh</h2></div>
           <div className='links'>
-            <span className='btn'>login</span>
-            <span className='border-btn'>sign up</span>
-            {/* <div className="call-info">
-              <div className="phone-icon"><IoIosCall /></div>
-              <div className="no-text">
-              <span>call for more info</span>
-              <span>9865954782</span>
-              </div>
-            </div> */}
+            <span className='border-btn'>Login</span>
+            <span className='btn'>Sign up</span>
+           
           </div>
         </div>
       </div>

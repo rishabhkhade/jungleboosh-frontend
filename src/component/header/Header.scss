@@ -1,9 +1,9 @@
 .header-parent {
     width: 100%;
     background-color: var(--white);
-    background: var(--bg-color);
+    box-shadow: var(--shadow);
     padding: 10px;
-    height: 60px;
+    height: 80px;
     position: fixed;
     top: 0;
     z-index: 99;
