@@ -1,22 +1,27 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.scss';
-import Header from './component/header/Header';
-import SellerHome from './pages/sellerHome/SellerHome';
-import Footer from './component/footer/Footer';
-import Login from './pages/login/Login';
-import Register from './pages/register/Register';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Suspense } from "react";
+import "./App.scss";
+import { routes } from "./routes";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter >
-        <Header />
-        <Routes>
-          <Route path='/' element={<SellerHome />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-        </Routes>
-        <Footer />
+      <BrowserRouter>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {routes.map((item, index) =>
+              item.component ? (
+                <Route
+                  key={index}
+                  path={item.path}
+                  exact={item.exact}
+                  name={item.name}
+                  element={<item.component/>}
+                />
+              ) : null
+            )}
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </div>
   );

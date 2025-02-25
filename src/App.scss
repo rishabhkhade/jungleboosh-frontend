@@ -84,7 +84,7 @@ p {
 .parent {
     width: 100%;
 
-    .container {
+    .cont {
         max-width: var(--max-width);
         margin: auto;
         padding: 0px 10px;
@@ -135,6 +135,6 @@ a {
     &:hover {
         background-color: var(--green);
         color: var(--white);
-        border: none;
+        border: 1px solid var(--green);
     }
 }
