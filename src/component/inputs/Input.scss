@@ -1,15 +1,31 @@
-.MuiFormControl-root{
+.input{
+  width: 100%;
+  position: relative;
+  .MuiFormControl-root{
     width: 100%;
 
 
     .MuiInputLabel-root.Mui-focused {
-        color: var(--green) !important; /* Label color on focus */
+        color: var(--accent) !important; /* Label color on focus */
       }
     .MuiOutlinedInput-root {
         &.Mui-focused .MuiOutlinedInput-notchedOutline {
-          border-color: var(--green) !important;
+          border-color: var(--accent) !important;
         }
       }
       
 
+}
+
+.password-icon{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2%;
+  cursor: pointer;
+
+  svg{
+    font-size: calc(var(--unit) + 2px);
+  }
+}
 }

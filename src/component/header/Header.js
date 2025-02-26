@@ -10,7 +10,8 @@ function Header() {
       <div className='parent header-parent'>
         <div className='cont header-container'>
           {/* <div className='logo'><img src={logo_header} /></div> */}
-          <div className='logo'><h2 style={{color:"var(--accent)"}}>Jungle Boosh</h2></div>
+          <div className='logo'><h2 style={{color:"var(--accent)"}}>
+            lorem lipsum</h2></div>
           <div className='links'>
             <Link to="/login" className='border-btn'>Login</Link>
             <Link className='btn'>Sign up</Link>

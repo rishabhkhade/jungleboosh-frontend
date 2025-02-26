@@ -1,18 +1,30 @@
 import { TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { IoEye } from "react-icons/io5";
+import { IoMdEyeOff } from "react-icons/io";
 import "./Input.scss";
-const Input = ({ label, value, onChange,error }) => {
+const Input = ({ label, value, onChange, error, password,name }) => {
+  const [passwordType, setPasswordType] = useState(true);
   return (
     <>
-      <TextField
-        id="outlined-basic"
-        label={label}
-        value={value}
-        variant="outlined"
-        onChange={onChange}
-        error={Boolean(error)} // Ensure error is a boolean
-        helperText={error ? "This field is required" : ""} // Optional message
-      />
+      <div class="input">
+        <TextField
+          id="outlined-basic"
+          label={label}
+          name={name}
+          value={value}
+          variant="outlined"
+          onChange={onChange}
+          type={password ? (passwordType ? "password" : "text") : "text"}
+          error={Boolean(error)}
+          helperText={error ? "This field is required" : ""} 
+        />
+        {password && (
+          <span className="password-icon"  onClick={()=>setPasswordType(!passwordType)} >
+            {!passwordType ? <IoEye /> : <IoMdEyeOff />}
+          </span>
+        )}
+      </div>
     </>
   );
 };

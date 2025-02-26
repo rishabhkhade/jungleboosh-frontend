@@ -58,17 +58,17 @@ function SellerHome(props) {
       <Header />
       {/* seller panel */}
       <div className="parent seller-home-parent">
-        <div className="container seller-home-container">
+        <div className="cont seller-home-container">
           <div className="seller-home-left">
             <h1>
               Sell Smarter, <span>Grow Faster</span>{" "}
             </h1>
             <h1>
               {" "}
-              Start Your Journey with <span>Jungleboosh!</span>
+              Start Your Journey with <span>lorem!</span>
             </h1>
             <p>
-              Jungleboosh – The Smartest Way to Sell Online and Scale Your
+              lorem – The Smartest Way to Sell Online and Scale Your
               Business!
             </p>
           </div>
@@ -81,7 +81,7 @@ function SellerHome(props) {
       {/* why choose us */}
 
       <div className="parent why-choose-parent">
-        <div className="container why-choose-container">
+        <div className="cont why-choose-container">
           <div className="w-c-heading">
             <HeadingTag text="Why Choose us" />
           </div>
@@ -105,7 +105,7 @@ function SellerHome(props) {
 
       {/* testimonial */}
       <div className="parent testimonial-parent">
-        <div className="container testimonial-container">
+        <div className="cont testimonial-container">
           <div className="testimonial-heading">
             <HeadingTag text="Testimonial" />
           </div>
