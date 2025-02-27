@@ -3,8 +3,10 @@ import "./Header.scss"
 import logo_header from "../../assets/header/Untitled design.png"
 import { IoIosCall } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { sellerApi } from '../../utils/Api';
 
 function Header() {
+
   return (
     <>
       <div className='parent header-parent'>

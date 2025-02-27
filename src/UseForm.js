@@ -18,6 +18,7 @@ const handleChange = (e)=>{
 
   const handleSubmit = (e)=>{
     e.preventDefault();
+    console.log("Form submitted");
     setErrors(validate(values));
     setIsSubmitting(true)
   }

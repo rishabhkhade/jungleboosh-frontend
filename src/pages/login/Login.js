@@ -10,8 +10,8 @@ import ValidateLogin from "../../validate/ValidateLogin";
 function Login() {
   const login = async () => {
     try {
-      const response = await sellerApi.post("/api/seller/login", values,{
-        withCredentials:true
+      const response = await sellerApi.post("api/seller/login", values, {
+        withCredentials: true,
       });
       console.log(response);
     } catch (error) {
@@ -38,17 +38,30 @@ function Login() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Consequatur, eligendi!
             </p>
-            <form  onSubmit={handleSubmit}>
-              <Input label="Email" name="email" onChange={handleChange} value={values.email} />
+            <form onSubmit={handleSubmit}>
+              <Input
+                label="Email"
+                name="email"
+                onChange={handleChange}
+                value={values.email}
+              />
               {errors.email && (
                 <small className="text-warning">{errors.email}</small>
               )}
-              <Input label="Password" name="password" onChange={handleChange} value={values.password} password={true} />
+              <Input
+                label="Password"
+                name="password"
+                onChange={handleChange}
+                value={values.password}
+                password={true}
+              />
               {errors.password && (
                 <small className="text-warning">{errors.password}</small>
               )}
               <div class="question_tags">
-                <Link className="link" to="/forgotpassword">Forgot Password ?</Link>
+                <Link className="link" to="/forgotpassword">
+                  Forgot Password ?
+                </Link>
                 <Link className="link link2">Register Our Business</Link>
               </div>
               <input class="btn" value="Log in" type="submit" />
