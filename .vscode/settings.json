@@ -1,0 +1,52 @@
+{
+    "files.autoSave": "afterDelay", // This will automatically save files after a delay
+    "git.autofetch": true, // Automatically fetch changes from Git
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "{git,gitlens,git-graph}:/*/.{md,csv,svg}": "default"
+    },
+    "emmet.includeLanguages": {
+        "javascript": "html", // Enable Emmet for JavaScript files
+        "javascriptreact": "html", // Enable Emmet for React (JSX) files
+        "typescript": "html", // Enable Emmet for TypeScript
+        "typescriptreact": "html" // Enable Emmet for TypeScript React (TSX)
+    },
+    "emmet.preferences": {
+    
+        
+
+        // Add any Emmet-specific preferences here
+    }, // Emmet will expand abbreviations when you press Tab
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "editor.suggest.autoClosingTags": true, // Automatically close HTML tags
+    "html.autoClosingTags": true, // Enable auto-closing tags for HTML-like languages
+    "javascript.suggest.autoClosingTags": true, // Enable auto-closing tags for JavaScript
+    "typescript.suggest.autoClosingTags": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "emmet.triggerExpansionOnTab": true,
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": "" // Enable auto-closing tags for TypeScript
+}
