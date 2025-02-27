@@ -8,8 +8,11 @@ import HeadingTag from "../../component/heading-tag/HeadingTag";
 import { LuCheckCheck } from "react-icons/lu";
 import testimonial_img1 from "../../assets/testimonial/NewProject.webp";
 import Header from "../../component/header/Header";
-import Footer from "../../component/footer/Footer"
+import Footer from "../../component/footer/Footer";
+import step_img1 from "../../assets/steps/2114.jpg";
+
 function SellerHome(props) {
+  //why choose us data
   const w_c_data = [
     {
       image: registration,
@@ -28,6 +31,7 @@ function SellerHome(props) {
     },
   ];
 
+  // testimonial data
   const testimonial_data = [
     {
       icon: <LuCheckCheck />,
@@ -52,9 +56,31 @@ function SellerHome(props) {
     },
   ];
 
+  // steps data
+  const steps_data = [
+    {
+      step_image: step_img1,
+      step_name: "Heading",
+      steps_contain:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet neque, officia voluptatem sed ullam itaque doloribus ut a, saepe earum repellat reiciendis minima. Libero, distinctio.",
+    },
+    {
+      step_image: step_img1,
+      step_name: "Heading",
+      steps_contain:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet neque, officia voluptatem sed ullam itaque doloribus ut a, saepe earum repellat reiciendis minima. Libero, distinctio.",
+    },
+    {
+      step_image: step_img1,
+      step_name: "Heading",
+      steps_contain:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet neque, officia voluptatem sed ullam itaque doloribus ut a, saepe earum repellat reiciendis minima. Libero, distinctio.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet neque, officia voluptatem sed ullam itaque doloribus ut a, saepe earum repellat reiciendis minima. Libero, distinctio.",
+    },
+  ];
+
   return (
     <>
-    {/* header */}
+      {/* header */}
       <Header />
       {/* seller panel */}
       <div className="parent seller-home-parent">
@@ -68,8 +94,7 @@ function SellerHome(props) {
               Start Your Journey with <span>lorem!</span>
             </h1>
             <p>
-              lorem – The Smartest Way to Sell Online and Scale Your
-              Business!
+              lorem – The Smartest Way to Sell Online and Scale Your Business!
             </p>
           </div>
           <div className="seller-home-right bg-img-cover">
@@ -132,6 +157,35 @@ function SellerHome(props) {
           </div>
         </div>
       </div>
+
+      {/* steps */}
+      <div class="parent step-parent">
+        <div class="heading-step-container cont">
+          <HeadingTag text="How to Sell Online " />
+        </div>
+
+        <div class="steps-design cont">
+          {steps_data.map((item, index) => (
+            <div class="cont step-container">
+              <div class="step-left">
+                <img src={item.step_image} alt="" />
+              </div>
+              <div class="step-right">
+                <h3>{item.step_name}</h3>
+                <p>{item.steps_contain}</p>
+              </div>
+
+              <div class="steps-circle">
+                <span className="steps-inner-circle"></span>
+              </div>
+            </div>
+          ))}
+
+          <div class="steps-middle-line"></div>
+        </div>
+      </div>
+
+
 
 
       {/* footer */}
