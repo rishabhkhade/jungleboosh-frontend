@@ -2,10 +2,10 @@ import { lazy } from "react";
 
 
 // dashboard
-const dashboard           = lazy(()=> import("./pages/sellerHome/SellerHome") );
+const dashboard           = lazy(()=> import("./pages/sellerHome/SellerHome.js") );
 // login 
-const login               = lazy(()=>import("./pages/login/Login"))
-const forgotpassword      = lazy(()=>import("./pages/forgotpassword/ForgotPassword"))
+const login               = lazy(()=>import("./pages/login/Login.js"))
+const forgotpassword      = lazy(()=>import("./pages/forgotpassword/ForgotPassword.js"))
 
 
 // rotuing

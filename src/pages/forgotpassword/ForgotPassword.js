@@ -2,6 +2,7 @@ import React from "react";
 import "./ForgotPassword.scss";
 import { Link } from "react-router-dom";
 import { LuArrowLeft } from "react-icons/lu";
+import Input from "../../component/inputs/Input";
 const ForgotPassword = () => {
   return (
     <>
@@ -22,6 +23,12 @@ const ForgotPassword = () => {
                 Please enter your registered email id
                 </p>
             </div>
+            <form action="" className="emailForm" >
+                <Input  label="Email Id" />
+                <button class="btn otp_btn">
+                       Send Otp
+                </button>
+            </form>
           </div>
         </div>
       </div>
