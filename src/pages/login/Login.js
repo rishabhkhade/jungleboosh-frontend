@@ -48,7 +48,7 @@ function Login() {
                 <small className="text-warning">{errors.password}</small>
               )}
               <div class="question_tags">
-                <Link className="link">Forgot Password ?</Link>
+                <Link className="link" to="/forgotpassword">Forgot Password ?</Link>
                 <Link className="link link2">Register Our Business</Link>
               </div>
               <input class="btn" value="Log in" type="submit" />
