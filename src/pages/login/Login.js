@@ -7,7 +7,7 @@ import { sellerApi } from "../../utils/Api";
 import UseForm from "../../UseForm";
 import ValidateLogin from "../../validate/ValidateLogin";
 import { UserContext } from "../../Context";
-
+import Loader from "../Loader/Loader";
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
@@ -48,7 +48,7 @@ function Login() {
 
   return (
     <>
-
+      <Loader />
       <div class="login_page parent">
         <div class="login_page_cont cont">
           <div class="left_login"></div>
