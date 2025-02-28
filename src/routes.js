@@ -6,7 +6,7 @@ const dashboard           = lazy(()=> import("./pages/sellerHome/SellerHome.js")
 // login 
 const login               = lazy(()=>import("./pages/login/Login.js"))
 const forgotpassword      = lazy(()=>import("./pages/forgotpassword/ForgotPassword.js"))
-
+const ChangePassword      = lazy(()=>import("./pages/changepassword/ChangePassword.js"))
 
 // rotuing
 export const routes = [
@@ -19,5 +19,8 @@ export const routes = [
     },
     {
         path:"/forgotpassword", exact:true, name:"forgotpassword", component:forgotpassword
+    },
+    {
+        path:"/ChangePassword", exact:true, name:"ChangePassword", component:ChangePassword
     },
 ]

@@ -8,6 +8,7 @@ import UseForm from "../../UseForm";
 import ValidateLogin from "../../validate/ValidateLogin";
 import { UserContext } from "../../Context";
 
+
 function Login() {
   const { user, setUser } = useContext(UserContext);
 
@@ -47,6 +48,7 @@ function Login() {
 
   return (
     <>
+
       <div class="login_page parent">
         <div class="login_page_cont cont">
           <div class="left_login"></div>
@@ -57,25 +59,29 @@ function Login() {
               Consequatur, eligendi!
             </p>
             <form onSubmit={handleSubmit}>
-              <Input
-                label="Email"
-                name="email"
-                onChange={handleChange}
-                value={values.email}
-              />
-              {errors.email && (
-                <small className="text-warning">{errors.email}</small>
-              )}
-              <Input
-                label="Password"
-                name="password"
-                onChange={handleChange}
-                value={values.password}
-                password={true}
-              />
-              {errors.password && (
-                <small className="text-warning">{errors.password}</small>
-              )}
+              <div class="form-row">
+                <Input
+                  label="Email"
+                  name="email"
+                  onChange={handleChange}
+                  value={values.email}
+                />
+                {errors.email && (
+                  <small className="text-warning">{errors.email}</small>
+                )}
+              </div>
+              <div class="form-row">
+                <Input
+                  label="Password"
+                  name="password"
+                  onChange={handleChange}
+                  value={values.password}
+                  password={true}
+                />
+                {errors.password && (
+                  <small className="text-warning">{errors.password}</small>
+                )}
+              </div>
               <div class="question_tags">
                 <Link className="link" to="/forgotpassword">
                   Forgot Password ?
