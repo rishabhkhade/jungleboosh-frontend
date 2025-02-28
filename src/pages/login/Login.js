@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Login.scss";
 
 import Input from "../../component/inputs/Input";
@@ -6,16 +6,34 @@ import { Link } from "react-router-dom";
 import { sellerApi } from "../../utils/Api";
 import UseForm from "../../UseForm";
 import ValidateLogin from "../../validate/ValidateLogin";
+import { UserContext } from "../../Context";
 
 function Login() {
+  const { user, setUser } = useContext(UserContext);
+
   const login = async () => {
     try {
       const response = await sellerApi.post("api/seller/login", values, {
         withCredentials: true,
       });
-      console.log(response);
+      if (response.status === 200) {
+        localStorage.setItem(
+          "seller_Data",
+          `${JSON.stringify(response.data.data)}`
+        );
+        setUser(response.data.data);
+      }
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 400) {
+        setErrors({
+          email: "email is incorrect",
+        });
+      }
+      if (error.response.data.message === "Incorrect email or password") {
+        setErrors({
+          password: "password is incorrect",
+        });
+      }
     }
   };
 

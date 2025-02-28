@@ -3,8 +3,8 @@ import axios from "axios";
 
 
 
-const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
-// const sellerbaseUrl = "http://localhost:8080";
+// const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
+const sellerbaseUrl = "http://localhost:8080";
 
 
 const sellerApi = axios.create({
