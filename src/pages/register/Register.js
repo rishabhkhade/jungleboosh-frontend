@@ -1,58 +1,44 @@
-import React from 'react'
-import './Register.scss'
+import React from "react";
+import "./Register.scss";
+import Step from "../../component/steps/Step";
+import Input from "../../component/inputs/Input";
 
 function Register() {
-    return (
-        <>
-            <div className="parent register-parent">
-                <div className="container register-container">
-                    {/* personal details */}
-                    <div className="steps">Steps</div>
-                    <form className='personal-form'>
-                        <label>
-                            <p>First Name</p>
-                            <input type="text" placeholder='username' />
-                        </label>
-                        <label>
-                            <p>Last Name</p>
-                            <input type="text" placeholder='username' />
-                        </label>
-                        <label>
-                            <p>Email</p>
-                            <input type="text" placeholder='username' />
-                        </label>
-                        <label>
-                            <p>Contact</p>
-                            <input type="text" placeholder='username' />
-                        </label>
-                    </form>
+  const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
+  return (
+    <>
+      <div class="register_parent parent">
+        <div class="register_cont cont">
+          <h2 class="logo">Lorem lipsum</h2>
+          <Step totalSteps={3} currentStep={1} stepLabels={stepLabels} />
 
-
-                    {/* Business Details */}
-
-                    <label htmlFor="">
-                        <p>Business name</p>
-                        <input type="text" placeholder='Business name' />
-                    </label>
-
-                    <label>
-                        <p>Product unit</p>
-                        <select  >
-                            <option value="">select unit</option>
-
-                            <option>
-                                Abc
-                            </option>
-
-                        </select>
-
-                    </label>
-
-
-                </div>
+          <form action="" className="register_form">
+            <div class="form-row">
+              <Input label="Your Name" name="name" />
             </div>
-        </>
-    )
+            <div class="form-row">
+              <Input label="Your Email" name="email" />
+            </div>
+            <div class="form-row">
+              <span>+91</span>
+              <Input label="Contact Number" name="number" />
+            </div>
+            <div class="form-row">
+              <Input label="Password" name="password" password={true} />
+            </div>
+            <div class="form-row">
+              <Input label="Confirm Password" password={true} />
+            </div>
+            <div class="form-row">
+              <button type="submit" className="btn">
+                Next
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Register
+export default Register;

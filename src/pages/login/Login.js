@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Login.scss";
 
 import Input from "../../component/inputs/Input";
@@ -11,9 +11,11 @@ import Loader from "../Loader/Loader";
 
 function Login() {
   const { user, setUser } = useContext(UserContext);
+  const [loader, setLoader] = useState(false);
 
   const login = async () => {
     try {
+      setLoader(true);
       const response = await sellerApi.post("api/seller/login", values, {
         withCredentials: true,
       });
@@ -35,6 +37,8 @@ function Login() {
           password: "password is incorrect",
         });
       }
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -48,7 +52,7 @@ function Login() {
 
   return (
     <>
-      <Loader />
+      {loader && <Loader />}
       <div class="login_page parent">
         <div class="login_page_cont cont">
           <div class="left_login"></div>
@@ -86,7 +90,7 @@ function Login() {
                 <Link className="link" to="/forgotpassword">
                   Forgot Password ?
                 </Link>
-                <Link className="link link2">Register Our Business</Link>
+                <Link to="/register" className="link link2">Register Our Business</Link>
               </div>
               <input class="btn" value="Log in" type="submit" />
             </form>
