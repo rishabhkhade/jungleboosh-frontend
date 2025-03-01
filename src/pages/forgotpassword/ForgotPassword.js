@@ -8,17 +8,19 @@ import UseForm from "../../UseForm";
 import OtpInput from "react-otp-input";
 import axios from "axios";
 import ValidateFp from "../../validate/ValidateForgotPassword";
+import Loader from "../Loader/Loader";
 
 const ForgotPassword = () => {
   const [otpField, setOtpField] = useState(
     JSON.parse(localStorage.getItem("otpField")) || false
   );
-
+  const [loader, setLoader] = useState(false);
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
 
   const otpsend = async () => {
     try {
+      setLoader(true);
       const response = await sellerApi.post(
         "api/seller/forgetPasswordSendOtp",
         values,
@@ -40,12 +42,15 @@ const ForgotPassword = () => {
           email: "Email is incorrect",
         });
       }
+    } finally {
+      setLoader(false);
     }
   };
 
   const otpVerify = async (e) => {
     try {
       e.preventDefault();
+      setLoader(true);
       const response = await sellerApi.post("api/seller/otpVerification", {
         sellerId: Number(localStorage.getItem("id")),
         otp: otp,
@@ -59,6 +64,8 @@ const ForgotPassword = () => {
       if (error.response.data.message === "Incorrect OTP") {
         alert("otp incorrect");
       }
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -77,6 +84,7 @@ const ForgotPassword = () => {
 
   return (
     <>
+      {loader && <Loader />}
       <div className="forgot_password parent">
         <div className="forgot_password_cont cont">
           <div className="panel_card">
