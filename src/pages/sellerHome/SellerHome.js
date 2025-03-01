@@ -2,7 +2,7 @@ import React from "react";
 import "./SellerHome.scss";
 import { AiOutlineSafety } from "react-icons/ai";
 import { MdOutlinePrecisionManufacturing } from "react-icons/md";
-import image_hero from "../../assets/hero_section/hero-img.png";
+import image_hero from "../../assets/hero_section/hero-img.webp";
 import registration from "../../assets/why_choose_us/registration.svg";
 import HeadingTag from "../../component/heading-tag/HeadingTag";
 import { LuCheckCheck } from "react-icons/lu";
@@ -10,6 +10,7 @@ import testimonial_img1 from "../../assets/testimonial/NewProject.webp";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import step_img1 from "../../assets/steps/2114.jpg";
+import { RiMegaphoneLine } from "react-icons/ri";
 
 function SellerHome(props) {
   //why choose us data
@@ -185,8 +186,75 @@ function SellerHome(props) {
         </div>
       </div>
 
+      {/* bring business online */}
+      <div class="parent business-online-parent">
+        <div class="cont business-online-container ">
+          <div class="heading-business-online">
+            <HeadingTag text="How to Grow Your Online Business " />
+          </div>
+          <div class="business-online-container-bottom">
+            <div class="business-online-left">
+              <h3>Lorem ipsum dolor dolor sit sit amet.</h3>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Voluptatem provident cupiditate blanditiis. Ratione, iure rerum.
+                Maiores corporis consequatur eum ad. Minus eum natus corrupti
+                placeat doloremque accusamus consequuntur illum reiciendis.
+              </p>
+              <div class="btn">Submit</div>
+            </div>
+            <div class="business-online-right">
+              <div class="business-online-box">
+                <span>
+                  <RiMegaphoneLine />
+                </span>
+                <h3>Advertisements</h3>
+                <p>
+                  You can promote your product catalog to reach more customers
+                  and increase your sales using Meesho Ads. Currently, not
+                  available for sellers who don't have a Regular GSTIN.
+                </p>
+              </div>
 
+              <div class="business-online-box">
+                <span>
+                  <RiMegaphoneLine />
+                </span>
+                <h3>Advertisements</h3>
+                <p>
+                  You can promote your product catalog to reach more customers
+                  and increase your sales using Meesho Ads. Currently, not
+                  available for sellers who don't have a Regular GSTIN.
+                </p>
+              </div>
 
+              <div class="business-online-box">
+                <span>
+                  <RiMegaphoneLine />
+                </span>
+                <h3>Advertisements</h3>
+                <p>
+                  You can promote your product catalog to reach more customers
+                  and increase your sales using Meesho Ads. Currently, not
+                  available for sellers who don't have a Regular GSTIN.
+                </p>
+              </div>
+
+              <div class="business-online-box">
+                <span>
+                  <RiMegaphoneLine />
+                </span>
+                <h3>Advertisements</h3>
+                <p>
+                  You can promote your product catalog to reach more customers
+                  and increase your sales using Meesho Ads. Currently, not
+                  available for sellers who don't have a Regular GSTIN.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* footer */}
 

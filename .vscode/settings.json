@@ -48,5 +48,10 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "emmet.triggerExpansionOnTab": true,
-    "liveServer.settings.AdvanceCustomBrowserCmdLine": "" // Enable auto-closing tags for TypeScript
+    "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#21321A",
+        "titleBar.activeBackground": "#2E4625",
+        "titleBar.activeForeground": "#F8FBF7"
+    } // Enable auto-closing tags for TypeScript
 }

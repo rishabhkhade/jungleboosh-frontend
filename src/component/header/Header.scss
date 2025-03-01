@@ -23,6 +23,14 @@
             gap: calc(var(--unit));
             align-items: center;
             justify-content: center;
+
+            .sell-online{
+                color: var(--black);
+                &:hover{
+                    color: var(--accent);
+                }
+            }
+
         }
 
         .call-info {
