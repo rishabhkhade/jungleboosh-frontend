@@ -27,6 +27,21 @@
             align-items: center;
 
             gap: var(--unit);
+
+
+            .num_row{
+                .lead{
+                    width: 55px;
+                    aspect-ratio: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: rgb(202, 202, 202);
+                    border-radius: calc(var(--unit)/3);
+                    font-size: calc(var(--unit) );
+
+                }
+            }
         }
     }
 }
