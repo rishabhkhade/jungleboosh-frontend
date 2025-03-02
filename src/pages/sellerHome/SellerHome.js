@@ -11,6 +11,8 @@ import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import step_img1 from "../../assets/steps/2114.jpg";
 import { RiMegaphoneLine } from "react-icons/ri";
+import earn_more from "../../assets/seller-benefits/salary.png"
+
 
 function SellerHome(props) {
   //why choose us data
@@ -79,30 +81,118 @@ function SellerHome(props) {
     },
   ];
 
+  //seller benefits
+  const seller_benefits_data = [
+    {
+      heading: "Earn More",
+      desc: "All the Lorem Ipsum generators on the Inter tend to chunks as true generator.",
+      img: earn_more
+    },
+  ]
+
   return (
     <>
       {/* header */}
       <Header />
       {/* seller panel */}
-      <div className="parent seller-home-parent">
+      <div className="parent seller-home-parent ">
         <div className="cont seller-home-container">
           <div className="seller-home-left">
             <h1>
-              Sell Smarter, <span>Grow Faster</span>{" "}
+              Sell Smarter, <span>Grow Faster</span>
             </h1>
             <h1>
-              {" "}
               Start Your Journey with <span>lorem!</span>
             </h1>
             <p>
               lorem – The Smartest Way to Sell Online and Scale Your Business!
             </p>
+            <div class="btn">Start Selling</div>
           </div>
+          {/* <div class="bullet"></div> */}
           <div className="seller-home-right bg-img-cover">
             <img src={image_hero} alt="hero image" />
           </div>
         </div>
       </div>
+
+
+      {/* steps */}
+      <div class="parent step-parent">
+        <div class="heading-step-container cont">
+          <HeadingTag text="Steps to get online " />
+        </div>
+
+        <div class="steps-design cont">
+          {steps_data.map((item, index) => (
+            <div class="cont step-container">
+              <div class="step-left">
+                <img src={item.step_image} alt="" />
+              </div>
+              <div class="step-right">
+                <h3>{item.step_name}</h3>
+                <p>{item.steps_contain}</p>
+              </div>
+
+              <div class="steps-circle">
+                <span className="steps-inner-circle"></span>
+              </div>
+            </div>
+          ))}
+
+          <div class="steps-middle-line"></div>
+        </div>
+      </div>
+
+
+      {/* seller benefits */}
+      <div className="parent seller-benefits-parent">
+        <div className="cont seller-benefits-container">
+          <div className="seller-benefits-heading">
+            <HeadingTag text="Seller Benefits" />
+          </div>
+          <div className="seller-benefits-bottom">
+            <div class="seller-benefits-left">
+              {
+                seller_benefits_data.map((item, index) => (
+                  <div class="seller-benefits-box">
+                    <img src={item.img} alt="" />
+                    <h3>{item.heading}</h3>
+                    <p>{item.desc}</p>
+
+                  </div>
+                ))
+              }
+
+              <div class="seller-benefits-box">
+                <img src={earn_more} alt="" />
+                <h3>Earn More</h3>
+                <p>All the Lorem Ipsum generators on the Inter tend to chunks as true generator.</p>
+
+              </div>
+
+              <div class="seller-benefits-box">
+                <img src={earn_more} alt="" />
+                <h3>Earn More</h3>
+                <p>All the Lorem Ipsum generators on the Inter tend to chunks as true generator.</p>
+
+              </div>
+              <div class="seller-benefits-box">
+                <img src={earn_more} alt="" />
+                <h3>Earn More</h3>
+                <p>All the Lorem Ipsum generators on the Inter tend to chunks as true generator.</p>
+
+              </div>
+            </div>
+            <div class="seller-benefits-right">
+              <div class="seller_benefit_img">
+                <h3>We help our seller achieve their goals</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       {/* why choose us */}
 
@@ -159,32 +249,7 @@ function SellerHome(props) {
         </div>
       </div>
 
-      {/* steps */}
-      <div class="parent step-parent">
-        <div class="heading-step-container cont">
-          <HeadingTag text="How to Sell Online " />
-        </div>
 
-        <div class="steps-design cont">
-          {steps_data.map((item, index) => (
-            <div class="cont step-container">
-              <div class="step-left">
-                <img src={item.step_image} alt="" />
-              </div>
-              <div class="step-right">
-                <h3>{item.step_name}</h3>
-                <p>{item.steps_contain}</p>
-              </div>
-
-              <div class="steps-circle">
-                <span className="steps-inner-circle"></span>
-              </div>
-            </div>
-          ))}
-
-          <div class="steps-middle-line"></div>
-        </div>
-      </div>
 
       {/* bring business online */}
       <div class="parent business-online-parent">
