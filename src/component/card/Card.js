@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import "./Card.scss";
 import { UserContext } from "../../Context";
-const Card = () => {
+
+const Card = ({ children }) => {
   const { sidebar } = useContext(UserContext);
   return (
-    <>
-      <div class={sidebar ? "card_parent active" : "card_parent"}></div>
-    </>
+    <div className={sidebar ? "card_parent active" : "card_parent"}>
+      {children}  {/* Allow children to be rendered inside */}
+    </div>
   );
 };
 
