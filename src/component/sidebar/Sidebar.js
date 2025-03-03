@@ -4,34 +4,45 @@ import "./Sidebar.scss";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
 import { UserContext } from "../../Context";
-import { HiMiniHome } from "react-icons/hi2";
+import { AiOutlineHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { FiPlus } from "react-icons/fi";
+import { LuTag } from "react-icons/lu";
+import { GrMoney } from "react-icons/gr";
+import { MdPayment } from "react-icons/md";
+import { GrGallery } from "react-icons/gr";
+
 const Sidebar = () => {
   const { sidebar, setSidebar } = useContext(UserContext);
   const navItems = [
     {
-      icon: <HiMiniHome />,
+      icon: <AiOutlineHome />,
       navItem: "Home",
       navLink: "/dashboard",
     },
     {
-      icon: <HiMiniHome />,
-      navItem: "Home",
+      icon: <FiPlus />,
+      navItem: "Add Product",
       navLink: "/dashboard",
     },
     {
-      icon: <HiMiniHome />,
-      navItem: "Home",
+      icon: <LuTag />,
+      navItem: "Product List",
       navLink: "/dashboard",
     },
     {
-      icon: <HiMiniHome />,
-      navItem: "Home",
+      icon: <GrMoney />,
+      navItem: "Total Sell",
       navLink: "/dashboard",
     },
     {
-      icon: <HiMiniHome />,
-      navItem: "Home",
+      icon: <MdPayment />,
+      navItem: "Payments",
+      navLink: "/dashboard",
+    },
+    {
+      icon: <GrGallery />,
+      navItem: "Gallery",
       navLink: "/dashboard",
     },
   ];

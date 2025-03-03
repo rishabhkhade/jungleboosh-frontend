@@ -60,6 +60,7 @@
                 justify-content: flex-start;
                 align-items: center;
                 gap: calc(var(--unit) - 5px);
+                
 
                 span{
                     display: flex;
@@ -78,6 +79,7 @@
                 .linktext{
                     font-size: calc(var(--unit) + 5px);
                     color: black;
+                    overflow: hidden;
                 }
             }
         }

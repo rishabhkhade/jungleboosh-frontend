@@ -1,0 +1,12 @@
+.card_parent{
+    width: calc(100% - 250px);
+    margin-left: 250px;
+    padding: 20px;
+    transition: var(--trans);
+    height: auto;
+
+    &.active{
+        width: calc(100% - 60px);
+        margin-left: 60px;
+    }
+}
