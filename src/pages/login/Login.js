@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Login.scss";
 
 import Input from "../../component/inputs/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { sellerApi } from "../../utils/Api";
 import UseForm from "../../UseForm";
 import ValidateLogin from "../../validate/ValidateLogin";
@@ -12,7 +12,7 @@ import Loader from "../Loader/Loader";
 function Login() {
   const { user, setUser } = useContext(UserContext);
   const [loader, setLoader] = useState(false);
-
+  const navigate = useNavigate();
   const login = async () => {
     try {
       setLoader(true);
@@ -25,6 +25,7 @@ function Login() {
           `${JSON.stringify(response.data.data)}`
         );
         setUser(response.data.data);
+        navigate("/dashboard", { replace: true });
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -90,7 +91,9 @@ function Login() {
                 <Link className="link" to="/forgotpassword">
                   Forgot Password ?
                 </Link>
-                <Link to="/register" className="link link2">Register Our Business</Link>
+                <Link to="/register" className="link link2">
+                  Register Our Business
+                </Link>
               </div>
               <input class="btn" value="Log in" type="submit" />
             </form>

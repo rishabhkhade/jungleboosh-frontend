@@ -5,15 +5,18 @@
   .MuiFormControl-root {
     width: 100%;
 
-    .css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused
-      .MuiOutlinedInput-notchedOutline {
+    .MuiInputLabel-root {
+      background-color: white;
+    }
+
+    .css-sc8y68-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline {
       border-color: var(--accent) !important;
     }
   }
 
   .Mui-focused {
     color: var(--accent) !important;
-    top: 5%;
+    top: 10%;
     background-color: white;
     padding-right: 10px;
     padding-left: 5px;

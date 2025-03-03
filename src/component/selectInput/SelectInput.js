@@ -18,7 +18,7 @@ const SelectInput = (props) => {
             disabled={props.disabled}
             onChange={props.onChange}
             value={props.value}
-            
+            name={props.name}
           >
             {props.children}
           </Select>
