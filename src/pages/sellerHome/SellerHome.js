@@ -1,9 +1,6 @@
 import React from "react";
 import "./SellerHome.scss";
-import { AiOutlineSafety } from "react-icons/ai";
-import { MdOutlinePrecisionManufacturing } from "react-icons/md";
 import image_hero from "../../assets/hero_section/hero-img.webp";
-import registration from "../../assets/why_choose_us/registration.svg";
 import HeadingTag from "../../component/heading-tag/HeadingTag";
 import { LuCheckCheck } from "react-icons/lu";
 import testimonial_img1 from "../../assets/testimonial/NewProject.webp";
@@ -11,26 +8,38 @@ import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import step_img1 from "../../assets/steps/2114.jpg";
 import { RiMegaphoneLine } from "react-icons/ri";
-import earn_more from "../../assets/seller-benefits/salary.png"
-
+import earn_more from "../../assets/seller-benefits/salary.png";
+import { GoCheck } from "react-icons/go";
+import { LiaRecycleSolid } from "react-icons/lia";
+import product_listing from "../../assets/online_business/6029494.webp"
 
 function SellerHome(props) {
   //why choose us data
   const w_c_data = [
     {
-      image: registration,
-      name: "No Registration Fee",
-      des: "Registering as a JungleBoosh seller is free - no cost of creating your account or getting your products listed.",
+      logo: <GoCheck />,
+      heading: "Social Impact",
+      des: "We uplift rural communities by giving them a direct market",
     },
     {
-      image: registration,
-      name: "No Registration Fee",
-      des: "Registering as a JungleBoosh seller is free - no cost of creating your account or getting your products listed.",
+      logo: <GoCheck />,
+      heading: "Sustainable Growth",
+      des: "Our platform decentralizes power, ensuring fair opportunities",
     },
     {
-      image: registration,
-      name: "No Registration Fee",
-      des: "Registering as a JungleBoosh seller is free - no cost of creating your account or getting your products listed.",
+      logo: <GoCheck />,
+      heading: "Low Commission, High Transparency",
+      des: "Fair pricing with no hidden costs",
+    },
+    {
+      logo: <GoCheck />,
+      heading: "Marketing & Visibility",
+      des: "Dedicated promotion for small sellers and artisans",
+    },
+    {
+      logo: <GoCheck />,
+      heading: "Logistics & Support",
+      des: " Hassle-free shipping and fulfillment services",
     },
   ];
 
@@ -86,9 +95,24 @@ function SellerHome(props) {
     {
       heading: "Earn More",
       desc: "All the Lorem Ipsum generators on the Inter tend to chunks as true generator.",
-      img: earn_more
+      img: earn_more,
     },
-  ]
+    {
+      heading: "Earn More",
+      desc: "All the Lorem Ipsum generators on the Inter tend to chunks as true generator.",
+      img: earn_more,
+    },
+    {
+      heading: "Earn More",
+      desc: "All the Lorem Ipsum generators on the Inter tend to chunks as true generator.",
+      img: earn_more,
+    },
+    {
+      heading: "Earn More",
+      desc: "All the Lorem Ipsum generators on the Inter tend to chunks as true generator.",
+      img: earn_more,
+    },
+  ];
 
   return (
     <>
@@ -115,7 +139,6 @@ function SellerHome(props) {
           </div>
         </div>
       </div>
-
 
       {/* steps */}
       <div class="parent step-parent">
@@ -144,7 +167,6 @@ function SellerHome(props) {
         </div>
       </div>
 
-
       {/* seller benefits */}
       <div className="parent seller-benefits-parent">
         <div className="cont seller-benefits-container">
@@ -153,71 +175,70 @@ function SellerHome(props) {
           </div>
           <div className="seller-benefits-bottom">
             <div class="seller-benefits-left">
-              {
-                seller_benefits_data.map((item, index) => (
-                  <div class="seller-benefits-box">
-                    <img src={item.img} alt="" />
-                    <h3>{item.heading}</h3>
-                    <p>{item.desc}</p>
-
-                  </div>
-                ))
-              }
-
-              <div class="seller-benefits-box">
-                <img src={earn_more} alt="" />
-                <h3>Earn More</h3>
-                <p>All the Lorem Ipsum generators on the Inter tend to chunks as true generator.</p>
-
-              </div>
-
-              <div class="seller-benefits-box">
-                <img src={earn_more} alt="" />
-                <h3>Earn More</h3>
-                <p>All the Lorem Ipsum generators on the Inter tend to chunks as true generator.</p>
-
-              </div>
-              <div class="seller-benefits-box">
-                <img src={earn_more} alt="" />
-                <h3>Earn More</h3>
-                <p>All the Lorem Ipsum generators on the Inter tend to chunks as true generator.</p>
-
-              </div>
+              {seller_benefits_data.map((item, index) => (
+                <div class="seller-benefits-box">
+                  <img src={item.img} alt="" />
+                  <h3>{item.heading}</h3>
+                  <p>{item.desc}</p>
+                </div>
+              ))}
             </div>
             <div class="seller-benefits-right">
-              <div class="seller_benefit_img">
-                <h3>We help our seller achieve their goals</h3>
+              <div class="seller_benefit_img bg-img-cover"></div>
+              <div class="contain">
+                <h2>We help our seller achieve their goals!!</h2>
+                <p>
+                  We help our clients achieve their goals!! Trust Score 4.7
+                  (Based on 1,200 reviews)
+                </p>
+                <div class="border-btn btn-seller">Login</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
 
       {/* why choose us */}
 
-      <div className="parent why-choose-parent">
+     <div class="w-c-commonparent">
+     <div className="parent why-choose-parent">
         <div className="cont why-choose-container">
-          <div className="w-c-heading">
-            <HeadingTag text="Why Choose us" />
-          </div>
-          <div className="w-c-bottom">
+          <div class="w-c-left">
+            <h2>Why Choose Us</h2>
             {w_c_data.map((item, index) => (
-              <div className="why-choose-box">
-                <>
-                  <div className="w-c-icon">
-                    <img src={item.image} alt="No Registration Fee" />
-                  </div>
-                  <div className="w-c-main-content">
-                    <h3>{item.name}</h3>
-                    <p>{item.des}</p>
-                  </div>
-                </>
+              <div class="w-c-points">
+                <div class="tick">{item.logo}</div>
+                <div class="content">
+                  <h3>{item.heading} :</h3>
+                  <p>{item.des}</p>
+                </div>
               </div>
             ))}
           </div>
+          <div class="w-c-right"></div>
+        </div>
+        <div class="w-c-right-img bg-img-cover"></div>
+      </div>
+
+      <div class="parent elmentor-parent">
+        <div class="cont elementor-cont">
+          <div class="elementor-element">
+            <span><LiaRecycleSolid /></span>
+            <h3>Marketing & Promotions</h3>
+          </div>
+
+          <div class="elementor-element">
+            <span><LiaRecycleSolid /></span>
+            <h3>Analytics & Insights</h3>
+          </div>
+
+          <div class="elementor-element">
+            <span><LiaRecycleSolid /></span>
+            <h3>Dedicated Seller Support</h3>
+          </div>
         </div>
       </div>
+     </div>
 
       {/* testimonial */}
       <div className="parent testimonial-parent">
@@ -249,75 +270,23 @@ function SellerHome(props) {
         </div>
       </div>
 
-
-
       {/* bring business online */}
       <div class="parent business-online-parent">
         <div class="cont business-online-container ">
-          <div class="heading-business-online">
-            <HeadingTag text="How to Grow Your Online Business " />
-          </div>
-          <div class="business-online-container-bottom">
-            <div class="business-online-left">
-              <h3>Lorem ipsum dolor dolor sit sit amet.</h3>
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem provident cupiditate blanditiis. Ratione, iure rerum.
-                Maiores corporis consequatur eum ad. Minus eum natus corrupti
-                placeat doloremque accusamus consequuntur illum reiciendis.
-              </p>
-              <div class="btn">Submit</div>
-            </div>
-            <div class="business-online-right">
-              <div class="business-online-box">
-                <span>
-                  <RiMegaphoneLine />
-                </span>
-                <h3>Advertisements</h3>
-                <p>
-                  You can promote your product catalog to reach more customers
-                  and increase your sales using Meesho Ads. Currently, not
-                  available for sellers who don't have a Regular GSTIN.
-                </p>
-              </div>
-
-              <div class="business-online-box">
-                <span>
-                  <RiMegaphoneLine />
-                </span>
-                <h3>Advertisements</h3>
-                <p>
-                  You can promote your product catalog to reach more customers
-                  and increase your sales using Meesho Ads. Currently, not
-                  available for sellers who don't have a Regular GSTIN.
-                </p>
-              </div>
-
-              <div class="business-online-box">
-                <span>
-                  <RiMegaphoneLine />
-                </span>
-                <h3>Advertisements</h3>
-                <p>
-                  You can promote your product catalog to reach more customers
-                  and increase your sales using Meesho Ads. Currently, not
-                  available for sellers who don't have a Regular GSTIN.
-                </p>
-              </div>
-
-              <div class="business-online-box">
-                <span>
-                  <RiMegaphoneLine />
-                </span>
-                <h3>Advertisements</h3>
-                <p>
-                  You can promote your product catalog to reach more customers
-                  and increase your sales using Meesho Ads. Currently, not
-                  available for sellers who don't have a Regular GSTIN.
-                </p>
+         <div class="top-content">
+          <h2>Scale Online Business</h2>
+         </div>
+         <div class="bottom-content">
+          <div class="elementor-wrapper">
+            <div class="no">01</div>
+            <div class="elements">
+              <img src={product_listing} alt="" />
+              <div class="element-content">
+                <p>Best practices for product listings</p>
               </div>
             </div>
           </div>
+         </div>
         </div>
       </div>
 
