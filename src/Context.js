@@ -8,9 +8,10 @@ const ContextProvider = ({ children }) => {
     localuserData = JSON.parse(localStorage.getItem("seller_Data"));
   }
 
+  const [sidebar,setSidebar] = useState(false)
   const [user, setUser] = useState(localuserData);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser,sidebar,setSidebar }}>
       {children}
     </UserContext.Provider>
   );
