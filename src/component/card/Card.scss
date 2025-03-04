@@ -4,6 +4,7 @@
     padding: 20px;
     transition: var(--trans);
     height: auto;
+    margin-top: 80px;
 
     &.active{
         width: calc(100% - 60px);

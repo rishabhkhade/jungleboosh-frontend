@@ -1,5 +1,6 @@
 .sidebar {
-    height: 100svh;
+    height: calc(100svh - 80px);
+    margin-top: 80px;
     width: 250px;
     background-color: var(--white);
     border-right: 2px solid rgba(204, 204, 204, 0.568);
@@ -62,6 +63,10 @@
                 align-items: center;
                 gap: calc(var(--unit) - 5px);
                 overflow: hidden;
+
+                &.active{
+                    border-left: 5px solid var(--accent);
+                }
 
 
                 span {

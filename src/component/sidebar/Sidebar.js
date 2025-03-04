@@ -5,7 +5,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
 import { UserContext } from "../../Context";
 import { AiOutlineHome } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 import { LuTag } from "react-icons/lu";
 import { GrMoney } from "react-icons/gr";
@@ -14,6 +14,7 @@ import { GrGallery } from "react-icons/gr";
 
 const Sidebar = () => {
   const { sidebar, setSidebar } = useContext(UserContext);
+  const location = useLocation();
   const navItems = [
     {
       icon: <AiOutlineHome />,
@@ -23,27 +24,27 @@ const Sidebar = () => {
     {
       icon: <FiPlus />,
       navItem: "Add Product",
-      navLink: "/dashboard",
+      navLink: "/addProduct",
     },
     {
       icon: <LuTag />,
       navItem: "Product List",
-      navLink: "/dashboard",
+      navLink: "/productlist",
     },
     {
       icon: <GrMoney />,
       navItem: "Total Sell",
-      navLink: "/dashboard",
+      navLink: "/totalsell",
     },
     {
       icon: <MdPayment />,
       navItem: "Payments",
-      navLink: "/dashboard",
+      navLink: "/payments",
     },
     {
       icon: <GrGallery />,
       navItem: "Gallery",
-      navLink: "/dashboard",
+      navLink: "/gallery",
     },
   ];
   return (
@@ -56,7 +57,13 @@ const Sidebar = () => {
         <div className="sidebar_content">
           <div className="links">
             {navItems.map((item, index) => (
-              <Link className="linkitem" to={item.navLink}  key={index} >
+              <Link
+              className={
+                location.pathname === item.navLink ? "linkitem active" : "linkitem"
+              }
+                to={item.navLink}
+                key={index}
+              >
                 <span>{item.icon}</span>
                 <span className="linktext"> {item.navItem} </span>
               </Link>

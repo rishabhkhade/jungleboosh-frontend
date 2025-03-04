@@ -1,0 +1,96 @@
+.header_parent {
+    width: 100%;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 30px;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    background-color: var(--white);
+    z-index: 99999;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.068);
+    border-bottom: 2px solid rgba(204, 204, 204, 0.568);
+
+    .left {
+        width: 50%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+
+
+        h2 {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+    }
+
+    .right {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var(--unit);
+        height: 100%;
+
+        
+        .dropdown{
+            position: relative;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .label{
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: calc(var(--unit)/2);
+
+                span{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+            .options{
+                position: absolute;
+                top: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                background-color: var(--white);
+                padding: calc(var(--unit)/2);
+                box-shadow: var(--shadow);
+                display: none;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;border-radius: calc(var(--unit)/2);
+                gap: var(--unit);
+
+                a,.logout{
+                    width: 100%;
+                    text-align: center;
+                }
+
+
+                .logout{
+                    cursor: pointer;
+                }
+            }
+
+
+            &:hover{
+
+                .options{
+                    display: flex;
+                }
+            }
+        }
+    }
+}

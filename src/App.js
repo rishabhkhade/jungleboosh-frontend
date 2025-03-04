@@ -10,6 +10,7 @@ import "./App.scss";
 import { routes } from "./routes";
 import ContextProvider, { UserContext } from "./Context";
 import Sidebar from "./component/sidebar/Sidebar";
+import DashHeader from "./component/dashHeader/DashHeader";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -32,7 +33,9 @@ function App() {
   }, [user, navigate]);
   return (
     <div className="App">
+       {user && !restrictedPaths.includes(location.pathname) && <DashHeader />}
       {user && !restrictedPaths.includes(location.pathname) && <Sidebar />}
+     
 
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
