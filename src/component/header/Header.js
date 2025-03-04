@@ -21,7 +21,7 @@ function Header() {
             <Link to="/login" className="border-btn">
               Login
             </Link>
-            <Link className="btn">Sign up</Link>
+            <Link className="btn">Register</Link>
           </div>
         </div>
       </div>
