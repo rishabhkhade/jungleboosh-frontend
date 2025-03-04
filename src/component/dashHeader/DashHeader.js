@@ -16,9 +16,10 @@ const DashHeader = () => {
       const response = await sellerApi.post("api/seller/logout");
 
       if(response.status === 200){
+        localStorage.removeItem("seller_Data");
         navigate("/login");
 
-        localStorage.removeItem("seller_Data")
+       
       }
     } catch (error) {
       console.log("Logout error:", error);
