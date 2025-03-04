@@ -11,7 +11,7 @@ import { RiMegaphoneLine } from "react-icons/ri";
 import earn_more from "../../assets/seller-benefits/salary.png";
 import { GoCheck } from "react-icons/go";
 import { LiaRecycleSolid } from "react-icons/lia";
-import product_listing from "../../assets/online_business/6029494.webp"
+import product_listing from "../../assets/online_business/6029494.webp";
 
 function SellerHome(props) {
   //why choose us data
@@ -114,6 +114,37 @@ function SellerHome(props) {
     },
   ];
 
+  //logistics
+  const logistics = [
+    {
+      icons: <GoCheck />,
+      heading: "Fast & Reliable Delivery",
+      content:
+        " We partner with trusted carriers for safe and on-time                  shipments.",
+    },
+    {
+      icons: <GoCheck />,
+      heading: "Real-Time Tracking",
+      content: "Get live updates on your orders with seamless tracking.",
+    },
+    {
+      icons: <GoCheck />,
+      heading: "Secure Packaging",
+      content:
+        "Every product is packed with care to ensure it reaches you in perfect condition.",
+    },
+    {
+      icons: <GoCheck />,
+      heading: "Multiple Shipping Options",
+      content: "Choose from express, standard, and eco-friendly delivery.",
+    },
+    {
+      icons: <GoCheck />,
+      heading: "Easy Returns & Replacements",
+      content: "Hassle-free returns with quick processing.",
+    },
+  ];
+
   return (
     <>
       {/* header */}
@@ -191,7 +222,7 @@ function SellerHome(props) {
                   We help our clients achieve their goals!! Trust Score 4.7
                   (Based on 1,200 reviews)
                 </p>
-                <div class="border-btn btn-seller">Login</div>
+                <div class="border-btn btn-seller">Register</div>
               </div>
             </div>
           </div>
@@ -200,48 +231,54 @@ function SellerHome(props) {
 
       {/* why choose us */}
 
-     <div class="w-c-commonparent">
-     <div className="parent why-choose-parent">
-        <div className="cont why-choose-container">
-          <div class="w-c-left">
-            <h2>Why Choose Us</h2>
-            {w_c_data.map((item, index) => (
-              <div class="w-c-points">
-                <div class="tick">{item.logo}</div>
-                <div class="content">
-                  <h3>{item.heading} :</h3>
-                  <p>{item.des}</p>
+      <div class="w-c-commonparent">
+        <div className="parent why-choose-parent">
+          <div className="cont why-choose-container">
+            <div class="w-c-left">
+              <h2>Why Choose Us</h2>
+              {w_c_data.map((item, index) => (
+                <div class="w-c-points">
+                  <div class="tick">{item.logo}</div>
+                  <div class="content">
+                    <h3>{item.heading} :</h3>
+                    <p>{item.des}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div class="w-c-right"></div>
           </div>
-          <div class="w-c-right"></div>
+          <div class="w-c-right-img bg-img-cover"></div>
         </div>
-        <div class="w-c-right-img bg-img-cover"></div>
-      </div>
 
-      <div class="parent elmentor-parent">
-        <div class="cont elementor-cont">
-          <div class="elementor-element">
-            <span><LiaRecycleSolid /></span>
-            <h3>Marketing & Promotions</h3>
-          </div>
+        <div class="parent elmentor-parent">
+          <div class="cont elementor-cont">
+            <div class="elementor-element">
+              <span>
+                <LiaRecycleSolid />
+              </span>
+              <h3>Marketing & Promotions</h3>
+            </div>
 
-          <div class="elementor-element">
-            <span><LiaRecycleSolid /></span>
-            <h3>Analytics & Insights</h3>
-          </div>
+            <div class="elementor-element">
+              <span>
+                <LiaRecycleSolid />
+              </span>
+              <h3>Analytics & Insights</h3>
+            </div>
 
-          <div class="elementor-element">
-            <span><LiaRecycleSolid /></span>
-            <h3>Dedicated Seller Support</h3>
+            <div class="elementor-element">
+              <span>
+                <LiaRecycleSolid />
+              </span>
+              <h3>Dedicated Seller Support</h3>
+            </div>
           </div>
         </div>
       </div>
-     </div>
 
       {/* testimonial */}
-      <div className="parent testimonial-parent">
+      <div className="parent testimonial-parent bg-img-cover">
         <div className="cont testimonial-container">
           <div className="testimonial-heading">
             <HeadingTag text="Testimonial" />
@@ -270,23 +307,95 @@ function SellerHome(props) {
         </div>
       </div>
 
+      {/* popular product */}
+      <div class="parent popular-product-parent">
+        <div class="cont popular-product-cont">
+          <div class="popular-header">
+            <HeadingTag text="Popular Products" />
+          </div>
+          <div class="elements-popular-products">
+            <h3>Handmade crafts</h3>
+            <h3>Organic </h3>
+            <h3>Traditional</h3>
+            <h3>Clothes</h3>
+            <h3>Dairy </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+          </div>
+        </div>
+      </div>
+
       {/* bring business online */}
       <div class="parent business-online-parent">
         <div class="cont business-online-container ">
-         <div class="top-content">
-          <h2>Scale Online Business</h2>
-         </div>
-         <div class="bottom-content">
-          <div class="elementor-wrapper">
-            <div class="no">01</div>
-            <div class="elements">
-              <img src={product_listing} alt="" />
-              <div class="element-content">
-                <p>Best practices for product listings</p>
+          <div class="top-content">
+            <h2>Scale Online Business</h2>
+          </div>
+          <div class="bottom-content">
+            <div class="elementor-wrapper">
+              <div class="no">01</div>
+              <div class="elements">
+                <img src={product_listing} alt="" />
+                <div class="element-content">
+                  <p>Best practices for product listings</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="elementor-wrapper">
+              <div class="no">02</div>
+              <div class="elements">
+                <img src={product_listing} alt="" />
+                <div class="element-content">
+                  <p>Pricing tips for better sales</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="elementor-wrapper">
+              <div class="no">03</div>
+              <div class="elements">
+                <img src={product_listing} alt="" />
+                <div class="element-content">
+                  <p>Leveraging The Jungle Boosh marketing tools</p>
+                </div>
               </div>
             </div>
           </div>
-         </div>
+        </div>
+      </div>
+
+      {/* logistics */}
+
+      <div class="parent logistics-parent bg-img-cover">
+        
+        <div class="cont logistics-cont">
+          <div class="left-logistics bg-img-cover"></div>
+          <div class="right-logistics">
+            <HeadingTag text="Logistics & Shipping" />
+            <h2>Seamless, Fast & Secure Shipping Solutions</h2>
+            <p>
+              Efficient logistics and shipping are the backbone of a successful
+              eCommerce business. We ensure smooth order fulfillment, secure
+              packaging, and timely deliveries for a hassle-free shopping
+              experience.
+            </p>
+            {logistics.map((item, index) => (
+              <div class="logistics-points">
+                <span>{item.icons}</span>
+                <div>
+                  <h3>{item.heading}</h3>
+                  <p>{item.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="btn">Ship with us</div>
         </div>
       </div>
 
