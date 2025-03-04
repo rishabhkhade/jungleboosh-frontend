@@ -145,6 +145,22 @@ function SellerHome(props) {
     },
   ];
 
+  //marketing  & promotion
+  const marketing = [
+    {
+      icons: <GoCheck />,
+      heading: "Advertise on Our Platform",
+    },
+    {
+      icons: <GoCheck />,
+      heading: "Offer Discounts & Exclusive Deals",
+    },
+    {
+      icons: <GoCheck />,
+      heading: "Leverage Our Social Media Reach",
+    },
+  ];
+
   return (
     <>
       {/* header */}
@@ -373,7 +389,6 @@ function SellerHome(props) {
       {/* logistics */}
 
       <div class="parent logistics-parent bg-img-cover">
-        
         <div class="cont logistics-cont">
           <div class="left-logistics bg-img-cover"></div>
           <div class="right-logistics">
@@ -395,7 +410,52 @@ function SellerHome(props) {
               </div>
             ))}
           </div>
-          <div class="btn">Ship with us</div>
+        </div>
+      </div>
+
+      {/* marketing and promotion */}
+      <div class="parent marketing-promotion-parent">
+        <div class="cont marketing-promotion-cont">
+          <div class="left-marketing-promotion bg-img-cover"></div>
+          <div class="right-marketing-promotion">
+            <HeadingTag text="Marketing & Promotion Tools" />
+            <h2>Powerful Tools to Boost Your Sales</h2>
+            <p>
+              Expand your reach and drive more sales with our powerful marketing
+              and promotion tools. We provide multiple ways to help your
+              business grow and attract more customers.
+            </p>
+            {marketing.map((item, index) => (
+              <div class="marketing-promotion">
+                <span>{item.icons}</span>
+                <div>
+                  <h3>{item.heading}</h3>
+                  <p>{item.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* earning and fees */}
+      <div class="parent earn-and-fees-parent">
+        <div class="cont earn-and-fees-cont ">
+          <HeadingTag text="Earnings & Fees Overview" />
+          <h2>Understand Your Earnings & Fees with Transparency</h2>
+          <div class="earn-process">
+            <div class="earn-process-card">
+              <span>
+                <LuCheckCheck />
+              </span>
+              <h3>Transparent Commission Structure</h3>
+              <p>
+                Get a clear breakdown of commission rates for each sale, earn
+                more with higher sales volume, and enjoy complete transparency
+                with no surprise deductions.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
