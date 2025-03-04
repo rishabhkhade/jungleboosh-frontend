@@ -1,0 +1,22 @@
+.header_label {
+    width: 100%;
+    height: auto;
+    background-color: var(--green);
+    margin: 0px 20px;
+  
+
+    .hader_label_cont {
+        height: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+
+        p{
+            text-transform: capitalize;
+            padding: 5px 0px;
+            border-bottom: 3px solid var(--accent);
+            color: var(--white);
+        }
+    }
+}

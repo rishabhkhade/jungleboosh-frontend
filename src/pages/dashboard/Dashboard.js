@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context";
 import "./Dashboard.scss";
 import Card from "../../component/card/Card";
+import Header_label from "../../component/header_label/Header_label";
 const Dashboard = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -31,8 +32,17 @@ const Dashboard = () => {
 
   return (
     <Card>
+      <Header_label />
       <div className="dashboard_parent parent">
-        <h2>i am dashboard</h2>
+        <div className="overlay"></div>
+        <div class="dashboard_cont cont">
+          <div class="dash_data"></div>
+          <div class="dash_data"></div>
+          <div class="dash_data"></div>
+          <div class="dash_data"></div>
+          <div class="dash_data"></div>
+          <div class="dash_data"></div>
+        </div>
       </div>
     </Card>
   );

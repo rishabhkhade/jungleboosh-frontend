@@ -9,14 +9,14 @@
     transition: var(--trans);
 
 
-    &.active{
+    &.active {
         width: 60px;
 
-        .onclose{
+        .onclose {
             right: -40%;
         }
     }
- 
+
 
     .onclose {
         position: absolute;
@@ -42,7 +42,7 @@
         width: 100%;
         height: calc(100% - 50px);
         margin-top: 50px;
-        
+
         overflow: hidden;
 
         .links {
@@ -52,31 +52,34 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
+            overflow: hidden;
 
-            .linkitem{
+            .linkitem {
                 width: 100%;
                 padding: var(--unit);
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
                 gap: calc(var(--unit) - 5px);
-                
+                overflow: hidden;
 
-                span{
+
+                span {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     color: white;
-                    
 
-                    svg{
+
+                    svg {
                         font-size: calc(var(--unit)*2);
                         color: var(--accent);
                     }
 
-                   
+
                 }
-                .linktext{
+
+                .linktext {
                     font-size: calc(var(--unit) + 5px);
                     color: black;
                     overflow: hidden;
