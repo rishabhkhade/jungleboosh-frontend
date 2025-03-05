@@ -107,15 +107,6 @@ function HelpSupport() {
               <strong>27 Division St, New York, USA</strong>
             </div>
           </div>
-          <div className="contact-item">
-            <FaClock className="icon" />
-            <div>
-              <p>Office Time</p>
-              <strong>Mon-Fri: 7.00 - 22.00</strong>
-              <br />
-              <strong>St-Sun: 9.00 - 20.00</strong>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -127,7 +118,7 @@ function HelpSupport() {
           <input type="email" placeholder="Your Email" />
           <input type="text" placeholder="Phone Number" />
           <textarea placeholder="Your Message"></textarea>
-          <button type="submit">➝ Send Message</button>
+          <button className="btn" type="submit">➝ Send Message</button>
         </form>
       </div>
 
