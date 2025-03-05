@@ -16,6 +16,12 @@ const Register = lazy(() => import("./pages/register/Register.js"));
 
 const Dashboard = lazy(() => import("./pages/dashboard/Dashboard.js"));
 
+const SellerBenefits = lazy(() =>
+  import("./pages/seller-benifits/SellerBenefits.js")
+);
+
+const HelpSupport = lazy(() => import("./pages/help-support/HelpSupport.js"));
+
 // rotuing
 export const routes = [
   // authentication
@@ -57,5 +63,21 @@ export const routes = [
     exact: true,
     name: "dashboard",
     component: Dashboard,
+  },
+
+  //seller-benifits
+  {
+    path: "/seller-benefits",
+    exact: true,
+    name: "seller-benefits",
+    component: SellerBenefits,
+  },
+
+  //help & support
+  {
+    path: "/help-support",
+    exact: true,
+    name: "help-support",
+    component: HelpSupport,
   },
 ];

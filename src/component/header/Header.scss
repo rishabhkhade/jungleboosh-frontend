@@ -18,42 +18,35 @@
             width: 10%;
         }
 
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: calc(var(--unit) * 3);
+
+            a {
+                color: var(--accent);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 500;
+            }
+        }
+
         .links {
             display: flex;
             gap: calc(var(--unit));
             align-items: center;
             justify-content: center;
 
-            .sell-online{
+            .sell-online {
                 color: var(--black);
-                &:hover{
+
+                &:hover {
                     color: var(--accent);
                 }
             }
 
         }
 
-        .call-info {
-            border: 1px solid var(--lightgrey);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px;
-            gap: calc(var(--unit)/2);
-            border-radius: calc(var(--unit)/2);
-
-
-            .phone-icon {
-                font-size: 26px;
-            }
-
-            .no-text {
-
-                display: flex;
-                flex-direction: column;
-                // gap: calc(var(--unit)/2);
-
-            }
-        }
     }
 }

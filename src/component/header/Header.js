@@ -1,9 +1,6 @@
 import React from "react";
 import "./Header.scss";
-import logo_header from "../../assets/header/Untitled design.png";
-import { IoIosCall } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { sellerApi } from "../../utils/Api";
 
 function Header() {
   return (
@@ -14,10 +11,22 @@ function Header() {
           <div className="logo">
             <h2 style={{ color: "var(--accent)" }}>lorem lipsum</h2>
           </div>
-          <div className="links">
+
+          <div class="nav">
             <Link to="/sell-online" className="sell-online">
-              Sell Online
+              Home
             </Link>
+
+            <Link to="/seller-benefits" className="sell-online">
+              Seller Benefits
+            </Link>
+
+            <Link to="/help-support" className="sell-online">
+              Help & Support
+            </Link>
+          </div>
+
+          <div className="links">
             <Link to="/login" className="border-btn">
               Login
             </Link>

@@ -4,7 +4,7 @@
     --green: #03221B;
     --accent: #B14B34;
     --accentbg: #b14b341c;
-    --text: rgb(107, 107, 107);
+    --text: rgba(107, 107, 107, 0.781);
     --unit: 16px;
     --grey: #606060;
     --max-width: 1200px;
@@ -60,7 +60,7 @@ h3{
 
 p {
     text-align: justify;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 25px;
     letter-spacing: 0.7px;
     word-spacing: 1px;
