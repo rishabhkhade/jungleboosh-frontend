@@ -88,7 +88,7 @@ function HelpSupport() {
             <FaPhoneAlt className="icon" />
             <div>
               <p>Contact Phone</p>
-              <strong>+55 (9900) 666 22</strong>
+              <h4>+55 (9900) 666 22</h4>
             </div>
           </div>
           <div className="contact-item">
