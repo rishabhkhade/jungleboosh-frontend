@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Register.scss";
 import Step from "../../component/steps/Step";
 import Input from "../../component/inputs/Input";
@@ -17,15 +17,18 @@ import { sellerApi } from "../../utils/Api";
 import UseForm from "../../UseForm";
 import validateFirstForm from "../../validate/ValidateRegisterPage";
 import OTPInput from "react-otp-input";
+import Loader from "../Loader/Loader";
 
 function Register() {
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
   const [step, setStep] = useState(1);
   const [idType, setIdType] = useState("gst");
-
+  const [loader, setLoader] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const [otpInput, setOtpInput] = useState(false);
+  const [countdown, setCountdown] = useState(60);
+
+  const [resendOtp, SetResendOtp] = useState();
   const [otp, setOtp] = useState("");
 
   const handleCountryChange = (event) => {
@@ -56,16 +59,46 @@ function Register() {
 
   const register = async () => {
     try {
+      setLoader(true);
       const response = await sellerApi.post("api/seller/registration", values);
       if (response.status === 200) {
         setDisabled(true);
-        setOtpInput(true);
-        // localStorage.setItem("sellerId", )
+       
+        localStorage.setItem("isDisabled", "true");
+        localStorage.setItem("sellerId", response.data.data.id);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoader(false);
     }
   };
+
+  useEffect(() => {
+    // Retrieve disabled state from localStorage
+    const savedDisabled = localStorage.getItem("isDisabled");
+    if (savedDisabled === "true") {
+      setDisabled(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    let timer;
+    if (disabled) {
+      setCountdown(60); // Reset countdown
+      timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 1) {
+            clearInterval(timer);
+            SetResendOtp(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [disabled]);
 
   const formObj = {
     name: "",
@@ -82,10 +115,12 @@ function Register() {
   );
 
   // otp
-  const otpValidate = async () => {
+  const otpValidate = async (e) => {
     try {
+      e.preventDefault();
+      const id = localStorage.getItem("sellerId");
       const response = await sellerApi.post("api/seller/otpVerification", {
-        sellerId: 1,
+        sellerId: Number(id),
         otp,
       });
 
@@ -97,6 +132,7 @@ function Register() {
 
   return (
     <>
+      {loader && <Loader />}
       <div class="register_parent parent">
         <div class="register_cont cont">
           <h2 class="logo">Lorem lipsum</h2>
@@ -177,7 +213,7 @@ function Register() {
                 )}
               </div>
 
-              {otpInput && (
+              {disabled && (
                 <div class="form-row-row">
                   <label for=""> Enter Otp</label>
                   <OTPInput
@@ -196,6 +232,8 @@ function Register() {
                       margin: "5px",
                     }}
                   />
+                {countdown !== 0 &&   <p>{countdown}</p>}
+                  {resendOtp && <div  >resendOtp</div>}
                 </div>
               )}
               <div class="form-row">
