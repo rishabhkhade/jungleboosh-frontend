@@ -19,10 +19,12 @@
 
     .faq-main-dropdown {
       display: flex;
-      flex-wrap: wrap;
+      width: 100%;
       align-items: flex-start;
       justify-content: center;
       gap: calc(var(--unit));
+      flex-direction: column;
+      transition: var(--trans);
 
       .faq-dropdown {
         border-top: 1px solid rgba(0, 0, 0, 0.13);
@@ -30,8 +32,10 @@
         padding: calc(var(--unit)) 0px;
         display: flex;
         flex-direction: column;
-        gap: calc(var(--unit) * 2);
-        width: 45%;
+        gap: calc(var(--unit) / 2 );
+        width: 100%;
+        transition: var(--trans);
+
 
         .faq-top {
           display: flex;
@@ -88,7 +92,6 @@
         .faq-down.open {
           max-height: 300px;
           opacity: 1;
-          padding: 10px;
         }
       }
     }
@@ -106,7 +109,7 @@
   .contact-cont {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     padding: 50px;
     gap: calc(var(--unit) * 2);
 
@@ -124,7 +127,8 @@
       }
 
       h1 {
-        font-size: 36px;
+        font-size: calc(var(--unit) * 3);
+
 
       }
 

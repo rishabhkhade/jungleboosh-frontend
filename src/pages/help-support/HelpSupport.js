@@ -8,6 +8,9 @@ import {
   FaEnvelope,
   FaClock,
 } from "react-icons/fa";
+import Header from "../../component/header/Header";
+import PageTop from "../../component/page-top/PageTop";
+import bgimg from "../../assets/pagetop/page_top.jpg";
 
 function HelpSupport() {
   //faq
@@ -50,6 +53,14 @@ function HelpSupport() {
 
   return (
     <>
+      <Header />
+
+      <PageTop
+        prev_page_name="Home"
+        cur_page_name="Help & Support"
+        bgImage={bgimg}
+      />
+
       {/* FAQ */}
       <div class="faq-parent parent">
         <div class="faq-cont cont">
