@@ -20,8 +20,8 @@
     .faq-main-dropdown {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-start;
+      align-items: flex-start;
+      justify-content: center;
       gap: calc(var(--unit));
 
       .faq-dropdown {
@@ -108,10 +108,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 50px;
-    gap: 50px;
+    gap: calc(var(--unit) * 2);
 
     .contact-info {
-      border: 1px solid;
       width: 70%;
       display: flex;
       flex-direction: column;
@@ -126,7 +125,7 @@
 
       h1 {
         font-size: 36px;
-        font-weight: bold;
+
       }
 
       .contact-details {
@@ -146,13 +145,13 @@
 
           .icon {
             font-size: 24px;
-            background: #ffffff;
-            padding: 15px;
+            background: var(--white);
+            padding: 10px;
             border-radius: 50%;
-
-            svg {
-              fill: var(--accent);
-            }
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
 
           p {
@@ -169,7 +168,7 @@
 
     .contact-form {
       width: 30%;
-      background: #f9f9f9;
+      background: var(--white);
       padding: 50px 30px;
       border-radius: 10px;
 

@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./HelpSupport.scss";
 import { MdArrowDownward } from "react-icons/md";
 import HeadingTag from "../../component/heading-tag/HeadingTag";
-import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaClock } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaClock,
+} from "react-icons/fa";
 
 function HelpSupport() {
   //faq
@@ -80,49 +85,55 @@ function HelpSupport() {
       {/* contact */}
       <div class="contact-parent parent">
         <div class="contact-cont cont">
-        <div className="contact-info">
-        <HeadingTag text="Contact Us" />
-        <h1>Our Creative Design Solutions Are For People, Contact Our Office.</h1>
-        <div className="contact-details">
-          <div className="contact-item">
-            <FaPhoneAlt className="icon" />
-            <div>
-              <p>Contact Phone</p>
-              <h4>+55 (9900) 666 22</h4>
+          <div className="contact-info">
+            <HeadingTag text="Contact Us" />
+            <h1>
+              Our Creative Design Solutions Are For People, Contact Our Office.
+            </h1>
+            <div className="contact-details">
+              <div className="contact-item">
+                <span className="icon">
+                  <FaPhoneAlt />
+                </span>
+                <div>
+                  <p>Contact Phone</p>
+                  <h4>+55 (9900) 666 22</h4>
+                </div>
+              </div>
+              <div className="contact-item">
+                <span className="icon">
+                  <FaEnvelope />
+                </span>
+                <div>
+                  <p>Contact Mail</p>
+                  <h4>info.kali@gmail.com</h4>
+                </div>
+              </div>
+              <div className="contact-item">
+                <span className="icon">
+                  {" "}
+                  <FaMapMarkerAlt />
+                </span>
+                <div>
+                  <p>Contact Location</p>
+                  <h4>18/2, Topkhana Road, Australia.</h4>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="contact-item">
-            <FaEnvelope className="icon" />
-            <div>
-              <p>Contact Mail</p>
-              <strong>info.kali@gmail.com</strong>
-            </div>
+
+          <div className="contact-form">
+            <h3>Get In Touch</h3>
+            <form>
+              <input type="text" placeholder="Your Name" />
+              <input type="email" placeholder="Your Email" />
+              <input type="text" placeholder="Phone Number" />
+              <textarea placeholder="Your Message"></textarea>
+              <button className="btn" type="submit">
+                ➝ Send Message
+              </button>
+            </form>
           </div>
-          <div className="contact-item">
-            <FaMapMarkerAlt className="icon" />
-            <div>
-              <p>Contact Location</p>
-              <strong>18/2, Topkhana Road, Australia.</strong>
-              <br />
-              <strong>27 Division St, New York, USA</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div className="contact-form">
-        <h3>Get In Touch</h3>
-        <form>
-          <input type="text" placeholder="Your Name" />
-          <input type="email" placeholder="Your Email" />
-          <input type="text" placeholder="Phone Number" />
-          <textarea placeholder="Your Message"></textarea>
-          <button className="btn" type="submit">➝ Send Message</button>
-        </form>
-      </div>
-
-
         </div>
       </div>
     </>

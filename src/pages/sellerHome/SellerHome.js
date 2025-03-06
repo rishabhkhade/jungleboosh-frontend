@@ -113,11 +113,7 @@ function SellerHome(props) {
       desc: "All the Lorem Ipsum generators on the Inter tend to chunks as true generator.",
       img: earn_more,
     },
-  ]; 
-
-
-
-
+  ];
 
   return (
     <>
@@ -172,37 +168,6 @@ function SellerHome(props) {
         </div>
       </div>
 
-      {/* seller benefits */}
-      <div className="parent seller-benefits-parent">
-        <div className="cont seller-benefits-container">
-          <div className="seller-benefits-heading">
-            <HeadingTag text="Seller Benefits" />
-          </div>
-          <div className="seller-benefits-bottom">
-            <div class="seller-benefits-left">
-              {seller_benefits_data.map((item, index) => (
-                <div class="seller-benefits-box">
-                  <img src={item.img} alt="" />
-                  <h3>{item.heading}</h3>
-                  <p>{item.desc}</p>
-                </div>
-              ))}
-            </div>
-            <div class="seller-benefits-right">
-              <div class="seller_benefit_img bg-img-cover"></div>
-              <div class="contain">
-                <h2>We help our seller achieve their goals!!</h2>
-                <p>
-                  We help our clients achieve their goals!! Trust Score 4.7
-                  (Based on 1,200 reviews)
-                </p>
-                <div class="border-btn btn-seller">Register</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* why choose us */}
 
       <div class="w-c-commonparent">
@@ -251,6 +216,60 @@ function SellerHome(props) {
         </div>
       </div>
 
+      {/* seller benefits */}
+      <div className="parent seller-benefits-parent">
+        <div className="cont seller-benefits-container">
+          <div className="seller-benefits-heading">
+            <HeadingTag text="Seller Benefits" />
+          </div>
+          <div className="seller-benefits-bottom">
+            <div class="seller-benefits-left">
+              {seller_benefits_data.map((item, index) => (
+                <div class="seller-benefits-box">
+                  <img src={item.img} alt="" />
+                  <h3>{item.heading}</h3>
+                  <p>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div class="seller-benefits-right">
+              <div class="seller_benefit_img bg-img-cover"></div>
+              <div class="contain">
+                <h2>We help our seller achieve their goals!!</h2>
+                <p>
+                  We help our clients achieve their goals!! Trust Score 4.7
+                  (Based on 1,200 reviews)
+                </p>
+                <div class="border-btn btn-seller">Register</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* popular product */}
+      <div class="parent popular-product-parent">
+        <div class="cont popular-product-cont">
+          <div class="popular-header">
+            <HeadingTag text="Popular Products" />
+          </div>
+          <div class="elements-popular-products">
+            <h3>Handmade crafts</h3>
+            <h3>Organic </h3>
+            <h3>Traditional</h3>
+            <h3>Clothes</h3>
+            <h3>Dairy </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+            <h3>Lorem </h3>
+          </div>
+        </div>
+      </div>
+
       {/* testimonial */}
       <div className="parent testimonial-parent bg-img-cover">
         <div className="cont testimonial-container">
@@ -277,29 +296,6 @@ function SellerHome(props) {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </div>
-
-      {/* popular product */}
-      <div class="parent popular-product-parent">
-        <div class="cont popular-product-cont">
-          <div class="popular-header">
-            <HeadingTag text="Popular Products" />
-          </div>
-          <div class="elements-popular-products">
-            <h3>Handmade crafts</h3>
-            <h3>Organic </h3>
-            <h3>Traditional</h3>
-            <h3>Clothes</h3>
-            <h3>Dairy </h3>
-            <h3>Lorem </h3>
-            <h3>Lorem </h3>
-            <h3>Lorem </h3>
-            <h3>Lorem </h3>
-            <h3>Lorem </h3>
-            <h3>Lorem </h3>
-            <h3>Lorem </h3>
           </div>
         </div>
       </div>
@@ -352,5 +348,3 @@ function SellerHome(props) {
 }
 
 export default SellerHome;
-
-
