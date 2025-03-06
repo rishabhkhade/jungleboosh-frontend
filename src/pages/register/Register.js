@@ -63,7 +63,7 @@ function Register() {
       const response = await sellerApi.post("api/seller/registration", values);
       if (response.status === 200) {
         setDisabled(true);
-       
+
         localStorage.setItem("isDisabled", "true");
         localStorage.setItem("sellerId", response.data.data.id);
       }
@@ -101,11 +101,41 @@ function Register() {
   }, [disabled]);
 
   const formObj = {
-    name: "",
-    email: "",
-    number: "",
-    password: "",
-    confirmPassword: "",
+    sellerReg: {
+      name: "",
+      email: "",
+      number: "",
+      password: "",
+      confirmPassword: "",
+    },
+    businessDetails:{
+      businessName:"",
+      enrollmentId:"",
+      address:"",
+      country:"",
+      state:"",
+      city:"",
+      pincode:"",
+      specialityProduct:"",
+      adharNum:"",
+      panNum:"",
+      businessOwnerName:"",
+      pickAddress:"",
+      pickCountry:"",
+      pickState:"",
+      pickCity:"",
+      pickPincode:"",
+      sellerTag:"",
+      sellerType:[],
+      advBooking:""
+    },
+    accountDetails:{
+      accountNum:"",
+      ifscCode:"",
+      bankName:"",
+      bankBranchName:"",
+      accountHolderName:""
+    }
   };
 
   const { handleChange, handleSubmit, values, errors, setErros } = UseForm(
@@ -232,8 +262,8 @@ function Register() {
                       margin: "5px",
                     }}
                   />
-                {countdown !== 0 &&   <p>{countdown}</p>}
-                  {resendOtp && <div  >resendOtp</div>}
+                  {countdown !== 0 && <p>{countdown}</p>}
+                  {resendOtp && <div>resendOtp</div>}
                 </div>
               )}
               <div class="form-row">
