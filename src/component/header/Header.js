@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../Context";
 
 function Header() {
-
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   return (
     <>
       <div className="parent header-parent">
@@ -15,7 +14,7 @@ function Header() {
             <h2 style={{ color: "var(--accent)" }}>lorem lipsum</h2>
           </div>
 
-          <div class="nav">
+          <div className="links">
             <Link to="/sell-online" className="sell-online">
               Home
             </Link>
@@ -27,13 +26,12 @@ function Header() {
             <Link to="/help-support" className="sell-online">
               Help & Support
             </Link>
-          </div>
-
-          <div className="links">
-            <Link to= "/login" className="border-btn">
+            <Link to="/login" className="border-btn">
               Login
             </Link>
-            <Link className="btn" to="/register">Register Your Business</Link>
+            <Link className="btn" to="/register">
+              Register Your Business
+            </Link>
           </div>
         </div>
       </div>
