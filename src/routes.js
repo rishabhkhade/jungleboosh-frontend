@@ -21,6 +21,7 @@ const SellerBenefits = lazy(() =>
 );
 
 const HelpSupport = lazy(() => import("./pages/help-support/HelpSupport.js"));
+const Products = lazy(() => import("./pages/products/Products.jsx"));
 
 // rotuing
 export const routes = [
@@ -79,5 +80,14 @@ export const routes = [
     component: Dashboard,
   },
 
+    // product
+    {
+      path: "/products",
+      exact: true,
+      name: "products",
+      component: Products,
+    },
+
+    
  
 ];
