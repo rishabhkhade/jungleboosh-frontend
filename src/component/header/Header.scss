@@ -18,20 +18,6 @@
             width: 10%;
         }
 
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: calc(var(--unit) * 3);
-
-            a {
-                color: var(--accent);
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                font-weight: 500;
-            }
-        }
-
         .links {
             display: flex;
             gap: calc(var(--unit));
@@ -39,7 +25,7 @@
             justify-content: center;
 
             .sell-online {
-                color: var(--black);
+                color: var(--accent);
 
                 &:hover {
                     color: var(--accent);

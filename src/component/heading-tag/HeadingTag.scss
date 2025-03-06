@@ -1,8 +1,8 @@
 .heading-tag{
     padding: 10px 20px;
-    border: 1.5px solid var(--accent);
-    border-radius: calc(var(--unit)/2);
+   border-radius: 50px;
     width: fit-content;
+    background: var(--accentbg);
 
     p{
         color: var(--accent);
