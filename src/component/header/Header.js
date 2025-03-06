@@ -15,9 +15,6 @@ function Header() {
           </div>
 
           <div className="links">
-            <Link to="/sell-online" className="sell-online">
-              Home
-            </Link>
 
             <Link to="/seller-benefits" className="sell-online">
               Seller Benefits

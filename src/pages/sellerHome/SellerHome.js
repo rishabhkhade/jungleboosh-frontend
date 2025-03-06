@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SellerHome.scss";
 import image_hero from "../../assets/hero_section/hero-img.webp";
 import HeadingTag from "../../component/heading-tag/HeadingTag";
@@ -7,12 +7,10 @@ import testimonial_img1 from "../../assets/testimonial/NewProject.webp";
 import Header from "../../component/header/Header";
 import Footer from "../../component/footer/Footer";
 import step_img1 from "../../assets/steps/2114.jpg";
-import { RiMegaphoneLine } from "react-icons/ri";
 import earn_more from "../../assets/seller-benefits/salary.png";
 import { GoCheck } from "react-icons/go";
 import { LiaRecycleSolid } from "react-icons/lia";
 import product_listing from "../../assets/online_business/6029494.webp";
-import { MdArrowDownward } from "react-icons/md";
 
 function SellerHome(props) {
   //why choose us data

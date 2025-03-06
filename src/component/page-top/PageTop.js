@@ -2,7 +2,7 @@ import React from "react";
 import "./PageTop.scss";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
-function PageTop({ prev_page_name, cur_page_name, bgImage }) {
+function PageTop({ prev_page_name, cur_page_name, bgImage, page_heading }) {
   return (
     <>
       <div
@@ -11,7 +11,7 @@ function PageTop({ prev_page_name, cur_page_name, bgImage }) {
       >
         <div className="cont page-top-cont">
           <div class="page-top-left">
-            <h2>Help & Support</h2>
+            <h2>{page_heading}</h2>
             <a href="/" className="breadcrums">
               {prev_page_name}
               <span>

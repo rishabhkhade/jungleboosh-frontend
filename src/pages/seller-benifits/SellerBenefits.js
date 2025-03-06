@@ -82,6 +82,7 @@ function SellerBenefits() {
       <Header />
 
       <PageTop
+        page_heading="Seller Benefits"
         prev_page_name="Home"
         cur_page_name="Seller Benefits"
         bgImage={bgimg}
