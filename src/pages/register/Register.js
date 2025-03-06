@@ -12,8 +12,6 @@ import {
 } from "@mui/material";
 import SelectInput from "../../component/selectInput/SelectInput";
 import MultiSelectInput from "../../component/multiselect/MultiSelectInput";
-import { sellerApi } from "../../utils/Api";
-
 import UseForm from "../../UseForm";
 import validateFirstForm from "../../validate/ValidateRegisterPage";
 import OTPInput from "react-otp-input";
@@ -24,16 +22,9 @@ function Register() {
   const [step, setStep] = useState(1);
   const [idType, setIdType] = useState("gst");
   const [loader, setLoader] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const [countdown, setCountdown] = useState(60);
 
-  const [resendOtp, SetResendOtp] = useState();
   const [otp, setOtp] = useState("");
-
-  const handleCountryChange = (event) => {
-    setSelectedCountry(event.target.value);
-  };
 
   const countryList = [
     { label: "India", value: "IN" },
@@ -41,7 +32,6 @@ function Register() {
     { label: "Canada", value: "CA" },
   ];
 
-  const [personName, setPersonName] = useState([]);
   const names = [
     "Oliver Hansen",
     "Van Henry",
@@ -57,23 +47,6 @@ function Register() {
 
   //  register 1st form
 
-  const register = async () => {
-    try {
-      setLoader(true);
-      const response = await sellerApi.post("api/seller/registration", values);
-      if (response.status === 200) {
-        setDisabled(true);
-
-        localStorage.setItem("isDisabled", "true");
-        localStorage.setItem("sellerId", response.data.data.id);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoader(false);
-    }
-  };
-
   useEffect(() => {
     // Retrieve disabled state from localStorage
     const savedDisabled = localStorage.getItem("isDisabled");
@@ -81,24 +54,6 @@ function Register() {
       setDisabled(true);
     }
   }, []);
-
-  useEffect(() => {
-    let timer;
-    if (disabled) {
-      setCountdown(60); // Reset countdown
-      timer = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev === 1) {
-            clearInterval(timer);
-            SetResendOtp(true);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [disabled]);
 
   const formObj = {
     sellerReg: {
@@ -108,58 +63,89 @@ function Register() {
       password: "",
       confirmPassword: "",
     },
-    businessDetails:{
-      businessName:"",
-      enrollmentId:"",
-      address:"",
-      country:"",
-      state:"",
-      city:"",
-      pincode:"",
-      specialityProduct:"",
-      adharNum:"",
-      panNum:"",
-      businessOwnerName:"",
-      pickAddress:"",
-      pickCountry:"",
-      pickState:"",
-      pickCity:"",
-      pickPincode:"",
-      sellerTag:"",
-      sellerType:[],
-      advBooking:""
+    businessDetails: {
+      businessName: "",
+      enrollmentId: "",
+      gstnum: "",
+      address: "",
+      country: "",
+      state: "",
+      city: "",
+      pincode: "",
+      specialityProduct: "",
+      adharNum: "",
+      panNum: "",
+      businessOwnerName: "",
+      pickAddress: "",
+      pickCountry: "",
+      pickState: "",
+      pickCity: "",
+      pickPincode: "",
+      sellerTag: "",
+      sellerType: [],
+      advBooking: "",
     },
-    accountDetails:{
-      accountNum:"",
-      ifscCode:"",
-      bankName:"",
-      bankBranchName:"",
-      accountHolderName:""
-    }
+    accountDetails: {
+      accountNum: "",
+      ifscCode: "",
+      bankName: "",
+      bankBranchName: "",
+      accountHolderName: "",
+    },
   };
 
-  const { handleChange, handleSubmit, values, errors, setErros } = UseForm(
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      businessDetails: {
+        ...prevValues.businessDetails,
+        [name]: value,
+      },
+    }));
+  };
+
+  const handleFirstFormChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      sellerReg: {
+        ...prevValues.sellerReg,
+        [name]: value,
+      },
+    }));
+  };
+  const handlelastFormChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      accountDetails: {
+        ...prevValues.accountDetails,
+        [name]: value,
+      },
+    }));
+  };
+
+  const handleMultiSelectChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      businessDetails: {
+        ...(prevValues.businessDetails || {}),
+        [name]: Array.isArray(value) ? value : [value], // Ensure value is always an array
+      },
+    }));
+  };
+
+  const { handleSubmit, values, setValues, errors, setErros } = UseForm(
     formObj,
-    validateFirstForm,
-    register
+    validateFirstForm
   );
 
-  // otp
-  const otpValidate = async (e) => {
-    try {
-      e.preventDefault();
-      const id = localStorage.getItem("sellerId");
-      const response = await sellerApi.post("api/seller/otpVerification", {
-        sellerId: Number(id),
-        otp,
-      });
+  console.log(values);
 
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const nextStep = () => setStep((prev) => prev + 1);
+  const prevStep = () => setStep((prev) => prev - 1);
   return (
     <>
       {loader && <Loader />}
@@ -169,34 +155,34 @@ function Register() {
           <Step totalSteps={3} currentStep={step} stepLabels={stepLabels} />
 
           {step === 1 && (
-            <form
-              action=""
-              className="register_form"
-              onSubmit={disabled ? otpValidate : handleSubmit}
-            >
+            <form action="" className="register_form" onSubmit={nextStep}>
               <div class="form-row">
                 <Input
                   label="Your Name"
                   disabled={disabled}
-                  value={values.name}
+                  value={values?.sellerReg?.name || ""}
                   name="name"
-                  onChange={handleChange}
+                  onChange={handleFirstFormChange}
                 />
-                {errors.name && (
-                  <small className="text-warning">{errors.name}</small>
+                {errors?.sellerReg?.name && (
+                  <small className="text-warning">
+                    {errors.sellerReg.name}
+                  </small>
                 )}
               </div>
               <div class="form-row">
                 <Input
                   label="Your Email"
-                  value={values.email}
+                  value={values.sellerReg.email}
                   disabled={disabled}
                   type="email"
                   name="email"
-                  onChange={handleChange}
+                  onChange={handleFirstFormChange}
                 />
-                {errors.email && (
-                  <small className="text-warning">{errors.email}</small>
+                {errors?.sellerReg?.email && (
+                  <small className="text-warning">
+                    {errors.sellerReg.email}
+                  </small>
                 )}
               </div>
               <div class="form-row">
@@ -205,40 +191,44 @@ function Register() {
                   <Input
                     label="Contact Number"
                     disabled={disabled}
-                    value={values.number}
+                    value={values.sellerReg.number}
                     name="number"
-                    onChange={handleChange}
+                    onChange={handleFirstFormChange}
                   />
                 </div>
-                {errors.number && (
-                  <small className="text-warning">{errors.number}</small>
+                {errors?.sellerReg?.number && (
+                  <small className="text-warning">
+                    {errors.sellerReg.number}
+                  </small>
                 )}
               </div>
               <div class="form-row">
                 <Input
                   label="Password"
                   name="password"
-                  value={values.password}
+                  value={values.sellerReg.password}
                   disabled={disabled}
-                  onChange={handleChange}
+                  onChange={handleFirstFormChange}
                   password={true}
                 />
-                {errors.password && (
-                  <small className="text-warning">{errors.password}</small>
+                {errors?.sellerReg?.password && (
+                  <small className="text-warning">
+                    {errors.sellerReg.password}
+                  </small>
                 )}
               </div>
               <div class="form-row">
                 <Input
                   label="Confirm Password"
-                  value={values.confirmPassword}
+                  value={values.sellerReg.confirmPassword}
                   disabled={disabled}
-                  onChange={handleChange}
+                  onChange={handleFirstFormChange}
                   name="confirmPassword"
                   password={true}
                 />
-                {errors.confirmPassword && (
+                {errors?.sellerReg?.confirmPassword && (
                   <small className="text-warning">
-                    {errors.confirmPassword}
+                    {errors.sellerReg.confirmPassword}
                   </small>
                 )}
               </div>
@@ -262,24 +252,33 @@ function Register() {
                       margin: "5px",
                     }}
                   />
-                  {countdown !== 0 && <p>{countdown}</p>}
-                  {resendOtp && <div>resendOtp</div>}
+                  {/* {countdown !== 0 && <p>{countdown}</p>}
+                  {resendOtp && <div>resendOtp</div>} */}
                 </div>
               )}
               <div class="form-row">
-                <button type="submit" className="btn">
+                <button  className="btn">
                   Next
                 </button>
               </div>
             </form>
           )}
 
-          {(step === 2 || step === 3) && (
-            <form action="" className="register_form">
+         
               {step === 2 && (
                 <div class="step_two_form" style={{ width: "100%" }}>
                   <div class="form-row">
-                    <Input label="Business Name" name="businessName" />
+                    <Input
+                      label="Business Name"
+                      name="businessName"
+                      value={values.businessDetails.businessName}
+                      onChange={handleChange}
+                    />
+                    {errors?.businessDetails?.businessName && (
+                      <small className="text-warning">
+                        {errors.businessDetails.businessName}
+                      </small>
+                    )}
                   </div>
                   <div class="form-row-row">
                     <div
@@ -312,35 +311,62 @@ function Register() {
                     </div>
                     <div class="half_row">
                       {idType === "gst" && (
-                        <Input label="Gst Number" name="email" />
+                        <Input
+                          label="Gst Number"
+                          value={values.businessDetails.gstnum}
+                          name="gstnum"
+                          onChange={handleChange}
+                        />
                       )}
                       {idType === "enid" && (
-                        <Input label="Enrollment id" name="email" />
+                        <Input
+                          label="Enrollment id"
+                          value={values.businessDetails.enrollmentId}
+                          name="enrollmentId"
+                          onChange={handleChange}
+                        />
                       )}
                     </div>
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
-                      <Input label="Aadhar Number" name="adharNum" />
+                      <Input
+                        label="Aadhar Number"
+                        name="adharNum"
+                        value={values.businessDetails.adharNum}
+                        onChange={handleChange}
+                      />
                     </div>
                     <div class="half_row">
-                      <Input label="Pan Number" name="panNum" />
+                      <Input
+                        label="Pan Number"
+                        name="panNum"
+                        value={values.businessDetails.panNum}
+                        onChange={handleChange}
+                      />
                     </div>
                   </div>
                   <div class="form-row">
                     <Input
                       label="Business Owner Name"
                       name="businessOwnerName"
+                      onChange={handleChange}
+                      value={values.businessDetails.businessOwnerName}
                     />
                   </div>
                   <div class="form-row">
-                    <Input label="Address" name="address" />
+                    <Input
+                      label="Address"
+                      name="address"
+                      value={values.businessDetails.address}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
                       <SelectInput
                         label="Country"
-                        value={selectedCountry}
+                        value={values.businessDetails.country}
                         onChange={handleChange}
                         name="country"
                       >
@@ -354,7 +380,7 @@ function Register() {
                     <div class="half_row">
                       <SelectInput
                         label="State"
-                        value={selectedCountry}
+                        value={values.businessDetails.state}
                         onChange={handleChange}
                         name="state"
                       >
@@ -370,7 +396,7 @@ function Register() {
                     <div class="half_row">
                       <SelectInput
                         label="City"
-                        value={selectedCountry}
+                        value={values.businessDetails.city}
                         onChange={handleChange}
                         name="city"
                       >
@@ -382,18 +408,28 @@ function Register() {
                       </SelectInput>
                     </div>
                     <div class="half_row">
-                      <Input label="Pincode" name="pincode" />
+                      <Input
+                        label="Pincode"
+                        value={values.businessDetails.pincode}
+                        onChange={handleChange}
+                        name="pincode"
+                      />
                     </div>
                   </div>
                   <div class="form-row">
-                    <Input label="Pickup Address" name="pickAddress" />
+                    <Input
+                      label="Pickup Address"
+                      onChange={handleChange}
+                      value={values.businessDetails.pickAddress}
+                      name="pickAddress"
+                    />
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
                       <SelectInput
                         label="Country"
-                        value={selectedCountry}
-                        onChange={handleCountryChange}
+                        value={values.businessDetails.pickCountry}
+                        onChange={handleChange}
                         name="pickCountry"
                       >
                         {countryList.map((country) => (
@@ -406,7 +442,7 @@ function Register() {
                     <div class="half_row">
                       <SelectInput
                         label="State"
-                        value={selectedCountry}
+                        value={values.businessDetails.pickState}
                         onChange={handleChange}
                         name="pickState"
                       >
@@ -422,8 +458,8 @@ function Register() {
                     <div class="half_row">
                       <SelectInput
                         label="City"
-                        value={selectedCountry}
-                        onChange={handleCountryChange}
+                        value={values.businessDetails.pickCity}
+                        onChange={handleChange}
                         name="pickCity"
                       >
                         {countryList.map((country) => (
@@ -434,15 +470,20 @@ function Register() {
                       </SelectInput>
                     </div>
                     <div class="half_row">
-                      <Input label="Pincode" name="pickPincode" />
+                      <Input
+                        label="Pincode"
+                        value={values.businessDetails.pickPincode}
+                        onChange={handleChange}
+                        name="pickPincode"
+                      />
                     </div>
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
                       <SelectInput
                         label="Your Product"
-                        value={selectedCountry}
-                        onChange={handleCountryChange}
+                        value={values.businessDetails.specialityProduct}
+                        onChange={handleChange}
                         name="specialityProduct"
                       >
                         {countryList.map((country) => (
@@ -455,8 +496,8 @@ function Register() {
                     <div class="half_row">
                       <SelectInput
                         label="Select Tag"
-                        value={selectedCountry}
-                        onChange={handleCountryChange}
+                        value={values.businessDetails.sellerTag}
+                        onChange={handleChange}
                         name="sellerTag"
                       >
                         {countryList.map((country) => (
@@ -469,7 +510,12 @@ function Register() {
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
-                      <MultiSelectInput options={names} value={personName} />
+                      <MultiSelectInput
+                        options={names}
+                        name="sellerType"
+                        value={values.businessDetails.sellerType || []}
+                        handleChange={handleMultiSelectChange}
+                      />
                     </div>
                     <div class="half_row">
                       <div class="half_row">
@@ -486,14 +532,18 @@ function Register() {
                             name="radio-buttons-group"
                           >
                             <FormControlLabel
-                              value="YES"
+                              value={
+                                values.businessDetails.advBooking === "YES"
+                              }
                               control={<Radio />}
+                              onChange={handleChange}
                               checked="YES"
                               label="YES"
                             />
                             <FormControlLabel
-                              value="NO"
+                              value={values.businessDetails.advBooking === "NO"}
                               control={<Radio />}
+                              onChange={handleChange}
                               checked="NO"
                               label="NO"
                             />
@@ -511,22 +561,39 @@ function Register() {
               {step === 3 && (
                 <div className="step_two_form">
                   <div className="form-row">
-                    <Input label="Bank name" name="bankName" />
+                    <Input
+                      label="Bank name"
+                      onChange={handlelastFormChange}
+                      name="bankName"
+                    />
                   </div>
                   <div className="form-row">
-                    <Input label="Account number" name="accountNum" />
+                    <Input
+                      label="Account number"
+                      onChange={handlelastFormChange}
+                      name="accountNum"
+                    />
                   </div>
 
                   <div className="form-row">
-                    <Input label="Ifsc code" name="ifscCode" />
+                    <Input
+                      label="Ifsc code"
+                      onChange={handlelastFormChange}
+                      name="ifscCode"
+                    />
                   </div>
                   <div className="form-row">
-                    <Input label="Bank branch name" name="bankBranchName" />
+                    <Input
+                      label="Bank branch name"
+                      onChange={handlelastFormChange}
+                      name="bankBranchName"
+                    />
                   </div>
                   <div className="form-row">
                     <Input
                       label="Account holder name"
                       name="accountHolderName"
+                      onChange={handlelastFormChange}
                     />
                   </div>
 
@@ -537,8 +604,7 @@ function Register() {
                   </div>
                 </div>
               )}
-            </form>
-          )}
+          
         </div>
       </div>
     </>
