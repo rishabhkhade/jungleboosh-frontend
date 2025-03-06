@@ -6,7 +6,6 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
   FaEnvelope,
-  FaClock,
 } from "react-icons/fa";
 import Header from "../../component/header/Header";
 import PageTop from "../../component/page-top/PageTop";
@@ -56,6 +55,7 @@ function HelpSupport() {
       <Header />
 
       <PageTop
+        page_heading="Help & Support"
         prev_page_name="Home"
         cur_page_name="Help & Support"
         bgImage={bgimg}
