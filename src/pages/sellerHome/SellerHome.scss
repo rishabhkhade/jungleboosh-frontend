@@ -343,7 +343,7 @@
 //why choose us
 .w-c-commonparent {
     position: relative;
-    padding: 100px 10px;
+    padding: 100px 0px;
 
     .why-choose-parent {
         height: auto;
@@ -633,11 +633,13 @@
 
 
         .elements-popular-products {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: calc(var(--unit) * 2);
+
 
             h3 {
                 border-right: 1px solid #b14b3485;
@@ -647,6 +649,7 @@
                 font-size: calc(var(--unit) * 1.2);
                 font-weight: 700;
                 letter-spacing: 1px;
+                
 
                 &:last-child {
                     border-right: none;
