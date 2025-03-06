@@ -3,6 +3,9 @@ import "./SellerBenefits.scss";
 import HeadingTag from "../../component/heading-tag/HeadingTag";
 import earn_more from "../../assets/seller-benefits/salary.png";
 import { GoCheck } from "react-icons/go";
+import Header from "../../component/header/Header";
+import PageTop from "../../component/page-top/PageTop";
+import bgimg from "../../assets/pagetop/page_top.jpg";
 
 function SellerBenefits() {
   //earn
@@ -76,6 +79,14 @@ function SellerBenefits() {
 
   return (
     <>
+      <Header />
+
+      <PageTop
+        prev_page_name="Home"
+        cur_page_name="Seller Benefits"
+        bgImage={bgimg}
+      />
+
       {/* earning and fees */}
       <div class="parent earn-and-fees-parent">
         <div class="cont earn-and-fees-cont ">
