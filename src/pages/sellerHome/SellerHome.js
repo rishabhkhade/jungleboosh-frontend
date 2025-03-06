@@ -254,7 +254,7 @@ function SellerHome(props) {
             <HeadingTag text="Popular Products" />
           </div>
           <div class="elements-popular-products">
-            <h3>Handmade crafts</h3>
+            <h3>Handmade</h3>
             <h3>Organic </h3>
             <h3>Traditional</h3>
             <h3>Clothes</h3>
