@@ -193,6 +193,7 @@ function Register() {
                     disabled={disabled}
                     value={values.sellerReg.number}
                     name="number"
+                    
                     onChange={handleFirstFormChange}
                   />
                 </div>
