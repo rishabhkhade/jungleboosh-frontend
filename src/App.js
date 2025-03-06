@@ -29,7 +29,9 @@ function App() {
     "/forgotpassword",
     "/register",
     "/ChangePassword",
-    "/*"
+    "/*",
+    "/seller-benefits",
+    "/help-support"
   ];
 
   return (

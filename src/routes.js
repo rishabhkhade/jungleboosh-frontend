@@ -55,7 +55,21 @@ export const routes = [
     name: "register",
     component: Register,
   },
+ //seller-benifits
+ {
+  path: "/seller-benefits",
+  exact: true,
+  name: "seller-benefits",
+  component: SellerBenefits,
+},
 
+//help & support
+{
+  path: "/help-support",
+  exact: true,
+  name: "help-support",
+  component: HelpSupport,
+},
   // dashboard
 
   {
@@ -65,19 +79,5 @@ export const routes = [
     component: Dashboard,
   },
 
-  //seller-benifits
-  {
-    path: "/seller-benefits",
-    exact: true,
-    name: "seller-benefits",
-    component: SellerBenefits,
-  },
-
-  //help & support
-  {
-    path: "/help-support",
-    exact: true,
-    name: "help-support",
-    component: HelpSupport,
-  },
+ 
 ];
