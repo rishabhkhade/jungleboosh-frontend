@@ -10,6 +10,7 @@ const Input = ({
   error,
   password,
   name,
+  disabled,
   type = "text",
 }) => {
   const [passwordType, setPasswordType] = useState(true);
@@ -20,6 +21,7 @@ const Input = ({
           id="outlined-basic"
           label={label}
           name={name}
+          disabled={disabled}
           value={value}
           variant="outlined"
           onChange={onChange}

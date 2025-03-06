@@ -15,30 +15,20 @@ import { Progress } from "antd";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = () => {
-      window.history.pushState(null, "", window.location.href);
-    };
-  }, []);
+    const sellerData = localStorage.getItem("seller_Data");
+    
+    // If no seller data, redirect to home (or login)
+    if (!sellerData) {
+      navigate("/", { replace: true }); // Redirect to Home instead of Login
+    }
+  }, [navigate]);
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      if (!localStorage.getItem("seller_Data")) {
-        setUser(null); // Update context
-        navigate("/login", { replace: true });
-      }
-    };
 
-    window.addEventListener("storage", handleStorageChange);
 
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [navigate, setUser]);
-
+  
   const dashTopBarData = [
     {
       icon: <AiOutlineShoppingCart />,

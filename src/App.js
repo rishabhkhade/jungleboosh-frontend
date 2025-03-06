@@ -1,21 +1,28 @@
 import {
-  Navigate,
-  Route,
+  BrowserRouter as Router,
   Routes,
-  useLocation,
+  Route,
+  Navigate,
   useNavigate,
 } from "react-router-dom";
 import { Suspense, useContext, useEffect } from "react";
 import "./App.scss";
 import { routes } from "./routes";
-import ContextProvider, { UserContext } from "./Context";
+import { UserContext } from "./Context";
 import Sidebar from "./component/sidebar/Sidebar";
 import DashHeader from "./component/dashHeader/DashHeader";
 
 function App() {
   const { user } = useContext(UserContext);
-  const location = useLocation();
+
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user && localStorage.getItem("firstLogin") === "true") {
+      navigate("/dashboard"); // Redirect to dashboard
+      localStorage.removeItem("firstLogin"); // Remove flag after redirection
+    }
+  }, [user, navigate]);
+
   const restrictedPaths = [
     "/",
     "/login",
@@ -24,18 +31,14 @@ function App() {
     "/ChangePassword",
   ];
 
-  useEffect(() => {
-    // Check if user just logged in
-    if (user && localStorage.getItem("firstLogin") === "true") {
-      navigate("/dashboard"); // Redirect to dashboard
-      localStorage.setItem("firstLogin", "false"); // Reset flag
-    }
-  }, [user, navigate]);
   return (
     <div className="App">
-       {user && !restrictedPaths.includes(location.pathname) && <DashHeader />}
-      {user && !restrictedPaths.includes(location.pathname) && <Sidebar />}
-     
+      {user && !restrictedPaths.includes(window.location.pathname) && (
+        <DashHeader />
+      )}
+      {user && !restrictedPaths.includes(window.location.pathname) && (
+        <Sidebar />
+      )}
 
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
@@ -47,8 +50,12 @@ function App() {
                 exact={item.exact}
                 name={item.name}
                 element={
-                  item.path === "/" && user ? (
-                    <Navigate to="/dashboard" />
+                  item.path === "/dashboard" ? (
+                    user ? (
+                      <item.component />
+                    ) : (
+                      <Navigate to="/" replace />
+                    )
                   ) : (
                     <item.component />
                   )
@@ -56,6 +63,8 @@ function App() {
               />
             ) : null
           )}
+          {/* Show 404 if no match */}
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Suspense>
     </div>

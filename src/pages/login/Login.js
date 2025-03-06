@@ -13,6 +13,7 @@ function Login() {
   const { user, setUser } = useContext(UserContext);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+
   const login = async () => {
     try {
       setLoader(true);
@@ -20,10 +21,8 @@ function Login() {
         withCredentials: true,
       });
       if (response.status === 200) {
-        localStorage.setItem(
-          "seller_Data",
-          `${JSON.stringify(response.data.data)}`
-        );
+        localStorage.setItem("seller_Data", JSON.stringify(response.data.data));
+        localStorage.setItem("firstLogin", "true");
         setUser(response.data.data);
         navigate("/dashboard", { replace: true });
       }

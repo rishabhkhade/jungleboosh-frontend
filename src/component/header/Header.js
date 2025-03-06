@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Header.scss";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../Context";
 
 function Header() {
+
+  const {user} = useContext(UserContext);
   return (
     <>
       <div className="parent header-parent">
@@ -27,10 +30,10 @@ function Header() {
           </div>
 
           <div className="links">
-            <Link to="/login" className="border-btn">
+            <Link to= "/login" className="border-btn">
               Login
             </Link>
-            <Link className="btn">Register</Link>
+            <Link className="btn" to="/register">Register Your Business</Link>
           </div>
         </div>
       </div>
