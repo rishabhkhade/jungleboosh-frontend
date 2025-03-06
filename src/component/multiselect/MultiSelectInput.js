@@ -8,8 +8,9 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
+  
 } from "@mui/material";
-const MultiSelectInput = ({ handleChange, value, options }) => {
+const MultiSelectInput = ({ handleChange, value = [], options, name }) => { 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -20,9 +21,10 @@ const MultiSelectInput = ({ handleChange, value, options }) => {
       },
     },
   };
+
   return (
     <>
-      <div class="multiselectinput">
+      <div className="multiselectinput">
         <div>
           <FormControl sx={{ m: 1, width: 300 }}>
             <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
@@ -30,16 +32,17 @@ const MultiSelectInput = ({ handleChange, value, options }) => {
               labelId="demo-multiple-checkbox-label"
               id="demo-multiple-checkbox"
               multiple
-              value={value}
+              value={Array.isArray(value) ? value : []} // ✅ Ensure it's always an array
+              name={name}
               onChange={handleChange}
               input={<OutlinedInput label="Tag" />}
               renderValue={(selected) => selected.join(", ")}
               MenuProps={MenuProps}
             >
-              {options.map((name) => (
-                <MenuItem key={name} value={name}>
-                  <Checkbox checked={value.includes(name)} />
-                  <ListItemText primary={name} />
+              {options.map((option) => (
+                <MenuItem key={option} value={option}>
+                  <Checkbox checked={value.includes(option)} />
+                  <ListItemText primary={option} />
                 </MenuItem>
               ))}
             </Select>
@@ -49,5 +52,6 @@ const MultiSelectInput = ({ handleChange, value, options }) => {
     </>
   );
 };
+
 
 export default MultiSelectInput;
