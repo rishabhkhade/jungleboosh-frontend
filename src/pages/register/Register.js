@@ -60,6 +60,7 @@ function Register() {
       if (response.status === 200) {
         setDisabled(true);
         setOtpInput(true);
+        // localStorage.setItem("sellerId", )
       }
     } catch (err) {
       console.log(err);
@@ -80,6 +81,20 @@ function Register() {
     register
   );
 
+  // otp
+  const otpValidate = async () => {
+    try {
+      const response = await sellerApi.post("api/seller/otpVerification", {
+        sellerId: 1,
+        otp,
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div class="register_parent parent">
@@ -88,7 +103,11 @@ function Register() {
           <Step totalSteps={3} currentStep={step} stepLabels={stepLabels} />
 
           {step === 1 && (
-            <form action="" className="register_form" onSubmit={handleSubmit}>
+            <form
+              action=""
+              className="register_form"
+              onSubmit={disabled ? otpValidate : handleSubmit}
+            >
               <div class="form-row">
                 <Input
                   label="Your Name"
@@ -159,7 +178,8 @@ function Register() {
               </div>
 
               {otpInput && (
-                <div class="form-row">
+                <div class="form-row-row">
+                  <label for=""> Enter Otp</label>
                   <OTPInput
                     numInputs={6}
                     value={otp}
