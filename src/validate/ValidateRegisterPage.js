@@ -1,5 +1,9 @@
-export default function validateFirstForm(value) {
-  let errors = {};
+export default function validateRegForm(value) {
+  let errors = {
+    sellerReg:{},
+    businessDetails:{},
+    accountDetails:{}
+  };
 
   if (!value.sellerReg.name) {
     errors.sellerReg.name = " Name is required";
@@ -7,13 +11,13 @@ export default function validateFirstForm(value) {
 
   if (!value.sellerReg.email) {
     errors.sellerReg.email = "Email is required";
-  } else if (!/\S+@\S+\.\S+/.test(value.email)) {
+  } else if (!/\S+@\S+\.\S+/.test(value.sellerReg.email)) {
     errors.sellerReg.email = "Email is invalid";
   }
 
   if (!value.sellerReg.number) {
     errors.sellerReg.number = "number is required";
-  } else if (value.sellerReg.number < 10) {
+  } else if (value.sellerReg.number.length !== 10) {
     errors.number = "number should be 10 digit";
   } else if (!/^\d*$/.test(value.sellerReg.number)) {
     errors.sellerReg.number = "Charcter not allowed";
@@ -24,7 +28,7 @@ export default function validateFirstForm(value) {
   }
   if (!value.sellerReg.confirmPassword) {
     errors.sellerReg.confirmPassword = " Confirm Password is required";
-  } else if (value.password !== value.confirmPassword) {
+  } else if (value.sellerReg.password !== value.sellerReg.confirmPassword) {
     errors.sellerReg.confirmPassword =
       "confirm password do not match to password";
   }
@@ -33,7 +37,7 @@ export default function validateFirstForm(value) {
     errors.businessDetails.businessName = "Business name is required"
   }
   if(!value.businessDetails.enrollmentId || !value.businessDetails.gstnum){
-    errors.businessDetails.businessName = "gst and Enrollment id is required"
+    errors.businessDetails.gstnum = "gst and Enrollment id is required"
   }
   if(!value.businessDetails.address){
     errors.businessDetails.address = "address is required"
@@ -104,3 +108,5 @@ export default function validateFirstForm(value) {
 
   return errors;
 }
+
+

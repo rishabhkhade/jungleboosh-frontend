@@ -16,6 +16,8 @@ import UseForm from "../../UseForm";
 import validateFirstForm from "../../validate/ValidateRegisterPage";
 import OTPInput from "react-otp-input";
 import Loader from "../Loader/Loader";
+import { sellerApi } from "../../utils/Api";
+import validateRegFirstForm from "../../validate/ValidatefirstRegForm";
 
 function Register() {
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
@@ -94,6 +96,46 @@ function Register() {
     },
   };
 
+  // const [values, setValues] = useState({
+  //   sellerReg: {
+  //     name: "",
+  //     email: "",
+  //     number: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //   },
+  //   businessDetails: {
+  //     businessName: "",
+  //     enrollmentId: "",
+  //     gstnum: "",
+  //     address: "",
+  //     country: "",
+  //     state: "",
+  //     city: "",
+  //     pincode: "",
+  //     specialityProduct: "",
+  //     adharNum: "",
+  //     panNum: "",
+  //     businessOwnerName: "",
+  //     pickAddress: "",
+  //     pickCountry: "",
+  //     pickState: "",
+  //     pickCity: "",
+  //     pickPincode: "",
+  //     sellerTag: "",
+  //     sellerType: [],
+  //     advBooking: "",
+  //   },
+  //   accountDetails: {
+  //     accountNum: "",
+  //     ifscCode: "",
+  //     bankName: "",
+  //     bankBranchName: "",
+  //     accountHolderName: "",
+  //   },
+  // });
+  // const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -101,20 +143,11 @@ function Register() {
       businessDetails: {
         ...prevValues.businessDetails,
         [name]: value,
+        advBooking: e.target.value,
       },
     }));
   };
 
-  const handleFirstFormChange = (e) => {
-    const { name, value } = e.target;
-    setValues((prevValues) => ({
-      ...prevValues,
-      sellerReg: {
-        ...prevValues.sellerReg,
-        [name]: value,
-      },
-    }));
-  };
   const handlelastFormChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -137,15 +170,46 @@ function Register() {
     }));
   };
 
-  const { handleSubmit, values, setValues, errors, setErros } = UseForm(
+  const [firstForm, setFirstForm] = useState({
+    name: "",
+    email: "",
+    number: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [firstFormErrors, secondFormErrors] = useState({});
+  const handleFirstFormChange = (e) => {
+    const { name, value } = e.target;
+    setFirstForm((prevValues) => ({
+      ...prevValues,
+
+      [name]: value,
+    }));
+  };
+  // send otp
+
+  const sendotp = async (e) => {
+    e.preventDefault();
+    secondFormErrors(validateRegFirstForm(firstForm));
+    if (Object.keys(errors).length > 0) return; 
+    try {
+      const email = values?.sellerReg?.email;
+
+      const response = await sellerApi.post("api/seller/sendOtp", { email });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { handleSubmit, values, setValues, errors, setErrors } = UseForm(
     formObj,
     validateFirstForm
   );
 
   console.log(values);
 
-  const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev - 1);
   return (
     <>
       {loader && <Loader />}
@@ -155,33 +219,31 @@ function Register() {
           <Step totalSteps={3} currentStep={step} stepLabels={stepLabels} />
 
           {step === 1 && (
-            <form action="" className="register_form" onSubmit={nextStep}>
+            <form class="register_form" onSubmit={sendotp}>
               <div class="form-row">
                 <Input
                   label="Your Name"
                   disabled={disabled}
-                  value={values?.sellerReg?.name || ""}
+                  value={firstForm.name}
                   name="name"
                   onChange={handleFirstFormChange}
                 />
-                {errors?.sellerReg?.name && (
-                  <small className="text-warning">
-                    {errors.sellerReg.name}
-                  </small>
+                {firstFormErrors.name && (
+                  <small className="text-warning">{firstFormErrors.name}</small>
                 )}
               </div>
               <div class="form-row">
                 <Input
                   label="Your Email"
-                  value={values.sellerReg.email}
+                  value={firstForm.email}
                   disabled={disabled}
                   type="email"
                   name="email"
                   onChange={handleFirstFormChange}
                 />
-                {errors?.sellerReg?.email && (
+                {firstFormErrors.email && (
                   <small className="text-warning">
-                    {errors.sellerReg.email}
+                    {firstFormErrors.email}
                   </small>
                 )}
               </div>
@@ -191,15 +253,14 @@ function Register() {
                   <Input
                     label="Contact Number"
                     disabled={disabled}
-                    value={values.sellerReg.number}
+                    value={firstForm.number}
                     name="number"
-                    
                     onChange={handleFirstFormChange}
                   />
                 </div>
-                {errors?.sellerReg?.number && (
+                {firstFormErrors.number && (
                   <small className="text-warning">
-                    {errors.sellerReg.number}
+                    {firstFormErrors.number}
                   </small>
                 )}
               </div>
@@ -207,29 +268,29 @@ function Register() {
                 <Input
                   label="Password"
                   name="password"
-                  value={values.sellerReg.password}
+                  value={values.password}
                   disabled={disabled}
                   onChange={handleFirstFormChange}
                   password={true}
                 />
-                {errors?.sellerReg?.password && (
+                {firstFormErrors.password && (
                   <small className="text-warning">
-                    {errors.sellerReg.password}
+                    {firstFormErrors.password}
                   </small>
                 )}
               </div>
               <div class="form-row">
                 <Input
                   label="Confirm Password"
-                  value={values.sellerReg.confirmPassword}
+                  value={values.confirmPassword}
                   disabled={disabled}
                   onChange={handleFirstFormChange}
                   name="confirmPassword"
                   password={true}
                 />
-                {errors?.sellerReg?.confirmPassword && (
+                {firstFormErrors.confirmPassword && (
                   <small className="text-warning">
-                    {errors.sellerReg.confirmPassword}
+                    {firstFormErrors.confirmPassword}
                   </small>
                 )}
               </div>
@@ -257,17 +318,16 @@ function Register() {
                   {resendOtp && <div>resendOtp</div>} */}
                 </div>
               )}
-              <div class="form-row">
-                <button  className="btn">
-                  Next
-                </button>
-              </div>
+              <button className="btn" type="submit">
+                Next
+              </button>
             </form>
           )}
 
-         
+          {step === 2 && step === 3 && (
+            <form action="" onSubmit={handleSubmit} className="register_form">
               {step === 2 && (
-                <div class="step_two_form" style={{ width: "100%" }}>
+                <div class="step_two_form " style={{ width: "100%" }}>
                   <div class="form-row">
                     <Input
                       label="Business Name"
@@ -524,28 +584,23 @@ function Register() {
                           Allow for Advance booking
                         </p>
                       </div>
-                      <div class="half_row">
+                      <div className="half_row">
                         <FormControl>
                           <RadioGroup
                             row
                             aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="female"
                             name="radio-buttons-group"
+                            value={values.businessDetails.advBooking}
+                            onChange={handleChange}
                           >
                             <FormControlLabel
-                              value={
-                                values.businessDetails.advBooking === "YES"
-                              }
+                              value="YES"
                               control={<Radio />}
-                              onChange={handleChange}
-                              checked="YES"
                               label="YES"
                             />
                             <FormControlLabel
-                              value={values.businessDetails.advBooking === "NO"}
+                              value="NO"
                               control={<Radio />}
-                              onChange={handleChange}
-                              checked="NO"
                               label="NO"
                             />
                           </RadioGroup>
@@ -605,7 +660,14 @@ function Register() {
                   </div>
                 </div>
               )}
-          
+
+              <div class="form-row">
+                <button type="submit" className="btn">
+                  Next
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </>
