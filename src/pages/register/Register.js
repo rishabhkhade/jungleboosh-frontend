@@ -18,6 +18,8 @@ import OTPInput from "react-otp-input";
 import Loader from "../Loader/Loader";
 import { sellerApi } from "../../utils/Api";
 import validateRegFirstForm from "../../validate/ValidatefirstRegForm";
+import axios from "axios";
+import validateRegForm from "../../validate/ValidateRegisterPage";
 
 function Register() {
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
@@ -52,8 +54,35 @@ function Register() {
   useEffect(() => {
     // Retrieve disabled state from localStorage
     const savedDisabled = localStorage.getItem("isDisabled");
+    const formData = localStorage.getItem("form_data");
+    const parsedData = JSON.parse(formData);
+
     if (savedDisabled === "true") {
       setDisabled(true);
+
+      setFirstForm({
+        name: parsedData.name,
+        email: parsedData.email,
+        number: parsedData.number,
+        password: parsedData.password,
+        confirmPassword: parsedData.confirmPassword,
+      });
+    }
+
+    const savedStep = localStorage.getItem("currentStep");
+    if (savedStep) {
+      setStep(parseInt(savedStep, 10));
+
+      setValues({
+        ...values,
+        sellerReg: {
+          name: parsedData.name,
+          email: parsedData.email,
+          number: parsedData.number,
+          password: parsedData.password,
+          confirmPassword: parsedData.confirmPassword,
+        },
+      });
     }
   }, []);
 
@@ -96,46 +125,7 @@ function Register() {
     },
   };
 
-  // const [values, setValues] = useState({
-  //   sellerReg: {
-  //     name: "",
-  //     email: "",
-  //     number: "",
-  //     password: "",
-  //     confirmPassword: "",
-  //   },
-  //   businessDetails: {
-  //     businessName: "",
-  //     enrollmentId: "",
-  //     gstnum: "",
-  //     address: "",
-  //     country: "",
-  //     state: "",
-  //     city: "",
-  //     pincode: "",
-  //     specialityProduct: "",
-  //     adharNum: "",
-  //     panNum: "",
-  //     businessOwnerName: "",
-  //     pickAddress: "",
-  //     pickCountry: "",
-  //     pickState: "",
-  //     pickCity: "",
-  //     pickPincode: "",
-  //     sellerTag: "",
-  //     sellerType: [],
-  //     advBooking: "",
-  //   },
-  //   accountDetails: {
-  //     accountNum: "",
-  //     ifscCode: "",
-  //     bankName: "",
-  //     bankBranchName: "",
-  //     accountHolderName: "",
-  //   },
-  // });
-  // const [errors, setErrors] = useState({});
-
+ 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -145,6 +135,11 @@ function Register() {
         [name]: value,
         advBooking: e.target.value,
       },
+      accountDetails: {
+        ...prevValues.accountDetails,
+        [name]: value,
+      },
+
     }));
   };
 
@@ -178,7 +173,7 @@ function Register() {
     confirmPassword: "",
   });
 
-  const [firstFormErrors, secondFormErrors] = useState({});
+  const [firstFormErrors, setSecondFormErrors] = useState({});
   const handleFirstFormChange = (e) => {
     const { name, value } = e.target;
     setFirstForm((prevValues) => ({
@@ -191,21 +186,76 @@ function Register() {
 
   const sendotp = async (e) => {
     e.preventDefault();
-    secondFormErrors(validateRegFirstForm(firstForm));
-    if (Object.keys(errors).length > 0) return; 
+
+    // Validate the form and update error state
+    const newErrors = validateRegFirstForm(firstForm);
+    setSecondFormErrors(newErrors);
+
+    // If there are errors, do not proceed with the API call
+    if (Object.keys(newErrors).length > 0) return;
     try {
-      const email = values?.sellerReg?.email;
+      setLoader(true);
+      const email = firstForm?.email;
 
       const response = await sellerApi.post("api/seller/sendOtp", { email });
-      console.log(response);
+      if (response.status) {
+        setDisabled(true);
+        localStorage.setItem("isDisabled", true);
+        localStorage.setItem("form_data", JSON.stringify(firstForm));
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoader(false);
+    }
+  };
+
+  // veerify otp
+
+  const verifyOtp = async (e) => {
+    try {
+      e.preventDefault();
+      if (otp.length !== 6) {
+        alert("please enter 6 digit otp");
+      }
+
+      const response = await sellerApi.post("api/seller/otpVerification", {
+        email: firstForm.email,
+        otp: otp,
+      });
+      if (response.status) {
+        setStep(2);
+        localStorage.setItem("currentStep", "2");
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const { handleSubmit, values, setValues, errors, setErrors } = UseForm(
+  //  register api
+
+  const register = async () => {
+    try {
+      const response = await sellerApi.post("api/seller/addSellerDetails",values);
+      console.log(response);
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+
+  const stepUpto = (e)=>{
+    e.preventDefault();
+    setStep(step + 1);
+    localStorage.setItem("currentStep", step + 1);
+
+  }
+
+  const {handleSubmit, values, setValues, errors, setErrors } = UseForm(
     formObj,
-    validateFirstForm
+    validateRegForm,
+    register
   );
 
   console.log(values);
@@ -219,7 +269,10 @@ function Register() {
           <Step totalSteps={3} currentStep={step} stepLabels={stepLabels} />
 
           {step === 1 && (
-            <form class="register_form" onSubmit={sendotp}>
+            <form
+              class="register_form"
+              onSubmit={disabled ? verifyOtp : sendotp}
+            >
               <div class="form-row">
                 <Input
                   label="Your Name"
@@ -268,7 +321,7 @@ function Register() {
                 <Input
                   label="Password"
                   name="password"
-                  value={values.password}
+                  value={firstForm.password}
                   disabled={disabled}
                   onChange={handleFirstFormChange}
                   password={true}
@@ -282,7 +335,7 @@ function Register() {
               <div class="form-row">
                 <Input
                   label="Confirm Password"
-                  value={values.confirmPassword}
+                  value={firstForm.confirmPassword}
                   disabled={disabled}
                   onChange={handleFirstFormChange}
                   name="confirmPassword"
@@ -324,8 +377,8 @@ function Register() {
             </form>
           )}
 
-          {step === 2 && step === 3 && (
-            <form action="" onSubmit={handleSubmit} className="register_form">
+          {(step === 2 || step === 3) && (
+            <form action="" onSubmit={ step === 2 ? stepUpto :  handleSubmit} className="register_form">
               {step === 2 && (
                 <div class="step_two_form " style={{ width: "100%" }}>
                   <div class="form-row">
@@ -608,9 +661,6 @@ function Register() {
                       </div>
                     </div>
                   </div>
-                  <div class="form-row">
-                    <button className="btn">Next</button>
-                  </div>
                 </div>
               )}
 
@@ -653,11 +703,7 @@ function Register() {
                     />
                   </div>
 
-                  <div class="form-row">
-                    <button type="submit" className="btn">
-                      Register
-                    </button>
-                  </div>
+                
                 </div>
               )}
 
