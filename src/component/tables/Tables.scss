@@ -1,0 +1,16 @@
+.order-tables-parent {
+    .order-tables-cont {
+        margin-top: 20px;
+
+        :where(.css-dev-only-do-not-override-1v613y0).ant-pagination .ant-pagination-item-active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--accent);
+
+            a {
+                color: var(--accent);
+            }
+        }
+    }
+}

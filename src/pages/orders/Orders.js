@@ -1,11 +1,10 @@
-import React from 'react'
-import "./Payments.scss"
-import Card from '../../component/card/Card';
-import Header_label from '../../component/header_label/Header_label';
-import Tables from '../../component/tables/Tables';
+import React from "react";
+import "./Orders.scss";
+import Card from "../../component/card/Card";
+import Header_label from "../../component/header_label/Header_label";
+import Tables from "../../component/tables/Tables";
 
-function Payments() {
-
+function Orders() {
   const ordersData = [
     {
       key: "1",
@@ -56,7 +55,6 @@ function Payments() {
     },
   ];
 
-
   return (
     <>
       <Card>
@@ -64,7 +62,7 @@ function Payments() {
         <Tables data={ordersData} columns={ordersColumns} />
       </Card>
     </>
-  )
+  );
 }
 
-export default Payments
+export default Orders;

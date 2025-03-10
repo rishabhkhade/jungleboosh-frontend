@@ -22,6 +22,10 @@ const SellerBenefits = lazy(() =>
 
 const HelpSupport = lazy(() => import("./pages/help-support/HelpSupport.js"));
 const Products = lazy(() => import("./pages/products/Products.jsx"));
+const Orders = lazy(() => import("./pages/orders/Orders.js"));
+const Payments = lazy(() => import("./pages/payments/Payments.jsx"));
+const SellerGallery = lazy(() => import("./pages/seller-gallery/SellerGallery.js"));
+const AddProducts = lazy(() => import("./pages/add-product/AddProducts.jsx"));
 
 // rotuing
 export const routes = [
@@ -56,23 +60,22 @@ export const routes = [
     name: "register",
     component: Register,
   },
- //seller-benifits
- {
-  path: "/seller-benefits",
-  exact: true,
-  name: "seller-benefits",
-  component: SellerBenefits,
-},
+  //seller-benifits
+  {
+    path: "/seller-benefits",
+    exact: true,
+    name: "seller-benefits",
+    component: SellerBenefits,
+  },
 
-//help & support
-{
-  path: "/help-support",
-  exact: true,
-  name: "help-support",
-  component: HelpSupport,
-},
+  //help & support
+  {
+    path: "/help-support",
+    exact: true,
+    name: "help-support",
+    component: HelpSupport,
+  },
   // dashboard
-
   {
     path: "/dashboard",
     exact: true,
@@ -80,14 +83,43 @@ export const routes = [
     component: Dashboard,
   },
 
-    // product
-    {
-      path: "/products",
-      exact: true,
-      name: "products",
-      component: Products,
-    },
+  // product
+  {
+    path: "/products",
+    exact: true,
+    name: "products",
+    component: Products,
+  },
 
-    
- 
+  //orders
+  {
+    path: "orders",
+    exact: true,
+    name: "orders",
+    component: Orders,
+  },
+
+  //payments
+  {
+    path: "payments",
+    exact: true,
+    name: "payments",
+    component: Payments,
+  },
+
+  //seller gallery
+  {
+    path: "seller-gallery",
+    exact: true,
+    name: "seller-gallery",
+    component: SellerGallery,
+  },
+
+  //add products
+  {
+    path: "add-products",
+    exact: true,
+    name: "add-products",
+    component: AddProducts,
+  },
 ];

@@ -1,0 +1,85 @@
+.sellergallery-parent {
+    margin-top: 20px;
+
+    .sellergallery-cont {
+        display: flex;
+        justify-content: flex-start;
+        padding-bottom: calc(var(--unit));
+        position: relative;
+        flex-direction: column;
+
+
+        .tabs {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            position: relative;
+            width: 100%;
+
+            .tabs-labels {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: calc(var(--unit) * 2);
+
+                span {
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    font-size: 16px;
+                    position: relative;
+                    color: #555;
+
+                    &.active {
+                        color: var(--accent);
+                    }
+                }
+            }
+
+            .underline {
+                width: 80px;
+                height: 2px;
+                background: var(--accent);
+                position: absolute;
+                bottom: 0;
+                left: 0;
+
+                &.photos {
+                    left: 0;
+                }
+
+                &.videos {
+                    left: 100px;
+                }
+            }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: calc(var(--unit));
+            margin-top: 20px;
+
+            .gallery-item {
+                background: #ddd;
+                aspect-ratio: 4/3;
+                border-radius: calc(var(--unit) / 2);
+            }
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: calc(var(--unit));
+            margin-top: 20px;
+
+            .gallery-item {
+                background: #ddd;
+                aspect-ratio: 4/3;
+                border-radius: calc(var(--unit) / 2);
+            }
+        }
+    }
+}

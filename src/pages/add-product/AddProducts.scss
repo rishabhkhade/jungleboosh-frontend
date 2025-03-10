@@ -1,0 +1,141 @@
+.parent-add-products {
+
+    .cont-add-products {
+
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--unit) * 7);
+
+
+        .top-add-products {
+            margin-top: 50px;
+        }
+
+        .bottom-add-products {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .product-add-form {
+                box-shadow: var(--shadow);
+                padding: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: calc(var(--unit));
+                border-radius: calc(var(--unit) / 2);
+                width: 100%;
+
+                .form-row {
+                    display: flex;
+                    width: 100%;
+                }
+
+            }
+        }
+
+        //step 2
+        .add-product-main {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--unit));
+            align-items: center;
+            justify-content: center;
+
+            .add-product-images {
+                display: flex;
+                align-items: stretch;
+                justify-content: center;
+                gap: calc(var(--unit));
+                width: 100%;
+
+                .drag-images {
+                    width: 33.33%;
+                    aspect-ratio: 1;
+                    border-radius: calc(var(--unit)/2);
+                    display: flex;
+                    flex-direction: column;
+                    gap: calc(var(--unit));
+
+                    .drag-drop-images {
+                        width: 100%;
+                        aspect-ratio: 6/3;
+                        background: rgba(0, 0, 0, 0.089);
+                        border-radius: calc(var(--unit)/2);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .instructions-images {
+                        width: 100%;
+                        aspect-ratio: 6/3;
+                        background: rgba(0, 0, 0, 0.089);
+                        border-radius: calc(var(--unit)/2);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+
+                .upload-images {
+                    width: 33.33%;
+                    aspect-ratio: 1;
+                    background: rgba(0, 0, 0, 0.089);
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: calc(var(--unit)/2);
+                    padding: 10px;
+
+                    .img-boxes {
+                        width: 160px;
+                        aspect-ratio: 1;
+                        background: rgba(255, 0, 0, 0.39);
+                        display: flex;
+                        border-radius: calc(var(--unit)/2);
+                    }
+                }
+
+                .hero-images {
+                    width: 33.33%;
+                    aspect-ratio: 1;
+                    background: rgba(0, 0, 0, 0.089);
+                    border-radius: calc(var(--unit)/2);
+                }
+            }
+        }
+
+        // step3
+        .add-info-product {
+            box-shadow: var(--shadow);
+            padding: 10px;
+            border-radius: calc(var(--unit));
+
+
+            .info-tabs {
+                display: flex;
+                align-items: center;
+                gap: calc(var(--unit));
+
+            }
+
+            
+            .info-boxes {
+                display: flex;
+                gap: calc(var(--unit));
+
+                input{
+                    padding: 10px;
+                    border-radius: calc(var(--unit) / 2);
+                    
+                }
+            }
+
+        }
+    }
+}
