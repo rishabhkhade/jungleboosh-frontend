@@ -246,7 +246,6 @@ function Register() {
         values
       );
       if (response.status === 201) {
-        localStorage.setItem("firstLogin", "true"); // Set flag for redirection
         localStorage.clear(); // Clear existing session storage
         navigate("/login"); // Redirect to dashboard
         window.location.reload();
@@ -312,6 +311,7 @@ function Register() {
                     disabled={disabled}
                     value={firstForm.number}
                     name="number"
+                    type="number"
                     onChange={handleFirstFormChange}
                   />
                 </div>
