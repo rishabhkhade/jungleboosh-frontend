@@ -248,7 +248,7 @@ function Register() {
       if (response.status === 201) {
         localStorage.setItem("firstLogin", "true"); // Set flag for redirection
         localStorage.clear(); // Clear existing session storage
-        navigate("/dashboard"); // Redirect to dashboard
+        navigate("/login"); // Redirect to dashboard
         window.location.reload();
       }
     } catch (error) {

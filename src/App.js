@@ -36,10 +36,9 @@ function App() {
 
   useEffect(() => {
     if (!user && !restrictedPaths.includes(window.location.pathname)) {
-      navigate("/404"); // Redirect to 404 if not logged in
+      navigate("/404", { replace: true }); // Redirect to 404 if not logged in
     }
   }, [user, navigate]);
-  
 
   return (
     <div className="App">
@@ -60,7 +59,11 @@ function App() {
                 exact={item.exact}
                 name={item.name}
                 element={
-                  user ? <item.component /> : <Navigate to="/404" replace />
+                  restrictedPaths.includes(item.path) || user ? (
+                    <item.component />
+                  ) : (
+                    <Navigate to="/404" replace />
+                  )
                 }
               />
             ) : null
