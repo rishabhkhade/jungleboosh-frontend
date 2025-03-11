@@ -65,7 +65,7 @@ function Register() {
   const [errors, setErrors] = useState({});
 
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [idType, setIdType] = useState("gst");
   const [loader, setLoader] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -103,11 +103,11 @@ function Register() {
       setDisabled(true);
 
       setFirstForm({
-        name: parsedData.name,
-        email: parsedData.email,
-        number: parsedData.number,
-        password: parsedData.password,
-        confirmPassword: parsedData.confirmPassword,
+        name: parsedData?.name || "",
+        email: parsedData?.email || "",
+        number: parsedData?.number || "",
+        password: parsedData?.password || "",
+        confirmPassword: parsedData?.confirmPassword || "",
       });
     }
 
@@ -118,11 +118,11 @@ function Register() {
       setValues({
         ...values,
         sellerReg: {
-          name: parsedData.name,
-          email: parsedData.email,
-          number: parsedData.number,
-          password: parsedData.password,
-          confirmPassword: parsedData.confirmPassword,
+          name: parsedData?.name || "",
+          email: parsedData?.email || "",
+          number: parsedData?.number || "",
+          password: parsedData?.password || "",
+          confirmPassword: parsedData?.confirmPassword || "",
         },
       });
     }
@@ -257,11 +257,21 @@ function Register() {
 
   const stepUpto = (e) => {
     e.preventDefault();
-    setStep(step + 1);
-    localStorage.setItem("currentStep", step + 1);
-  };
+    const newErrors = validateRegForm(values); // Pass entire values object
 
-  console.log(values);
+    console.log("Validation Errors:", newErrors); // Debugging
+
+    if (
+      Object.keys(newErrors.businessDetails).length > 0 ||
+      Object.keys(newErrors.accountDetails).length > 0
+    ) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
+      setStep(step + 1);
+      localStorage.setItem("currentStep", step + 1);
+    }
+  };
 
   return (
     <>
@@ -284,7 +294,7 @@ function Register() {
                   name="name"
                   onChange={handleFirstFormChange}
                 />
-                {firstFormErrors.name && (
+                {firstFormErrors?.name && (
                   <small className="text-warning">{firstFormErrors.name}</small>
                 )}
               </div>
@@ -310,9 +320,15 @@ function Register() {
                     label="Contact Number"
                     disabled={disabled}
                     value={firstForm.number}
+                    maxLength={10}
                     name="number"
                     type="number"
-                    onChange={handleFirstFormChange}
+                    onChange={(e) => {
+                      const inputVal = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                      if (inputVal.length <= 10) {
+                        handleFirstFormChange(e);
+                      }
+                    }}
                   />
                 </div>
                 {firstFormErrors.number && (
@@ -430,6 +446,12 @@ function Register() {
                           />
                         </RadioGroup>
                       </FormControl>
+                      {errors?.businessDetails?.enrollmentId ||
+                        (errors?.businessDetails?.gstnum && (
+                          <small className="text-warning">
+                            {errors.businessDetails.gstnum}
+                          </small>
+                        ))}
                     </div>
                     <div class="half_row">
                       {idType === "gst" && (
@@ -458,6 +480,12 @@ function Register() {
                         value={values.businessDetails.adharNum}
                         onChange={handleChange}
                       />
+
+                      {errors?.businessDetails?.adharNum && (
+                        <small className="text-warning">
+                          {errors.businessDetails.adharNum}
+                        </small>
+                      )}
                     </div>
                     <div class="half_row">
                       <Input
@@ -466,6 +494,12 @@ function Register() {
                         value={values.businessDetails.panNum}
                         onChange={handleChange}
                       />
+
+                      {errors?.businessDetails?.panNum && (
+                        <small className="text-warning">
+                          {errors.businessDetails.panNum}
+                        </small>
+                      )}
                     </div>
                   </div>
                   <div class="form-row">
@@ -475,6 +509,11 @@ function Register() {
                       onChange={handleChange}
                       value={values.businessDetails.businessOwnerName}
                     />
+                    {errors?.businessDetails?.businessOwnerName && (
+                      <small className="text-warning">
+                        {errors.businessDetails.businessOwnerName}
+                      </small>
+                    )}
                   </div>
                   <div class="form-row">
                     <Input
@@ -483,6 +522,12 @@ function Register() {
                       value={values.businessDetails.address}
                       onChange={handleChange}
                     />
+
+                    {errors?.businessDetails?.address && (
+                      <small className="text-warning">
+                        {errors.businessDetails.address}
+                      </small>
+                    )}
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
@@ -498,6 +543,11 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+                      {errors?.businessDetails?.country && (
+                          <small className="text-warning">
+                            {errors.businessDetails.country}
+                          </small>
+                        )}
                     </div>
                     <div class="half_row">
                       <SelectInput
@@ -512,6 +562,12 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+
+                      {errors?.businessDetails?.state && (
+                        <small className="text-warning">
+                          {errors.businessDetails.state}
+                        </small>
+                      )}
                     </div>
                   </div>
                   <div class="form-row-row">
@@ -528,6 +584,12 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+
+                      {errors?.businessDetails?.city && (
+                        <small className="text-warning">
+                          {errors.businessDetails.city}
+                        </small>
+                      )}
                     </div>
                     <div class="half_row">
                       <Input
@@ -536,6 +598,11 @@ function Register() {
                         onChange={handleChange}
                         name="pincode"
                       />
+                      {errors?.businessDetails?.pincode && (
+                        <small className="text-warning">
+                          {errors.businessDetails.pincode}
+                        </small>
+                      )}
                     </div>
                   </div>
                   <div class="form-row">
@@ -545,6 +612,12 @@ function Register() {
                       value={values.businessDetails.pickAddress}
                       name="pickAddress"
                     />
+
+                    {errors?.businessDetails?.pickAddress && (
+                      <small className="text-warning">
+                        {errors.businessDetails.pickAddress}
+                      </small>
+                    )}
                   </div>
                   <div class="form-row-row">
                     <div class="half_row">
@@ -560,6 +633,12 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+
+                      {errors?.businessDetails?.pickCountry && (
+                        <small className="text-warning">
+                          {errors.businessDetails.pickCountry}
+                        </small>
+                      )}
                     </div>
                     <div class="half_row">
                       <SelectInput
@@ -574,6 +653,11 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+                      {errors?.businessDetails?.pickState && (
+                        <small className="text-warning">
+                          {errors.businessDetails.pickState}
+                        </small>
+                      )}
                     </div>
                   </div>
                   <div class="form-row-row">
@@ -590,6 +674,11 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+                      {errors?.businessDetails?.pickCity && (
+                        <small className="text-warning">
+                          {errors.businessDetails.pickCity}
+                        </small>
+                      )}
                     </div>
                     <div class="half_row">
                       <Input
@@ -598,6 +687,12 @@ function Register() {
                         onChange={handleChange}
                         name="pickPincode"
                       />
+
+                      {errors?.businessDetails?.pickPincode && (
+                        <small className="text-warning">
+                          {errors.businessDetails.pickPincode}
+                        </small>
+                      )}
                     </div>
                   </div>
                   <div class="form-row-row">
@@ -614,6 +709,12 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+
+                      {errors?.businessDetails?.specialityProduct && (
+                        <small className="text-warning">
+                          {errors.businessDetails.specialityProduct}
+                        </small>
+                      )}
                     </div>
                     <div class="half_row">
                       <SelectInput
@@ -628,6 +729,11 @@ function Register() {
                           </MenuItem>
                         ))}
                       </SelectInput>
+                      {errors?.businessDetails?.sellerTag && (
+                        <small className="text-warning">
+                          {errors.businessDetails.sellerTag}
+                        </small>
+                      )}
                     </div>
                   </div>
                   <div class="form-row-row">
@@ -638,12 +744,22 @@ function Register() {
                         value={values.businessDetails.sellerType || []}
                         handleChange={handleMultiSelectChange}
                       />
+                      {errors?.businessDetails?.sellerType && (
+                        <small className="text-warning">
+                          {errors.businessDetails.sellerType}
+                        </small>
+                      )}
                     </div>
-                    <div class="half_row">
+                    <div class="half_row"  style={{flexDirection:"row"}} >
                       <div class="half_row">
                         <p style={{ fontSize: "14px" }}>
                           Allow for Advance booking
                         </p>
+                        {errors?.businessDetails?.advBooking && (
+                          <small className="text-warning">
+                            {errors.businessDetails.advBooking}
+                          </small>
+                        )}
                       </div>
                       <div className="half_row">
                         <FormControl>
@@ -666,6 +782,7 @@ function Register() {
                             />
                           </RadioGroup>
                         </FormControl>
+                      
                       </div>
                     </div>
                   </div>

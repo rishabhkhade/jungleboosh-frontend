@@ -11,6 +11,7 @@ const Input = ({
   password,
   name,
   disabled,
+  maxLength,
   type = "text",
 }) => {
   const [passwordType, setPasswordType] = useState(true);
@@ -28,6 +29,7 @@ const Input = ({
           type={password ? (passwordType ? "password" : "text") : type}
           error={Boolean(error)}
           helperText={error ? "This field is required" : ""}
+          maxLength={maxLength}
         />
         {password && (
           <span

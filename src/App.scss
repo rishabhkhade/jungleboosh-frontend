@@ -170,6 +170,7 @@ a {
     justify-content: center;
     align-items: center;
     gap: var(--unit);
+    flex-direction: column;
     height: 100%;
 }
 
