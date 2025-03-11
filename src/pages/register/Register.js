@@ -5,7 +5,6 @@ import Input from "../../component/inputs/Input";
 import {
   FormControl,
   FormControlLabel,
-  FormLabel,
   MenuItem,
   Radio,
   RadioGroup,
@@ -13,15 +12,58 @@ import {
 import SelectInput from "../../component/selectInput/SelectInput";
 import MultiSelectInput from "../../component/multiselect/MultiSelectInput";
 import UseForm from "../../UseForm";
-import validateFirstForm from "../../validate/ValidateRegisterPage";
+
 import OTPInput from "react-otp-input";
 import Loader from "../Loader/Loader";
 import { sellerApi } from "../../utils/Api";
 import validateRegFirstForm from "../../validate/ValidatefirstRegForm";
-import axios from "axios";
+
 import validateRegForm from "../../validate/ValidateRegisterPage";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const [values, setValues] = useState({
+    sellerReg: {
+      name: "",
+      email: "",
+      number: "",
+      password: "",
+      confirmPassword: "",
+    },
+    businessDetails: {
+      businessName: "",
+      enrollmentId: "",
+      gstnum: "",
+      address: "",
+      country: "",
+      state: "",
+      city: "",
+      pincode: "",
+      specialityProduct: "",
+      adharNum: "",
+      panNum: "",
+      businessOwnerName: "",
+      pickAddress: "",
+      pickCountry: "",
+      pickState: "",
+      pickCity: "",
+      pickPincode: "",
+      sellerTag: "",
+      sellerType: [],
+      advBooking: "",
+    },
+    accountDetails: {
+      accountNum: "",
+      ifscCode: "",
+      bankName: "",
+      bankBranchName: "",
+      accountHolderName: "",
+    },
+  });
+
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
   const [step, setStep] = useState(1);
   const [idType, setIdType] = useState("gst");
@@ -31,9 +73,9 @@ function Register() {
   const [otp, setOtp] = useState("");
 
   const countryList = [
-    { label: "India", value: "IN" },
-    { label: "United States", value: "US" },
-    { label: "Canada", value: "CA" },
+    { label: "India", value: "IN", id: 1 },
+    { label: "United States", value: "US", id: 2 },
+    { label: "Canada", value: "CA", id: 3 },
   ];
 
   const names = [
@@ -86,46 +128,6 @@ function Register() {
     }
   }, []);
 
-  const formObj = {
-    sellerReg: {
-      name: "",
-      email: "",
-      number: "",
-      password: "",
-      confirmPassword: "",
-    },
-    businessDetails: {
-      businessName: "",
-      enrollmentId: "",
-      gstnum: "",
-      address: "",
-      country: "",
-      state: "",
-      city: "",
-      pincode: "",
-      specialityProduct: "",
-      adharNum: "",
-      panNum: "",
-      businessOwnerName: "",
-      pickAddress: "",
-      pickCountry: "",
-      pickState: "",
-      pickCity: "",
-      pickPincode: "",
-      sellerTag: "",
-      sellerType: [],
-      advBooking: "",
-    },
-    accountDetails: {
-      accountNum: "",
-      ifscCode: "",
-      bankName: "",
-      bankBranchName: "",
-      accountHolderName: "",
-    },
-  };
-
- 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
@@ -139,7 +141,6 @@ function Register() {
         ...prevValues.accountDetails,
         [name]: value,
       },
-
     }));
   };
 
@@ -234,29 +235,32 @@ function Register() {
 
   //  register api
 
-  const register = async () => {
+  const register = async (e) => {
     try {
-      const response = await sellerApi.post("api/seller/addSellerDetails",values);
-      console.log(response);
+      e.preventDefault();
 
+      const newErrors = validateRegForm(values);
+      setErrors(newErrors);
+      const response = await sellerApi.post(
+        "api/seller/addSellerDetails",
+        values
+      );
+      if (response.status === 201) {
+        localStorage.setItem("firstLogin", "true"); // Set flag for redirection
+        localStorage.clear(); // Clear existing session storage
+        navigate("/dashboard"); // Redirect to dashboard
+        window.location.reload();
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
-
-  const stepUpto = (e)=>{
+  const stepUpto = (e) => {
     e.preventDefault();
     setStep(step + 1);
     localStorage.setItem("currentStep", step + 1);
-
-  }
-
-  const {handleSubmit, values, setValues, errors, setErrors } = UseForm(
-    formObj,
-    validateRegForm,
-    register
-  );
+  };
 
   console.log(values);
 
@@ -378,7 +382,11 @@ function Register() {
           )}
 
           {(step === 2 || step === 3) && (
-            <form action="" onSubmit={ step === 2 ? stepUpto :  handleSubmit} className="register_form">
+            <form
+              action=""
+              onSubmit={step === 2 ? stepUpto : register}
+              className="register_form"
+            >
               {step === 2 && (
                 <div class="step_two_form " style={{ width: "100%" }}>
                   <div class="form-row">
@@ -485,7 +493,7 @@ function Register() {
                         name="country"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -499,7 +507,7 @@ function Register() {
                         name="state"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -515,7 +523,7 @@ function Register() {
                         name="city"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -547,7 +555,7 @@ function Register() {
                         name="pickCountry"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -561,7 +569,7 @@ function Register() {
                         name="pickState"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -577,7 +585,7 @@ function Register() {
                         name="pickCity"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -601,7 +609,7 @@ function Register() {
                         name="specialityProduct"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -615,7 +623,7 @@ function Register() {
                         name="sellerTag"
                       >
                         {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.value}>
+                          <MenuItem key={country.value} value={country.id}>
                             {country.label}
                           </MenuItem>
                         ))}
@@ -642,7 +650,7 @@ function Register() {
                           <RadioGroup
                             row
                             aria-labelledby="demo-radio-buttons-group-label"
-                            name="radio-buttons-group"
+                            name="advBooking"
                             value={values.businessDetails.advBooking}
                             onChange={handleChange}
                           >
@@ -702,8 +710,6 @@ function Register() {
                       onChange={handlelastFormChange}
                     />
                   </div>
-
-                
                 </div>
               )}
 

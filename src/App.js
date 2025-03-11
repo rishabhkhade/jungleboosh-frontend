@@ -31,8 +31,15 @@ function App() {
     "/ChangePassword",
     "/*",
     "/seller-benefits",
-    "/help-support"
+    "/help-support",
   ];
+
+  useEffect(() => {
+    if (!user && !restrictedPaths.includes(window.location.pathname)) {
+      navigate("/404"); // Redirect to 404 if not logged in
+    }
+  }, [user, navigate]);
+  
 
   return (
     <div className="App">
@@ -53,15 +60,7 @@ function App() {
                 exact={item.exact}
                 name={item.name}
                 element={
-                  item.path === "/dashboard" ? (
-                    user ? (
-                      <item.component />
-                    ) : (
-                      <Navigate to="/" replace />
-                    )
-                  ) : (
-                    <item.component />
-                  )
+                  user ? <item.component /> : <Navigate to="/404" replace />
                 }
               />
             ) : null

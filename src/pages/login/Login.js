@@ -10,7 +10,7 @@ import { UserContext } from "../../Context";
 import Loader from "../Loader/Loader";
 
 function Login() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
