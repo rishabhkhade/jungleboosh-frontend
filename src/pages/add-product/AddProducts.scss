@@ -84,13 +84,48 @@
                     gap: 10px;
                     border-radius: calc(var(--unit)/2);
                     padding: 10px;
+                    position: relative;
 
                     .img-boxes {
                         background: rgba(206, 205, 205, 0.795);
                         display: flex;
                         border-radius: calc(var(--unit)/2);
+                        position: relative;
+
+                        img {
+                            width: 100%;
+                            aspect-ratio: 1;
+                            border-radius: calc(var(--unit)/2);
+                            cursor: pointer;
+                        }
+
                     }
+
+                    .close-btn {
+                        position: absolute;
+                        background-color: black;
+                        top: -5px;
+                        right: -5px;
+                        box-shadow: var(--shadow);
+                        z-index: 2;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        // display: none;
+                        cursor: pointer;
+                        transition: var(--trans);
+
+                        svg {
+                            color: white;
+                            font-size: 20px;
+                        }
+                    }
+
                 }
+
+
+
 
                 .hero-images {
                     height: auto;

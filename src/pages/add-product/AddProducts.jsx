@@ -7,13 +7,17 @@ import Input from '../../component/inputs/Input';
 import { MdAdd } from "react-icons/md";
 import { FiMinus } from "react-icons/fi";
 import axios from 'axios';
+import { useDropzone } from 'react-dropzone';
+import { IoIosClose } from "react-icons/io";
+
 import { handleFirstFormValidate } from "../../validate/validateAddProduct";
 
 function AddProducts() {
   const stepLabels = ["Personal Details", "Add Products Details", "Add Extra Information "];
   const [activeTab, setActiveTab] = useState("info")
-
+  const [heroImage, setHeroImage] = useState(null)
   const [currentStep, setCurrentStep] = useState(1);
+  const [images, setImages] = useState([]);
 
   const [infoBoxes, setInfoBoxes] = useState(
     [
@@ -46,6 +50,20 @@ function AddProducts() {
     }
   };
 
+
+  const onDrop = (acceptedFiles) => {
+    const newImages = acceptedFiles.map((file) =>
+      Object.assign(file, { preview: URL.createObjectURL(file) })
+    );
+    setImages([...images, ...newImages]);
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    multiple: true,
+  });
+
   //add product
   const [productAdd, setProductAdd] = useState({
     sellerId: "",
@@ -69,6 +87,40 @@ function AddProducts() {
       const response = await axios.sellerApi("api/product/addProduct", productAdd)
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  // Handle file selection
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    addImages(files);
+  };
+
+  // Handle drag and drop
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const files = Array.from(event.dataTransfer.files);
+    addImages(files);
+  };
+
+  // Prevent default behavior
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  // Add images to state
+  const addImages = (files) => {
+    const newImages = files.map((file) => URL.createObjectURL(file));
+    setImages((prevImages) => [...prevImages, ...newImages].slice(0, 4)); // Limit to 4 images
+  };
+
+  //remove images
+  const removeImage = (indexToRemove) => {
+    setImages(images.filter((_, index) => index !== indexToRemove));
+
+    // If removed image is the hero image, reset heroImage
+    if (heroImage === images[indexToRemove]) {
+      setHeroImage(null);
     }
   }
 
@@ -122,21 +174,49 @@ function AddProducts() {
               currentStep === 2 && (
                 <div class="add-product-main">
                   <div class="add-product-images">
-                    <div class="drag-images">
+                    <div class="drag-images"
+                      onDrop={handleDrop}
+                      onDragOver={handleDragOver}>
                       <div class="drag-drop-images">
-                        <a href="">drag & drop</a>
+                        <label htmlFor="fileUpload" style={{ cursor: "pointer" }}>
+                          Drag & Drop or Click to Upload
+                        </label>
+                        <input
+                          type="file"
+                          id="fileUpload"
+                          multiple
+                          accept="image/*"
+                          style={{ display: "none" }}
+                          onChange={handleFileChange}
+                        />
                       </div>
                       <div class="instructions-images">
                         <span>Instructions</span>
                       </div>
                     </div>
-                    <div class="upload-images">
-                      <div class="img-boxes"></div>
-                      <div class="img-boxes"></div>
-                      <div class="img-boxes"></div>
-                      <div class="img-boxes"></div>
+
+                    <div className="upload-images">
+                      {images.map((img, index) => (
+                        <>
+                          <div key={index} className="img-boxes">
+                            <img src={img} alt={`uploaded-${index}`}
+                              onClick={() => setHeroImage(img)} // Set hero image on click
+                            />
+
+                            <div className='close-btn '
+                              onClick={() => removeImage(index)}
+                            >
+                              <IoIosClose />
+                            </div>
+                          </div>
+                        </>
+
+                      ))}
                     </div>
-                    <div class="hero-images"></div>
+                    <div class="hero-images">
+                      {heroImage && <img src={heroImage} alt="Hero" width="200" />
+                      }
+                    </div>
                   </div>
                   <div class="next-prev-btn">
                     <div class="btn" onClick={handlePrev}>prev</div>
