@@ -17,14 +17,14 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    const sellerData = localStorage.getItem("seller_Data");
+  // useEffect(() => {
+  //   const sellerData = localStorage.getItem("seller_Data");
     
-    // If no seller data, redirect to home (or login)
-    if (!sellerData) {
-      navigate("/", { replace: true }); // Redirect to Home instead of Login
-    }
-  }, [navigate]);
+  //   // If no seller data, redirect to home (or login)
+  //   if (!sellerData) {
+  //     navigate("/", { replace: true }); // Redirect to Home instead of Login
+  //   }
+  // }, [navigate]);
 
 
 

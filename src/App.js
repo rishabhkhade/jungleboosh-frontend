@@ -34,11 +34,11 @@ function App() {
     "/help-support",
   ];
 
-  useEffect(() => {
-    if (!user && !restrictedPaths.includes(window.location.pathname)) {
-      navigate("/404", { replace: true }); // Redirect to 404 if not logged in
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user && !restrictedPaths.includes(window.location.pathname)) {
+  //     navigate("/404", { replace: true }); // Redirect to 404 if not logged in
+  //   }
+  // }, [user, navigate]);
 
   return (
     <div className="App">
@@ -58,13 +58,15 @@ function App() {
                 path={item.path}
                 exact={item.exact}
                 name={item.name}
-                element={
-                  restrictedPaths.includes(item.path) || user ? (
-                    <item.component />
-                  ) : (
-                    <Navigate to="/404" replace />
-                  )
-                }
+                // element={
+                //   restrictedPaths.includes(item.path) || user ? (
+                //     <item.component />
+                //   ) : (
+                //     <Navigate to="/404" replace />
+                //   )
+                // }
+
+                element={<item.component />}
               />
             ) : null
           )}
