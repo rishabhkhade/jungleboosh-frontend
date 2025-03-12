@@ -15,6 +15,8 @@ const ContextProvider = ({ children }) => {
   // country fetching
 
   const [countries, setCountries] = useState([]);
+  const [state,setStates] = useState([]);
+
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -39,6 +41,8 @@ const ContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+
 
 
   useEffect(() => {
