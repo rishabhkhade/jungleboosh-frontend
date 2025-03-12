@@ -5,11 +5,17 @@ import axios from "axios";
 
 const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
 // const sellerbaseUrl = "http://localhost:8080";
+// const adminbaseUrl = process.env.REACT_APP_ADMIN_API;
+const adminbaseUrl = "http://localhost:4002"
 
 
 const sellerApi = axios.create({
     baseURL:sellerbaseUrl,
     withCredentials: true,
+});
+const adminApi = axios.create({
+    baseURL:adminbaseUrl,
+    // withCredentials: true,
 });
 
 let sellerToken = null;
@@ -31,4 +37,4 @@ const HeaderAuth = axios.create({
 })
 
 
-export {sellerApi,HeaderAuth}
+export {sellerApi,HeaderAuth,adminApi}

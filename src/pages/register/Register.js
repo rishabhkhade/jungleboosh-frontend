@@ -65,7 +65,7 @@ function Register() {
   const [errors, setErrors] = useState({});
 
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const [idType, setIdType] = useState("gst");
   const [loader, setLoader] = useState(false);
   const [disabled, setDisabled] = useState(false);

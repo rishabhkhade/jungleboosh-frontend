@@ -64,7 +64,13 @@ export default function validateRegForm(value) {
       adharNum : "aadhar number is required",
     }
  
+  }else if (value.businessDetails.adharNum.length < 12) {
+    errors.businessDetails ={
+      ...errors.businessDetails,
+      adharNum : "aadhar number must be 12 digits",
+    }
   }
+  
   if (!value.businessDetails.panNum) {
     errors.businessDetails ={
       ...errors.businessDetails,

@@ -1,4 +1,6 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
+import { adminApi } from "./utils/Api";
 
 export const UserContext = createContext();
 
@@ -10,6 +12,9 @@ const ContextProvider = ({ children }) => {
 
   const [user, setUser] = useState(getLocalUserData());
   const [sidebar, setSidebar] = useState(false);
+  // country fetching
+
+  const [countries, setCountries] = useState([]);
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -23,8 +28,25 @@ const ContextProvider = ({ children }) => {
     };
   }, []);
 
+  // country fetching
+
+  const countryFetch = async () => {
+    try {
+      const response = await adminApi.get("/api/countryList");
+     
+      setCountries(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  useEffect(() => {
+    countryFetch();
+  }, []);
+
   return (
-    <UserContext.Provider value={{ user, setUser, sidebar, setSidebar }}>
+    <UserContext.Provider value={{ user, setUser, sidebar, setSidebar,countries,setCountries}}>
       {children}
     </UserContext.Provider>
   );
