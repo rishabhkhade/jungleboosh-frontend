@@ -66,7 +66,7 @@ function App() {
                 //   )
                 // }
 
-                element={<item.component />}
+                element={<item.component/>}
               />
             ) : null
           )}
