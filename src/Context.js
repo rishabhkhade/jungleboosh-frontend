@@ -15,8 +15,8 @@ const ContextProvider = ({ children }) => {
   // country fetching
 
   const [countries, setCountries] = useState([]);
-  const [state,setStates] = useState([]);
-
+  const [state, setStates] = useState([]);
+  const [city,setCity] = useState([])
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -35,22 +35,48 @@ const ContextProvider = ({ children }) => {
   const countryFetch = async () => {
     try {
       const response = await adminApi.get("/api/countryList");
-     
+
       setCountries(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // state fetch on countryId
+
+  const stateFetch = async (countryId) => {
+    try {
+      setStates([])
+      const response = await adminApi.get(
+        `/api/getStateByCountryId?countryId=${countryId}`
+      );
+        
+      setStates(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
+  // city fetch on stateId
+  const cityFetch = async (stateId)=>{
+    try {
+      const response = await adminApi.get(`api/getCityByState?stateId=${stateId}`);
+      setCity(response.data.data)
+    } catch (error) {
+     console.log(error) 
+    }
+  }
 
   useEffect(() => {
     countryFetch();
+    
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, sidebar, setSidebar,countries,setCountries}}>
+    <UserContext.Provider
+      value={{ user, setUser, sidebar, setSidebar, countries, setCountries,state, setStates,stateFetch,city,setCity,cityFetch }}
+    >
       {children}
     </UserContext.Provider>
   );

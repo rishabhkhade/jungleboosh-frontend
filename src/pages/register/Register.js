@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Register.scss";
 import Step from "../../component/steps/Step";
 import Input from "../../component/inputs/Input";
@@ -20,8 +20,11 @@ import validateRegFirstForm from "../../validate/ValidatefirstRegForm";
 
 import validateRegForm from "../../validate/ValidateRegisterPage";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context";
 
 function Register() {
+  const { countries, stateFetch, state,city,cityFetch } = useContext(UserContext);
+
   const [values, setValues] = useState({
     sellerReg: {
       name: "",
@@ -65,7 +68,7 @@ function Register() {
   const [errors, setErrors] = useState({});
 
   const stepLabels = ["Personal Details", "Business Details", "Bank Details"];
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
   const [idType, setIdType] = useState("gst");
   const [loader, setLoader] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -534,31 +537,41 @@ function Register() {
                       <SelectInput
                         label="Country"
                         value={values.businessDetails.country}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          handleChange(e); // Update the form state
+                          stateFetch(e.target.value); // Fetch states based on selected country
+                        }}
                         name="country"
                       >
-                        {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.id}>
-                            {country.label}
+                        {countries.map((country) => (
+                          <MenuItem
+                            key={country.countryName}
+                            value={country.id}
+                          >
+                            {country.countryName}
                           </MenuItem>
                         ))}
                       </SelectInput>
+
                       {errors?.businessDetails?.country && (
-                          <small className="text-warning">
-                            {errors.businessDetails.country}
-                          </small>
-                        )}
+                        <small className="text-warning">
+                          {errors.businessDetails.country}
+                        </small>
+                      )}
                     </div>
                     <div class="half_row">
                       <SelectInput
                         label="State"
                         value={values.businessDetails.state}
-                        onChange={handleChange}
+                        onChange={(e)=>{
+                          handleChange(e)
+                          cityFetch(e.target.value)
+                        }}
                         name="state"
                       >
-                        {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.id}>
-                            {country.label}
+                        {state.map((country) => (
+                          <MenuItem key={country.stateName} value={country.id}>
+                            {country.stateName}
                           </MenuItem>
                         ))}
                       </SelectInput>
@@ -578,9 +591,9 @@ function Register() {
                         onChange={handleChange}
                         name="city"
                       >
-                        {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.id}>
-                            {country.label}
+                        {city.map((country) => (
+                          <MenuItem key={country.cityName} value={country.id}>
+                            {country.cityName}
                           </MenuItem>
                         ))}
                       </SelectInput>
@@ -750,7 +763,7 @@ function Register() {
                         </small>
                       )}
                     </div>
-                    <div class="half_row"  style={{flexDirection:"row"}} >
+                    <div class="half_row" style={{ flexDirection: "row" }}>
                       <div class="half_row">
                         <p style={{ fontSize: "14px" }}>
                           Allow for Advance booking
@@ -782,7 +795,6 @@ function Register() {
                             />
                           </RadioGroup>
                         </FormControl>
-                      
                       </div>
                     </div>
                   </div>
