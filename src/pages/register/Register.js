@@ -637,12 +637,18 @@ function Register() {
                       <SelectInput
                         label="Country"
                         value={values.businessDetails.pickCountry}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          handleChange(e); // Update the form state
+                          stateFetch(e.target.value); // Fetch states based on selected country
+                        }}
                         name="pickCountry"
                       >
-                        {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.id}>
-                            {country.label}
+                        {countries.map((country) => (
+                          <MenuItem
+                            key={country.countryName}
+                            value={country.id}
+                          >
+                            {country.countryName}
                           </MenuItem>
                         ))}
                       </SelectInput>
@@ -657,12 +663,15 @@ function Register() {
                       <SelectInput
                         label="State"
                         value={values.businessDetails.pickState}
-                        onChange={handleChange}
+                        onChange={(e)=>{
+                          handleChange(e)
+                          cityFetch(e.target.value)
+                        }}
                         name="pickState"
                       >
-                        {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.id}>
-                            {country.label}
+                        {state.map((country) => (
+                          <MenuItem key={country.stateName} value={country.id}>
+                            {country.stateName}
                           </MenuItem>
                         ))}
                       </SelectInput>
@@ -681,9 +690,9 @@ function Register() {
                         onChange={handleChange}
                         name="pickCity"
                       >
-                        {countryList.map((country) => (
-                          <MenuItem key={country.value} value={country.id}>
-                            {country.label}
+                       {city.map((country) => (
+                          <MenuItem key={country.cityName} value={country.id}>
+                            {country.cityName}
                           </MenuItem>
                         ))}
                       </SelectInput>
