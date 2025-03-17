@@ -11,6 +11,7 @@ import earn_more from "../../assets/seller-benefits/salary.png";
 import { GoCheck } from "react-icons/go";
 import { LiaRecycleSolid } from "react-icons/lia";
 import product_listing from "../../assets/online_business/6029494.webp";
+import { TiArrowForward } from "react-icons/ti";
 
 function SellerHome(props) {
   //why choose us data
@@ -135,6 +136,36 @@ function SellerHome(props) {
           {/* <div class="bullet"></div> */}
           <div className="seller-home-right bg-img-cover">
             <img src={image_hero} alt="hero image" />
+          </div>
+        </div>
+      </div>
+
+      {/* about section */}
+
+      <div class="about_section parent">
+        <div class="about_section_cont cont">
+          <div class="left"></div>
+          <div class="right">
+            <HeadingTag text="About Jungle Boosh" />
+            <h1>Lorem ipsum dolor sit consectetur adipisicing elit.</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+              tempore adipisci architecto laudantium nulla mollitia quisquam
+              accusantium earum rerum inventore.
+            </p>
+            <div class="list">
+              <div class="top">
+                <div class="icon">
+                  <TiArrowForward />
+                </div>
+                <h4>Together to the future</h4>
+              </div>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+                recusandae, eius ea vitae ipsum hic minima quibusdam consectetur
+                doloremque consequatur.
+              </p>
+            </div>
           </div>
         </div>
       </div>
