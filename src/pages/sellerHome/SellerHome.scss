@@ -112,6 +112,74 @@
     }
 }
 
+// about section
+
+.about_section {
+    width: 100%;
+    height: auto;
+    padding: 40px 0px;
+
+    .about_section_cont {
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        gap: var(--unit);
+
+        .left{
+            width: 50%;
+            height: auto;
+            background-color: red;
+        }
+
+        .right{
+            width: 50%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            gap: var(--unit);
+            pad: 20px 0px;
+
+            h1{
+                font-size: calc(var(--unit) * 2);
+                width: 100%;
+                font-weight: 700;
+            }
+
+            .list{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: calc(var(--unit)/2);
+
+                .top{
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: calc(var(--unit)/2);
+
+                    h4{
+                        line-height: 100%;
+                    }
+
+                    .icon{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        svg{
+                            font-size: calc(var(--unit)*2);
+                            color: var(--green);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 //steps
 .step-parent {
     height: auto;
@@ -649,7 +717,7 @@
                 font-size: calc(var(--unit) * 1.2);
                 font-weight: 700;
                 letter-spacing: 1px;
-                
+
 
                 &:last-child {
                     border-right: none;
@@ -658,15 +726,3 @@
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
