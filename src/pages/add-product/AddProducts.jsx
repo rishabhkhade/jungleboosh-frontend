@@ -19,7 +19,7 @@ function AddProducts() {
   const stepLabels = ["Personal Details", "Add Products Details", "Add Extra Information "];
   const [activeTab, setActiveTab] = useState("info")
   const [heroImage, setHeroImage] = useState(null)
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(3);
   const [images, setImages] = useState([]);
 
   const [infoBoxes, setInfoBoxes] = useState(
@@ -27,7 +27,6 @@ function AddProducts() {
       { id: 1, value1: "", value2: "" }
     ]
   );
-
 
   const categories = [
     "Electronics & Gadgets",
@@ -46,7 +45,6 @@ function AddProducts() {
     "Office & Business Supplies",
     "Music & Entertainment"
   ];
-
 
   const subcategories = [
     "Mobile Phones", "Laptops", "Tablets", "Smartwatches", "Cameras", "Audio Devices", "Gaming Consoles", "Accessories",
@@ -101,7 +99,11 @@ function AddProducts() {
   };
 
   const handleNext = () => {
-    const validationErrors = validateAddProduct(values, currentStep);
+    const validationErrors = validateAddProduct(
+      { images, heroImage },  // Pass latest state
+      currentStep
+    );
+
     setErrors(validationErrors);
 
     // Allow moving forward only if there are no errors
@@ -115,10 +117,6 @@ function AddProducts() {
       setCurrentStep(currentStep - 1);
     }
   };
-
-
-
-
 
   const onDrop = (acceptedFiles) => {
     const newImages = acceptedFiles.map((file) =>
@@ -177,7 +175,41 @@ function AddProducts() {
   // Handle file selection
   const handleFileChange = (event) => {
     const files = Array.from(event.target.files);
-    addImages(files);
+    let newImages = files.map((file) => URL.createObjectURL(file));
+
+    if (newImages.length !== 5) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        images: "You must upload exactly 5 images, including a hero image.",
+      }));
+    } else {
+      setErrors((prevErrors) => {
+        const updatedErrors = { ...prevErrors };
+        delete updatedErrors.images;
+        return updatedErrors;
+      });
+    }
+
+    if (!heroImage && newImages.length > 0) {
+      setHeroImage(newImages[0]);
+    }
+
+    let updatedImages = [...images, ...newImages];
+
+    // Ensure only 5 images are stored
+    if (updatedImages.length > 5) {
+      updatedImages = updatedImages.slice(0, 5);
+    }
+
+    setImages(updatedImages);
+
+    // Set the first image as the Hero Image if it's not set
+    if (!heroImage && updatedImages.length > 0) {
+      setHeroImage(updatedImages[0]);
+    }
+
+    // Clear validation error
+    setErrors((prevErrors) => ({ ...prevErrors, Heroimage: "" }));
   };
 
   // Handle drag and drop
@@ -195,7 +227,7 @@ function AddProducts() {
   // Add images to state
   const addImages = (files) => {
     const newImages = files.map((file) => URL.createObjectURL(file));
-    setImages((prevImages) => [...prevImages, ...newImages].slice(0, 4)); // Limit to 4 images
+    setImages((prevImages) => [...prevImages, ...newImages].slice(0, 5)); // Limit to 4 images
   };
 
   //remove images
@@ -238,12 +270,12 @@ function AddProducts() {
 
                     <div class="form-row">
                       <SelectInput label="Unit" name="Product_qantity" onChange={handleChange} value={values.Product_qantity}>
-                      {units.map((item, index) => (
+                        {units.map((item, index) => (
                           <MenuItem key={index} value={item} >
                             {item}
                           </MenuItem>
                         ))}
-                        </SelectInput>
+                      </SelectInput>
                       {errors.Product_qantity && (
                         <small className="text-warning">{errors.Product_qantity}</small>
                       )}
@@ -317,34 +349,38 @@ function AddProducts() {
                       </div>
                       <div class="instructions-images">
                         <span>Instructions</span>
+                        <div class="instruction-points">
+                          <p>1. Lorem ipsum dolor sit amet.</p>
+                          <p>2. Lorem ipsum dolor sit amet.</p>
+                          <p>3. Lorem ipsum dolor sit amet.</p>
+                          <p>4. Lorem ipsum dolor sit amet.</p>
+                        </div>
                       </div>
-                      {errors.Heroimage && (
-                        <small className="text-warning">{errors.Heroimage}</small>
+                      {errors.images && (
+                        <small className="text-warning">{errors.images}</small>
                       )}
                     </div>
 
                     <div className="upload-images">
-                      {images.map((img, index) => (
-                        <>
+                      {images
+                        .filter((img) => img !== heroImage) // Exclude the hero image from the list
+                        .slice(0, 4) // Ensure only 4 images are shown
+                        .map((img, index) => (
                           <div key={index} className="img-boxes">
-                            <img src={img} alt={`uploaded-${index}`}
+                            <img
+                              src={img}
+                              alt={`uploaded-${index}`}
                               onClick={() => setHeroImage(img)} // Set hero image on click
                             />
-
-                            <div className='close-btn '
-                              onClick={() => removeImage(index)}
-                            >
+                            <div className="close-btn" onClick={() => removeImage(index)}>
                               <IoIosClose />
                             </div>
                           </div>
-                        </>
-
-                      ))}
+                        ))}
+                      {errors.heroImage && <small className="text-warning">{errors.heroImage}</small>}
                     </div>
-                    <div class="hero-images">
-                      {heroImage && <img src={heroImage} alt="Hero" width="200" />
-                      }
-                      
+                    <div className="hero-images">
+                      {heroImage && <img src={heroImage} alt="Hero" width="200" />}
                     </div>
                   </div>
                   <div class="next-prev-btn">
@@ -398,7 +434,8 @@ function AddProducts() {
                         </div>
 
                       ))}
-                      {errors.AddInfo && (
+                      
+                      {infoBoxes.length < 3 && errors.AddInfo && (
                         <small className="text-warning">{errors.AddInfo}</small>
                       )}
 
