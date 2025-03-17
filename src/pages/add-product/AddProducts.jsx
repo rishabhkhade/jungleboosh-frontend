@@ -6,11 +6,14 @@ import Header_label from '../../component/header_label/Header_label';
 import Input from '../../component/inputs/Input';
 import { MdAdd } from "react-icons/md";
 import { FiMinus } from "react-icons/fi";
-import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 import { IoIosClose } from "react-icons/io";
 
-import { handleFirstFormValidate } from "../../validate/validateAddProduct";
+import validateAddProduct from "../../validate/validateAddProduct";
+import UseForm from '../../UseForm';
+import { sellerApi } from '../../utils/Api';
+import SelectInput from '../../component/selectInput/SelectInput';
+import { MenuItem } from '@mui/material';
 
 function AddProducts() {
   const stepLabels = ["Personal Details", "Add Products Details", "Add Extra Information "];
@@ -24,6 +27,65 @@ function AddProducts() {
       { id: 1, value1: "", value2: "" }
     ]
   );
+
+
+  const categories = [
+    "Electronics & Gadgets",
+    "Fashion & Apparel",
+    "Health & Beauty",
+    "Home & Furniture",
+    "Sports & Outdoors",
+    "Automotive & Accessories",
+    "Books & Stationery",
+    "Toys & Games",
+    "Groceries & Food",
+    "Jewelry & Accessories",
+    "Baby & Kids",
+    "Pet Supplies",
+    "Arts & Crafts",
+    "Office & Business Supplies",
+    "Music & Entertainment"
+  ];
+
+
+  const subcategories = [
+    "Mobile Phones", "Laptops", "Tablets", "Smartwatches", "Cameras", "Audio Devices", "Gaming Consoles", "Accessories",
+    "Men's Clothing", "Women's Clothing", "Shoes", "Bags", "Jewelry", "Watches", "Eyewear", "Traditional Wear",
+    "Skincare", "Haircare", "Makeup", "Fragrances", "Personal Care", "Wellness", "Medical Supplies", "Supplements",
+    "Furniture", "Kitchenware", "Home Decor", "Bedding", "Lighting", "Storage", "Bathroom Essentials", "Cleaning Supplies",
+    "Fitness Equipment", "Outdoor Gear", "Cycling", "Camping", "Sportswear", "Yoga & Meditation", "Swimming", "Hiking",
+    "Car Accessories", "Bike Accessories", "Car Care", "Helmets", "Tires", "Spare Parts", "Oils & Lubricants",
+  ]
+
+  const productCategories = [
+    "Electronics",
+    "Fashion",
+    "Health & Beauty",
+    "Home & Kitchen",
+    "Sports & Outdoors",
+    "Automotive",
+    "Books & Stationery",
+    "Toys & Games",
+    "Groceries",
+    "Jewelry & Watches",
+    "Baby & Kids",
+    "Pet Supplies",
+    "Arts & Crafts",
+  ];
+
+
+  const units = [
+    "Piece",
+    "Kilogram (kg)",
+    "Gram (g)",
+    "Milligram (mg)",
+    "Liter (L)",
+    "Milliliter (mL)",
+    "Meter (m)",
+    "Centimeter (cm)",
+    "Millimeter (mm)"
+  ];
+
 
   const addInfoBox = () => {
     setInfoBoxes([...infoBoxes, { id: infoBoxes.length + 1, value1: "", value2: "" }]);
@@ -39,7 +101,11 @@ function AddProducts() {
   };
 
   const handleNext = () => {
-    if (currentStep < 3) {
+    const validationErrors = validateAddProduct(values, currentStep);
+    setErrors(validationErrors);
+
+    // Allow moving forward only if there are no errors
+    if (Object.keys(validationErrors).length === 0) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -49,6 +115,9 @@ function AddProducts() {
       setCurrentStep(currentStep - 1);
     }
   };
+
+
+
 
 
   const onDrop = (acceptedFiles) => {
@@ -65,7 +134,8 @@ function AddProducts() {
   });
 
   //add product
-  const [productAdd, setProductAdd] = useState({
+
+  const formObj = {
     sellerId: "",
     product_name: "",
     Product_price: "",
@@ -76,15 +146,29 @@ function AddProducts() {
     Description: "",
     Heroimage: "",
     Add_info: []
-  });
+  }
 
-  const [errors, setErrors] = useState({});
+
+  const { handleChange, handleSubmit, values, errors, setErrors } = UseForm(
+    formObj,
+    validateAddProduct,
+  );
+
+
 
   // add product
   const handleProductAdd = async (e) => {
     e.preventDefault();
+
+    const validationErrors = validateAddProduct(values);
+    setErrors(validationErrors);
+
+    // Stop form submission if there are validation errors
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
     try {
-      const response = await axios.sellerApi("api/product/addProduct", productAdd)
+      const response = await sellerApi.post("api/product/addProduct", values)
     } catch (error) {
       console.log(error);
     }
@@ -142,28 +226,69 @@ function AddProducts() {
                 <div class="bottom-add-products">
                   <form action="" className='product-add-form'>
                     <div class="form-row">
-                      <Input
-                        label="Title"
-
-                      />
-                      {errors.product_name && <span className="error">{errors.product_name}</span>}
-                      <Input
-                        label="Price"
-                        error={errors.price}
-
-                      />
+                      <Input label="Title" name="product_name" onChange={handleChange} value={values.product_name} />
+                      {errors.product_name && (
+                        <small className="text-warning">{errors.product_name}</small>
+                      )}
+                      <Input label="Price" name="Product_price" onChange={handleChange} value={values.Product_price} />
+                      {errors.Product_price && (
+                        <small className="text-warning">{errors.Product_price}</small>
+                      )}
                     </div>
 
                     <div class="form-row">
-                      <Input
-                        label="Unit"
-                      />
-                      <Input
-                        label="Category"
-                      />
+                      <SelectInput label="Unit" name="Product_qantity" onChange={handleChange} value={values.Product_qantity}>
+                      {units.map((item, index) => (
+                          <MenuItem key={index} value={item} >
+                            {item}
+                          </MenuItem>
+                        ))}
+                        </SelectInput>
+                      {errors.Product_qantity && (
+                        <small className="text-warning">{errors.Product_qantity}</small>
+                      )}
+
+                      <SelectInput label="Category" name="Category" onChange={handleChange} value={values.Category} >
+                        {categories.map((item, index) => (
+                          <MenuItem key={index} value={item} >
+                            {item}
+                          </MenuItem>
+                        ))}
+                      </SelectInput>
+                      {errors.Category && (
+                        <small className="text-warning">{errors.Category}</small>
+                      )}
+                    </div>
+
+                    <div class="form-row">
+                      <SelectInput label="Sub Category" name="Sub_category" onChange={handleChange} value={values.Sub_category}>
+                        {subcategories.map((item, index) => (
+                          <MenuItem key={index} value={item}>
+                            {item}
+                          </MenuItem>
+                        ))}
+                      </SelectInput>
+                      {errors.Sub_category && (
+                        <small className="text-warning">{errors.Sub_category}</small>
+                      )}
+
+                      <SelectInput
+                        label="Product Category"
+                        name="Prd_category"
+                        onChange={handleChange}
+                        value={values.Prd_category}>
+
+                        {productCategories.map((item, index) => (
+                          <MenuItem key={index} value={item}>
+                            {item}
+                          </MenuItem>
+                        ))}
+                      </SelectInput>
+                      {errors.Prd_category && (
+                        <small className="text-warning">{errors.Prd_category}</small>
+                      )}
                     </div>
                     <div class="btn" onClick={handleNext}>next</div>
-
                   </form>
                 </div>
               )
@@ -193,6 +318,9 @@ function AddProducts() {
                       <div class="instructions-images">
                         <span>Instructions</span>
                       </div>
+                      {errors.Heroimage && (
+                        <small className="text-warning">{errors.Heroimage}</small>
+                      )}
                     </div>
 
                     <div className="upload-images">
@@ -216,6 +344,7 @@ function AddProducts() {
                     <div class="hero-images">
                       {heroImage && <img src={heroImage} alt="Hero" width="200" />
                       }
+                      
                     </div>
                   </div>
                   <div class="next-prev-btn">
@@ -250,20 +379,28 @@ function AddProducts() {
                             value={box.value1}
                             placeholder={index === 0 ? "e.g., Weight" : index === 1 ? "e.g., Color" : "e.g., Dimensions"}
                             onChange={(e) => handleInputChange(box.id, "value1", e.target.value)}
-                            error={errors.value1}
+
                           />
+
                           <input
                             type="text"
                             value={box.value2}
+                            placeholder={index === 0 ? "e.g., 1kg" : index === 1 ? "e.g., Red" : "e.g., 10*45"}
                             onChange={(e) => handleInputChange(box.id, "value2", e.target.value)}
                           />
+
                           {infoBoxes.length > 1 && (
                             <span onClick={() => removeInfoBox(box.id)}>
                               <FiMinus />
                             </span>
                           )}
+
                         </div>
+
                       ))}
+                      {errors.AddInfo && (
+                        <small className="text-warning">{errors.AddInfo}</small>
+                      )}
 
                       <div className="add-other" onClick={addInfoBox}>
                         Add Other <span><MdAdd /></span>

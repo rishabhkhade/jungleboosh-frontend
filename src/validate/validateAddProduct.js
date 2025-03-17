@@ -1,35 +1,48 @@
-function handleFirstFormValidate(value) {
+function validateAddProduct(value, step) {
   let errors = {};
-  
-  if (!value.sellerId) {
-    errors.sellerId = "Seller Id is required";
+
+  if (step === 1) {
+    if (!value.product_name) {
+      errors.product_name = "Product name is required";
+    }
+    if (!value.Product_price) {
+      errors.Product_price = "Product price is required";
+    }
+    if (!value.Product_qantity) {
+      errors.Product_qantity = "Product quantity is required";
+    }
+    if (!value.Category) {
+      errors.Category = "Product category is required";
+    }
+    if (!value.Sub_category) {
+      errors.Sub_category = "sub category is required";
+    }
+    if (!value.Prd_category) {
+      errors.Prd_category = "product category is required";
+    }
   }
-  if (!value.product_name) {
-    errors.product_name = "product name is required";
+
+  if (step === 2) {
+    if (!value.images || value.images.length !== 5) {
+      errors.images = "You must upload exactly 5 images, including a hero image.";
+    }
+    if (!value.heroImage) {
+      errors.heroImage = "Hero image is required.";
+    }
   }
-  if (!value.Product_price) {
-    errors.product_name = "product price is required";
-  }
-  if (!value.Product_qantity) {
-    errors.product_name = "product quantity is required";
-  }
-  if (!value.Category) {
-    errors.Category = "product Category is required";
-  }
-  if (!value.Sub_category) {
-    errors.Sub_category = "sub category is required";
-  }
-  if (!value.Prd_category) {
-    errors.Prd_category = "product category is required";
-  }
-  if (!value.Description) {
-    errors.Description = "description is required";
-  } else if (value.Description.split(" ").length > 300) {
-    errors.Description = "Max length is 300 words";
-  }
-  if (!value.Heroimage) {
-    errors.Heroimage = "hero image is required";
-  }
+
+  // if (!value.Description) {
+  //   errors.Description = "description is required";
+  // } else if (value.Description.split(" ").length > 300) {
+  //   errors.Description = "Max length is 300 words";
+  // }
+  // if (!value.Heroimage) {
+  //   errors.Heroimage = "hero image is required";
+  // }
+  // if (!value.AddInfo) {
+  //   errors.AddInfo = "addtional information is required";
+  // }
+  return errors;
 }
 
-export { handleFirstFormValidate };
+export default validateAddProduct;
