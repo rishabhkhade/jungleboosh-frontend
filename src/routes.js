@@ -93,7 +93,7 @@ export const routes = [
 
   //orders
   {
-    path: "orders",
+    path: "/orders",
     exact: true,
     name: "orders",
     component: Orders,
@@ -101,7 +101,7 @@ export const routes = [
 
   //payments
   {
-    path: "payments",
+    path: "/payments",
     exact: true,
     name: "payments",
     component: Payments,
@@ -109,7 +109,7 @@ export const routes = [
 
   //seller gallery
   {
-    path: "seller-gallery",
+    path: "/seller-gallery",
     exact: true,
     name: "seller-gallery",
     component: SellerGallery,
@@ -117,7 +117,7 @@ export const routes = [
 
   //add products
   {
-    path: "add-products",
+    path: "/add-products",
     exact: true,
     name: "add-products",
     component: AddProducts,

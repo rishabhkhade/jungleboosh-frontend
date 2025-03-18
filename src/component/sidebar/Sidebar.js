@@ -24,7 +24,7 @@ const Sidebar = () => {
     {
       icon: <FiPlus />,
       navItem: "Add Product",
-      navLink: "/addProduct",
+      navLink: "/add-products",
     },
     {
       icon: <LuTag />,
