@@ -2,7 +2,7 @@ import React from "react";
 import "./Orders.scss";
 import Card from "../../component/card/Card";
 import Header_label from "../../component/header_label/Header_label";
-import Tables from "../../component/tables/Tables";
+import { LiaRupeeSignSolid } from "react-icons/lia";
 
 function Orders() {
   const ordersData = [
@@ -26,40 +26,48 @@ function Orders() {
     },
   ];
 
-  const ordersColumns = [
-    {
-      title: "Customer Name",
-      dataIndex: "name",
-      key: "name",
-      searchable: true,
-    },
-    { title: "Age", dataIndex: "age", key: "age", searchable: true },
-    {
-      title: "Product",
-      dataIndex: "product",
-      key: "product",
-      searchable: true,
-    },
-    { title: "Amount", dataIndex: "amount", key: "amount", searchable: false },
-    {
-      title: "Delivered Date",
-      dataIndex: "deliveredDate",
-      key: "deliveredDate",
-      searchable: false,
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      searchable: true,
-    },
-  ];
 
   return (
     <>
       <Card>
         <Header_label />
-        <Tables data={ordersData} columns={ordersColumns} />
+        <div className="order-parent parent">
+          <div className="order-cont cont">
+            <div className="order-wrapper">
+              <div className="order-left">
+                <div className="order-left-img">
+                  <img src="" alt="" />
+                </div>
+                <div className="order-left-product-details">
+                  <h4>Product Name</h4>
+                  <div className="price-quan-amnt">
+                    <div class="price"><h5>Price :</h5><span><LiaRupeeSignSolid />800.00</span>
+                    </div>
+                    <div class="quantity">  <h5>Quantity :</h5><span>1</span></div>
+                    <div class="total-amount"><h5>Total Amount :</h5><span><LiaRupeeSignSolid />800.00</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="order-right">
+
+                <div class="order-customer">
+                  <div class="customer-name">
+                    <h5>Customer Name :</h5><span>Xyz abc pqr</span>
+                  </div>
+                  <div class="deleivery-address">
+                    <h5>Delivery Address :</h5><span>23-mandir Pune , Maharashtra</span>
+                  </div>
+                  <div class="shipping-cancelled-btn">
+                    <div class="btn">Shipped</div>
+                    <div class="btn">Cancelled</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </Card>
     </>
   );

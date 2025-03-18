@@ -1,0 +1,108 @@
+.order-parent {
+    margin-top: 50px;
+
+    .order-cont {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(var(--unit));
+
+
+        .order-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: calc(var(--unit));
+            // border: 1px solid var(--text);
+            box-shadow: var(--shadow);
+            border-radius: calc(var(--unit));
+            width: 100%;
+            padding: 10px;
+
+            .order-left {
+                width: 50%;
+                display: flex;
+                align-items: stretch;
+                justify-content: center;
+                gap: calc(var(--unit));
+
+
+                .order-left-img {
+                    width: 30%;
+                    aspect-ratio: 4/3;
+                    background: var(--text);
+                    border-radius: calc(var(--unit)/2);
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: calc(var(--unit)/2);
+                    }
+                }
+
+                .order-left-product-details {
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: calc(var(--unit));
+
+                    h4 {
+                        color: var(--accent);
+                    }
+
+                    .price-quan-amnt {
+
+
+                        .price,
+                        .quantity,
+                        .total-amount {
+                            display: flex;
+                            align-items: center;
+                            gap: calc(var(--unit)/ 2);
+                            width: 100%;
+
+                            span {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            .order-right {
+                width: 50%;
+
+                .order-customer {
+                    display: flex;
+                    flex-direction: column;
+                    gap: calc(var(--unit));
+                    justify-content: center;
+
+                    .customer-name {
+                        display: flex;
+                        gap: calc(var(--unit) / 2);
+                        align-items: center;
+                    }
+
+                    .deleivery-address {
+                        display: flex;
+                        gap: calc(var(--unit) / 2);
+                        align-items: center;
+
+                    }
+
+                    .shipping-cancelled-btn {
+                        display: flex;
+                        gap: calc(var(--unit) / 2);
+                        justify-content: flex-end;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
