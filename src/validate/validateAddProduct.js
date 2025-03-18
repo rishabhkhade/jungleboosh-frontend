@@ -1,4 +1,4 @@
-function validateAddProduct(value, step) {
+function validateAddProduct(value,images, step) {
   let errors = {};
 
   if (step === 1) {
@@ -23,7 +23,7 @@ function validateAddProduct(value, step) {
   }
 
   if (step === 2) {
-    if (!value.images || value.images.length !== 5) {
+    if (!images || images.length !== 5) {
       errors.images =
         "You must upload exactly 5 images, including a hero image.";
     } else if (!value.heroImage) {
@@ -32,14 +32,13 @@ function validateAddProduct(value, step) {
   }
 
   if (step === 3) {
+    if (!value.Add_info || Object.entries(value.Add_info).length < 3) {
+      errors.Add_info = "At least 3 additional information entries are required.";
+    }
+    
+    
     if (!value.Description) {
       errors.Description = "description is required";
-    } else if (value.Description.split(" ").length > 300) {
-      errors.Description = "Max length is 300 words";
-    }
-
-    if (!value.AddInfo || value.AddInfo.length < 3) {
-      errors.AddInfo = "At least 3 additional information entries are required.";
     }
   }
 

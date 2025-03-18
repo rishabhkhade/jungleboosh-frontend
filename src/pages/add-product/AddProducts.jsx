@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AddProducts.scss'
 import Step from '../../component/steps/Step'
 import Card from '../../component/card/Card';
@@ -11,22 +11,21 @@ import { IoIosClose } from "react-icons/io";
 
 import validateAddProduct from "../../validate/validateAddProduct";
 import UseForm from '../../UseForm';
-import { sellerApi } from '../../utils/Api';
+import { productApi, sellerApi } from '../../utils/Api';
 import SelectInput from '../../component/selectInput/SelectInput';
 import { MenuItem } from '@mui/material';
 
 function AddProducts() {
   const stepLabels = ["Personal Details", "Add Products Details", "Add Extra Information "];
   const [activeTab, setActiveTab] = useState("info")
-  const [heroImage, setHeroImage] = useState(null)
-  const [currentStep, setCurrentStep] = useState(3);
+  const [heroImage, setHeroImage] = useState("image1")
+  const [currentStep, setCurrentStep] = useState(1);
   const [images, setImages] = useState([]);
 
-  const [infoBoxes, setInfoBoxes] = useState(
-    [
-      { id: 1, value1: "", value2: "" }
-    ]
-  );
+
+
+
+  const [keyValuePairs, setKeyValuePairs] = useState([{ id: Date.now(), key: "", value: "" }]);
 
   const categories = [
     "Electronics & Gadgets",
@@ -86,31 +85,55 @@ function AddProducts() {
 
 
   const addInfoBox = () => {
-    setInfoBoxes([...infoBoxes, { id: infoBoxes.length + 1, value1: "", value2: "" }]);
+    setKeyValuePairs([...keyValuePairs, { id: Date.now(), key: "", value: "" }]);
+  };
+
+  // ✅ Remove Info Box by Index
+  const removeInfoBox = (index) => {
+    setKeyValuePairs((prev) => prev.filter((_, i) => i !== index));
   };
 
 
-  const removeInfoBox = (id) => {
-    setInfoBoxes(infoBoxes.filter((box) => box.id !== id));
+
+
+  const handleInputChange = (index, type, value) => {
+    setKeyValuePairs((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, [type]: value } : item))
+    );
   };
 
-  const handleInputChange = (id, field, value) => {
-    setInfoBoxes(infoBoxes.map((box) => (box.id === id ? { ...box, [field]: value } : box)));
-  };
+
+  useEffect(() => {
+    const updatedInfo = {};
+
+    keyValuePairs.forEach((item) => {
+      if (item.key.trim() && item.value.trim()) {
+        updatedInfo[item.key] = item.value;
+      }
+    });
+
+
+    setValues((prev) => ({ ...prev, Add_info: updatedInfo }));
+  }, [keyValuePairs]);
+
 
   const handleNext = () => {
-    const validationErrors = validateAddProduct(
-      { images, heroImage },  // Pass latest state
-      currentStep
-    );
-
+    const validationErrors = validateAddProduct(values, images, currentStep); // Pass images separately
     setErrors(validationErrors);
 
-    // Allow moving forward only if there are no errors
-    if (Object.keys(validationErrors).length === 0) {
-      setCurrentStep(currentStep + 1);
+    console.log("🚀 Validation Errors:", validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+        console.log("❌ Validation Failed! Stopping...");
+        return false;  
     }
-  };
+
+    console.log("✅ Validation Passed! Moving to Next Step...");
+    setCurrentStep((prevStep) => prevStep + 1); // Ensure state updates correctly
+    return true;
+};
+
+
 
   const handlePrev = () => {
     if (currentStep > 1) {
@@ -142,35 +165,45 @@ function AddProducts() {
     Sub_category: "",
     Prd_category: "",
     Description: "",
-    Heroimage: "",
-    Add_info: []
+    Heroimage: "image1",
+    Add_info: {}
   }
 
-
-  const { handleChange, handleSubmit, values, errors, setErrors } = UseForm(
-    formObj,
-    validateAddProduct,
-  );
-
+ 
 
 
   // add product
   const handleProductAdd = async (e) => {
     e.preventDefault();
 
-    const validationErrors = validateAddProduct(values);
-    setErrors(validationErrors);
+    const isNext = handleNext();
+    if (!isNext) {
+        console.log("🛑 Stopping API Call due to validation errors!");
+        return;
+    }
 
-    // Stop form submission if there are validation errors
-    if (Object.keys(validationErrors).length > 0) {
-      return;
-    }
     try {
-      const response = await sellerApi.post("api/product/addProduct", values)
+        const formdata = new FormData();
+        formdata.append("product",values);
+        images.forEach((image, index) => formdata.append(`productImage_${index}`, image));
+        const response = await productApi.post("api/product/addProduct", formdata);
+        console.log("✅ API Response:", response);
     } catch (error) {
-      console.log(error);
+        console.error("API Error:", error);
     }
-  }
+};
+
+
+
+  const { handleChange, values, setValues, errors, setErrors } = UseForm(
+    formObj,
+    validateAddProduct,
+
+  );
+
+
+  console.log(values)
+
 
   // Handle file selection
   const handleFileChange = (event) => {
@@ -234,11 +267,16 @@ function AddProducts() {
   const removeImage = (indexToRemove) => {
     setImages(images.filter((_, index) => index !== indexToRemove));
 
-    // If removed image is the hero image, reset heroImage
+    
     if (heroImage === images[indexToRemove]) {
       setHeroImage(null);
     }
   }
+
+
+
+
+
 
   return (
     <>
@@ -250,6 +288,8 @@ function AddProducts() {
             <Step totalSteps={3}
               currentStep={currentStep}
               stepLabels={["Add Products Details", "Add Images", "Add Extra Information"]} />
+
+
 
 
             {/* step 1 */}
@@ -334,9 +374,9 @@ function AddProducts() {
                     <div class="drag-images"
                       onDrop={handleDrop}
                       onDragOver={handleDragOver}>
-                      <div class="drag-drop-images">
-                        <label htmlFor="fileUpload" style={{ cursor: "pointer" }}>
-                          Drag & Drop or Click to Upload
+                      <div className="drag-drop-images">
+                        <label htmlFor="fileUpload" className='dragdrop-text'>
+                          Drag & Drop or <span>Click to Upload</span>
                         </label>
                         <input
                           type="file"
@@ -401,60 +441,77 @@ function AddProducts() {
                     <span className={activeTab === "info" ? "active" : ""}
                       onClick={() => setActiveTab("info")}
                     >Add Information</span>
-                    <span className={activeTab === "description" ? "active" : ""}
+                    <span
+                      className={` ${activeTab === "description" ? "active" : ""} ${errors.Description ? "error-tab" : ""}`}
                       onClick={() => setActiveTab("description")}
-                    >Description</span>
+                    >
+                      Description
+                    </span>
+
                     <div class="add-info-product-line"></div>
                   </div>
                   {activeTab === "info" ? (
                     <>
-                      {infoBoxes.map((box, index) => (
+                      {keyValuePairs.map((box, index) => (
                         <div className="info-boxes" key={box.id}>
                           <input
                             type="text"
-                            value={box.value1}
-                            placeholder={index === 0 ? "e.g., Weight" : index === 1 ? "e.g., Color" : "e.g., Dimensions"}
-                            onChange={(e) => handleInputChange(box.id, "value1", e.target.value)}
-
+                            value={box.key}
+                            placeholder={
+                              index === 0 ? "e.g., Description Weight" :
+                                index === 1 ? "e.g., Color" :
+                                  "e.g., Dimensions"
+                            }
+                            onChange={(e) => handleInputChange(index, "key", e.target.value)}
                           />
-
                           <input
                             type="text"
-                            value={box.value2}
-                            placeholder={index === 0 ? "e.g., 1kg" : index === 1 ? "e.g., Red" : "e.g., 10*45"}
-                            onChange={(e) => handleInputChange(box.id, "value2", e.target.value)}
+                            value={box.value}
+                            placeholder={
+                              index === 0 ? "e.g., 1kg" :
+                                index === 1 ? "e.g., Red" :
+                                  "e.g., 10*45"
+                            }
+                            onChange={(e) => handleInputChange(index, "value", e.target.value)}
                           />
-
-                          {infoBoxes.length > 1 && (
-                            <span onClick={() => removeInfoBox(box.id)}>
+                          {keyValuePairs.length > 1 && (
+                            <span onClick={() => removeInfoBox(index)}>
                               <FiMinus />
                             </span>
                           )}
-
                         </div>
-
                       ))}
-                      
-                      {infoBoxes.length < 3 && errors.AddInfo && (
-                        <small className="text-warning">{errors.AddInfo}</small>
-                      )}
 
-                      <div className="add-other" onClick={addInfoBox}>
-                        Add Other <span><MdAdd /></span>
-                      </div>
+                  
+                        <div className="add-other" onClick={addInfoBox}>
+                          Add Other <span><MdAdd /></span>
+                        </div>
+                     
+                    
                     </>
                   ) : (
-                    <textarea type="text" class="description-box"></textarea>
-                  )
+                    <>
+                      <textarea
+                        className="description-box"
+                        value={values.Description}
+                        onChange={handleChange}
+                        name='Description'
+                      />
 
-                  }
+                      {errors.Description && (
+                        <small className="text-warning">{errors.Description}</small>
+                      )}
+                    </>
+                  )}
+
                   <div class="next-prev-btn-step3">
                     <div class="btn" onClick={handlePrev}>prev</div>
-                    <div class="btn" onClick={handleNext}>next</div>
+                    <div class="btn" type="submit" onClick={handleProductAdd} >next</div>
                   </div>
                 </div>
               )
             }
+
 
           </div>
         </div>
@@ -462,5 +519,6 @@ function AddProducts() {
     </>
   )
 }
+
 
 export default AddProducts
