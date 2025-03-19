@@ -1,0 +1,159 @@
+.seller-profile-parent {
+    margin-top: 50px;
+
+    .seller-profile-cont {
+        box-shadow: var(--shadow);
+        padding: 30px;
+        border-radius: calc(var(--unit));
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--unit));
+
+        .seller-profile {
+            border: 1px solid rgba(0, 0, 0, 0.178);
+            padding: 20px;
+            border-radius: calc(var(--unit) / 2);
+            display: flex;
+            align-items: center;
+            gap: calc(var(--unit));
+            justify-content: space-between;
+
+
+            .left-seller-profile {
+                display: flex;
+                align-items: center;
+                gap: calc(var(--unit));
+                justify-content: center;
+
+                img {
+                    height: 100px;
+                    width: 100px;
+                    border-radius: 50%;
+                }
+
+                .name-profile-area {
+                    display: flex;
+                    flex-direction: column;
+                    gap: calc(var(--unit) / 2);
+
+                    h5 {
+                        color: var(--text);
+                    }
+                }
+            }
+        }
+
+        .personal-profile {
+            border: 1px solid rgba(0, 0, 0, 0.178);
+            padding: 20px;
+            border-radius: calc(var(--unit) / 2);
+            width: 100%;
+
+            .personal-profile-main {
+                display: flex;
+                flex-direction: column;
+                gap: calc(var(--unit));
+
+                .top-personal-profile {
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .bottom-personal-profile {
+                    display: flex;
+
+                    form {
+                        width: 100%;
+                        display: flex;
+                        gap: calc(var(--unit));
+
+                        .form-row {
+                            display: flex;
+                            width: 100%;
+
+                        }
+
+                        label {
+                            width: 100%;
+                        }
+
+                        input {
+                            padding: 10px;
+                            border: 1px solid rgba(0, 0, 0, 0.267);
+                            border-radius: calc(var(--unit) / 2);
+                            width: 100%;
+                        }
+                    }
+
+
+                }
+            }
+
+        }
+
+        .business-profile {
+            border: 1px solid rgba(0, 0, 0, 0.178);
+            padding: 20px;
+            border-radius: calc(var(--unit) / 2);
+            width: 100%;
+
+
+            .business-profile-main {
+                display: flex;
+                flex-direction: column;
+                gap: calc(var(--unit));
+
+                .top-business-profile {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .bottom-business-profile {
+                    display: flex;
+
+                    form {
+                        width: 100%;
+                        display: flex;
+                        gap: calc(var(--unit));
+
+                        .form-row {
+                            display: flex;
+                            width: 100%;
+
+                        }
+
+                        label {
+                            width: 100%;
+                        }
+
+                        input {
+                            padding: 10px;
+                            border: 1px solid rgba(0, 0, 0, 0.267);
+                            border-radius: calc(var(--unit) / 2);
+                            width: 100%;
+                        }
+                    }
+
+
+                }
+            }
+
+
+
+        }
+
+
+        .right-seller-profile {
+            border: 1px solid var(--text);
+            border-radius: calc(var(--unit));
+            padding: calc(var(--unit) / 2);
+            display: flex;
+            gap: calc(var(--unit) / 2);
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

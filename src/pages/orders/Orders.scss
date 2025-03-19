@@ -6,6 +6,7 @@
         align-items: center;
         justify-content: center;
         gap: calc(var(--unit));
+        flex-direction: column;
 
 
         .order-wrapper {
@@ -13,8 +14,8 @@
             align-items: center;
             justify-content: center;
             gap: calc(var(--unit));
-            // border: 1px solid var(--text);
-            box-shadow: var(--shadow);
+            border: 1px solid var(--text);
+            // box-shadow: var(--shadow);
             border-radius: calc(var(--unit));
             width: 100%;
             padding: 10px;
@@ -29,8 +30,6 @@
 
                 .order-left-img {
                     width: 30%;
-                    aspect-ratio: 4/3;
-                    background: var(--text);
                     border-radius: calc(var(--unit)/2);
 
                     img {
