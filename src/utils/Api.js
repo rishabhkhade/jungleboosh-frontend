@@ -24,14 +24,22 @@ const productApi = axios.create({
     withCredentials: true,
 });
 
-let sellerToken  ;
 
-if(localStorage.getItem("seller_data") !== null){
-    const localData = JSON.parse(localStorage.getItem("seller_data"));
 
-    // const {access_token} = localData.token;
+let sellerToken;
 
-    sellerToken = Cookies.get("token");
+
+
+if(localStorage.getItem("seller_Data") !== null){
+    const localData = JSON.parse(localStorage.getItem("seller_Data"))
+
+    const access_token = localData.token;
+
+   
+
+   
+
+    sellerToken = access_token;
 }
 
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './AddImages.scss'
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import drag_drop from "../../assets/drag_drop.png"
-import { sellerApi } from "../../utils/Api";
+import { HeaderAuth, sellerApi } from "../../utils/Api";
 import UseForm from '../../UseForm';
 
 
@@ -44,7 +44,7 @@ function AddImages({ onClose, onUpload, sellerId }) {
 
   const addImages = async () => {
     try {
-      const response = await sellerApi.post("api/seller/addGallery",
+      const response = await HeaderAuth.post("api/seller/addGallery",
         values
       )
       console.log(response,"response");
