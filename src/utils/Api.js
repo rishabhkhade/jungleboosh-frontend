@@ -12,7 +12,7 @@ const addproduct = "http://localhost:4000/"
  
 const sellerApi = axios.create({
     baseURL:sellerbaseUrl,
-    withCredentials: true,
+    // withCredentials: true,
 });
 const adminApi = axios.create({
     baseURL:adminbaseUrl,

@@ -19,7 +19,7 @@ function Login() {
       setLoader(true);
   
       const response = await sellerApi.post("api/seller/login", values, {
-        // withCredentials: true, // ✅ Ensures cookies are sent & received
+        withCredentials: true, // ✅ Ensures cookies are sent & received
       });
   
       if (response.status === 200) {

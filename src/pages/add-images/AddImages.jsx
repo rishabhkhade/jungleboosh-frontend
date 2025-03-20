@@ -107,7 +107,7 @@ function AddImages({ onClose, onUpload, sellerId }) {
               onDrop={handleDrop}
               onDragOver={handleDragOver} >
               <span><img src={drag_drop} alt="" /></span>
-              <p>Drag & drop <span style={{ color: "var(--accent)" }}>images</span></p>
+              <label htmlFor='fileInput'>Drag & drop <span style={{ color: "var(--accent)" }}>images</span></label>
               <p>or <a href=""> browse files </a> on your computer</p>
               <input
                 id="fileInput"
