@@ -19,6 +19,7 @@ function Login() {
       setLoader(true);
       const response = await sellerApi.post("api/seller/login", values, {
         withCredentials: true,
+       
       });
       if (response.status === 200) {
         localStorage.setItem("seller_Data", JSON.stringify(response.data.data));
