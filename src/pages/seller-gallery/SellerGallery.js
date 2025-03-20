@@ -7,15 +7,14 @@ import AddImages from "../../pages/add-images/AddImages.jsx";
 
 function SellerGallery() {
   const [activeTab, setActiveTab] = useState("photos");
-  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
 
   const handleImageUpload = (newImages) => {
-    setUploadedImages([...uploadedImages, ...newImages]); // Append new images
+    setUploadedImages((prev) => [...prev, ...newImages]); // Append new images
     setIsPopupOpen(false); // Close popup after uploading
   };
-
   return (
     <>
       <Card>
