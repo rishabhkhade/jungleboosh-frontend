@@ -47,7 +47,7 @@ function Orders() {
                           <div class="price"><h5>Price :</h5><span><LiaRupeeSignSolid />{item.price}</span>
                           </div>
                           <div class="quantity"> <h5>Quantity :</h5><span>{item.quantity}</span></div>
-                          <div class="total-amount"><h5>Total Amount :</h5><span><LiaRupeeSignSolid />{item.total_amnt}</span>
+                          <div class="total-amount"><h5>Total Amount :</h5><span><LiaRupeeSignSolid />{item.totalAmt}</span>
                           </div>
                         </div>
                       </div>
@@ -57,10 +57,10 @@ function Orders() {
 
                       <div class="order-customer">
                         <div class="customer-name">
-                          <h5>Customer Name :</h5><span>{item.cust_name}</span>
+                          <h5>Customer Name :</h5><span>{item.buyerName}</span>
                         </div>
                         <div class="deleivery-address">
-                          <h5>Delivery Address :</h5><span>{item.delivery_add}</span>
+                          <h5>Delivery Address :</h5><span>{item.address}</span>
                         </div>
                         <div class="shipping-cancelled-btn">
                           <div class="btn">Shipped</div>

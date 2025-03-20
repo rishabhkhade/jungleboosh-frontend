@@ -63,23 +63,17 @@
             margin-top: 20px;
 
             .gallery-item {
-                background: #ddd;
                 aspect-ratio: 4/3;
                 border-radius: calc(var(--unit) / 2);
+                background: var(--grey);
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                  
+                }
             }
         }
 
-        .videos-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: calc(var(--unit));
-            margin-top: 20px;
-
-            .gallery-item {
-                background: #ddd;
-                aspect-ratio: 4/3;
-                border-radius: calc(var(--unit) / 2);
-            }
-        }
     }
 }
