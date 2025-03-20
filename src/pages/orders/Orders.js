@@ -1,65 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Orders.scss";
 import Card from "../../component/card/Card";
 import Header_label from "../../component/header_label/Header_label";
-import Tables from "../../component/tables/Tables";
+import { LiaRupeeSignSolid } from "react-icons/lia";
+import pro_img1 from "../../assets/products/rice.jpg"
+import { sellerApi } from "../../utils/Api";
 
 function Orders() {
-  const ordersData = [
-    {
-      key: "1",
-      name: "Alice Doe",
-      age: 30,
-      product: "Tablet",
-      amount: "$500",
-      deliveredDate: "2024-03-09",
-      address: "Paris No. 3 Street",
-    },
-    {
-      key: "2",
-      name: "Bob Smith",
-      age: 28,
-      product: "Monitor",
-      amount: "$200",
-      deliveredDate: "2024-03-05",
-      address: "Berlin No. 7 Lane",
-    },
-  ];
 
-  const ordersColumns = [
-    {
-      title: "Customer Name",
-      dataIndex: "name",
-      key: "name",
-      searchable: true,
-    },
-    { title: "Age", dataIndex: "age", key: "age", searchable: true },
-    {
-      title: "Product",
-      dataIndex: "product",
-      key: "product",
-      searchable: true,
-    },
-    { title: "Amount", dataIndex: "amount", key: "amount", searchable: false },
-    {
-      title: "Delivered Date",
-      dataIndex: "deliveredDate",
-      key: "deliveredDate",
-      searchable: false,
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      searchable: true,
-    },
-  ];
+  const [orderProduct, setOrderProduct] = useState([]);
+
+
+  //get order by id
+  const getOrderById = async () => {
+    try {
+      const response = await sellerApi.get("api/order/getOrdersBySeller?sellerId=6")
+      setOrderProduct(response.data.data);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
+
+  useEffect(() => {
+    getOrderById()
+  }, [])
 
   return (
     <>
       <Card>
         <Header_label />
-        <Tables data={ordersData} columns={ordersColumns} />
+        <div className="order-parent parent">
+          <div className="order-cont cont">
+            {
+              orderProduct.length > 0 ? (
+                orderProduct.map((item, index) => (
+                  <div className="order-wrapper" key={index}>
+                    <div className="order-left">
+                      <div className="order-left-img">
+                        <img src={pro_img1} alt="" />
+                      </div>
+                      <div className="order-left-product-details">
+                        <h4>{item.pro_name}</h4>
+                        <div className="price-quan-amnt">
+                          <div class="price"><h5>Price :</h5><span><LiaRupeeSignSolid />{item.price}</span>
+                          </div>
+                          <div class="quantity"> <h5>Quantity :</h5><span>{item.quantity}</span></div>
+                          <div class="total-amount"><h5>Total Amount :</h5><span><LiaRupeeSignSolid />{item.total_amnt}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="order-right">
+
+                      <div class="order-customer">
+                        <div class="customer-name">
+                          <h5>Customer Name :</h5><span>{item.cust_name}</span>
+                        </div>
+                        <div class="deleivery-address">
+                          <h5>Delivery Address :</h5><span>{item.delivery_add}</span>
+                        </div>
+                        <div class="shipping-cancelled-btn">
+                          <div class="btn">Shipped</div>
+                          <div class="btn">Cancelled</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No orders found</p>
+              )
+            }
+          </div>
+        </div>
       </Card>
     </>
   );

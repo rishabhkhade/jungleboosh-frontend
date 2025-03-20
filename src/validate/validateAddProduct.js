@@ -1,4 +1,4 @@
-function validateAddProduct(value, step) {
+function validateAddProduct(value, images, heroImage, step) {
   let errors = {};
 
   if (step === 1) {
@@ -8,8 +8,12 @@ function validateAddProduct(value, step) {
     if (!value.Product_price) {
       errors.Product_price = "Product price is required";
     }
-    if (!value.Product_qantity) {
-      errors.Product_qantity = "Product quantity is required";
+
+    if (!value.prd_unit) {
+      errors.prd_unit = "Product Unit is required";
+    }
+    if (!value.stock) {
+      errors.stock = "Product Quantity is required";
     }
     if (!value.Category) {
       errors.Category = "Product category is required";
@@ -23,25 +27,28 @@ function validateAddProduct(value, step) {
   }
 
   if (step === 2) {
-    if (!value.images || value.images.length !== 5) {
-      errors.images = "You must upload exactly 5 images, including a hero image.";
+    const filteredImages = images.filter(img => img !== heroImage); // Remove heroImage from array
+    const totalImages = filteredImages.length + (heroImage ? 1 : 0);
+    
+    if (totalImages !== 5) {
+      errors.images = `You must upload exactly 5 images, including a hero image. You currently have ${totalImages}.`;
     }
-    if (!value.heroImage) {
-      errors.heroImage = "Hero image is required.";
+    
+    
+        
+  }
+
+  if (step === 3) {
+    if (!value.Add_info || Object.keys(value.Add_info).length < 3) {
+      errors.Add_info = "At least 3 additional information entries are required.";
+    }
+    
+
+    if (!value.Description) {
+      errors.Description = "description is required";
     }
   }
 
-  // if (!value.Description) {
-  //   errors.Description = "description is required";
-  // } else if (value.Description.split(" ").length > 300) {
-  //   errors.Description = "Max length is 300 words";
-  // }
-  // if (!value.Heroimage) {
-  //   errors.Heroimage = "hero image is required";
-  // }
-  // if (!value.AddInfo) {
-  //   errors.AddInfo = "addtional information is required";
-  // }
   return errors;
 }
 

@@ -65,15 +65,28 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
+
+                        .dragdrop-text{
+                            cursor: pointer;
+                            
+                        }
+
+
                     }
 
                     .instructions-images {
-                        height: 50%;
+                        height: auto;
                         width: 100%;
                         background: rgba(0, 0, 0, 0.089);
                         border-radius: calc(var(--unit)/2);
                         display: flex;
                         padding: 10px;
+                        flex-direction: column;
+                        gap: calc(var(--unit) / 2);
+
+                        .instruction-points {
+                            padding-bottom: calc(var(--unit));
+                        }
                     }
                 }
 
@@ -133,7 +146,7 @@
                     background: rgba(0, 0, 0, 0.089);
                     border-radius: calc(var(--unit)/2);
 
-                    img{
+                    img {
                         width: 100%;
                         height: 100%;
                         border-radius: calc(var(--unit) / 2);
@@ -172,6 +185,11 @@
                         border-bottom: 2px solid var(--accent);
                     }
                 }
+
+                .error-tab {
+                    color: orangered;
+                  }
+                  
 
                 .add-info-product-line {
                     width: 100%;
@@ -236,6 +254,7 @@
                 outline: none;
                 padding: 10px;
             }
+
 
             .next-prev-btn-step3 {
                 display: flex;

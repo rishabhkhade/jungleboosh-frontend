@@ -7,6 +7,7 @@ const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
 // const sellerbaseUrl = "http://localhost:8080";
 // const adminbaseUrl = process.env.REACT_APP_ADMIN_API;
 const adminbaseUrl = "http://localhost:4002"
+const addproduct = "http://localhost:4000/"
 
  
 const sellerApi = axios.create({
@@ -15,6 +16,11 @@ const sellerApi = axios.create({
 });
 const adminApi = axios.create({
     baseURL:adminbaseUrl,
+    // withCredentials: true,
+});
+
+const productApi = axios.create({
+    baseURL:addproduct,
     // withCredentials: true,
 });
 
@@ -37,4 +43,4 @@ const HeaderAuth = axios.create({
 })
 
 
-export {sellerApi,HeaderAuth,adminApi}
+export {sellerApi,HeaderAuth,adminApi,productApi}

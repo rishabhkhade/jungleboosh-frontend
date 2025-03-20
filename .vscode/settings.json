@@ -27,7 +27,7 @@
     "javascript.suggest.autoClosingTags": true, // Enable auto-closing tags for JavaScript
     "typescript.suggest.autoClosingTags": true,
     "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.typescript-language-features"
     },
     "[scss]": {
         "editor.defaultFormatter": "vscode.css-language-features"

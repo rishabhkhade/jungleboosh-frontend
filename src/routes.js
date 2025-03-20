@@ -26,6 +26,8 @@ const Orders = lazy(() => import("./pages/orders/Orders.js"));
 const Payments = lazy(() => import("./pages/payments/Payments.jsx"));
 const SellerGallery = lazy(() => import("./pages/seller-gallery/SellerGallery.js"));
 const AddProducts = lazy(() => import("./pages/add-product/AddProducts.jsx"));
+const SellerProfile = lazy(() => import ("./pages/seller-profile/SellerProfile.js"));  
+
 
 // rotuing
 export const routes = [
@@ -93,7 +95,7 @@ export const routes = [
 
   //orders
   {
-    path: "orders",
+    path: "/orders",
     exact: true,
     name: "orders",
     component: Orders,
@@ -101,7 +103,7 @@ export const routes = [
 
   //payments
   {
-    path: "payments",
+    path: "/payments",
     exact: true,
     name: "payments",
     component: Payments,
@@ -109,7 +111,7 @@ export const routes = [
 
   //seller gallery
   {
-    path: "seller-gallery",
+    path: "/seller-gallery",
     exact: true,
     name: "seller-gallery",
     component: SellerGallery,
@@ -117,9 +119,17 @@ export const routes = [
 
   //add products
   {
-    path: "add-products",
+    path: "/add-products",
     exact: true,
     name: "add-products",
     component: AddProducts,
+  },
+
+  //seller profile
+  {
+    path: "/seller-profile",
+    exact: true,
+    name: "seller-profile",
+    component: SellerProfile,
   },
 ];
