@@ -3,10 +3,19 @@ import "./SellerGallery.scss";
 import Card from "../../component/card/Card";
 import Header_label from "../../component/header_label/Header_label";
 import { MdAdd } from "react-icons/md";
+import AddImages from "../../pages/add-images/AddImages.jsx";
 
 function SellerGallery() {
   const [activeTab, setActiveTab] = useState("photos");
-  
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
+  const [uploadedImages, setUploadedImages] = useState([]);
+
+
+  const handleImageUpload = (newImages) => {
+    setUploadedImages([...uploadedImages, ...newImages]); // Append new images
+    setIsPopupOpen(false); // Close popup after uploading
+  };
+
   return (
     <>
       <Card>
@@ -22,15 +31,9 @@ function SellerGallery() {
                 >
                   Photos
                 </span>
-                <span
-                  className={activeTab === "videos" ? "active" : ""}
-                  onClick={() => setActiveTab("videos")}
-                >
-                  Videos
-                </span>
               </div>
               <div class={`underline ${activeTab}`}></div>
-              <div class="btn">
+              <div class="btn" onClick={() => setIsPopupOpen(true)}>
                 <span>
                   <MdAdd />
                 </span>
@@ -38,23 +41,21 @@ function SellerGallery() {
               </div>
             </div>
 
+
+            {isPopupOpen && <AddImages onClose={() => setIsPopupOpen(false)} onUpload={handleImageUpload} />}
+
+
             {activeTab === "photos" && (
               <div className="gallery-grid">
-                {Array(9)
-                  .fill(null)
-                  .map((_, index) => (
-                    <div key={index} className="gallery-item"></div>
-                  ))}
-              </div>
-            )}
-
-            {activeTab === "videos" && (
-              <div class="videos-grid">
-                {Array(3)
-                  .fill(null)
-                  .map((_, index) => (
-                    <div key={index} className="gallery-item"></div>
-                  ))}
+                {uploadedImages.length === 0 ? (
+                  <p>No images uploaded</p>
+                ) : (
+                  uploadedImages.map((image, index) => (
+                    <div key={index} className="gallery-item">
+                      <img src={image} alt={`Uploaded ${index}`} />
+                    </div>
+                  ))
+                )}
               </div>
             )}
           </div>

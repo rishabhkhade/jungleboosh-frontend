@@ -3,8 +3,8 @@ import Cookies from "js-cookie";
 
 
 
-// const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
-const sellerbaseUrl = "http://localhost:8080";
+const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
+// const sellerbaseUrl = "http://localhost:8080";
 // const adminbaseUrl = process.env.REACT_APP_ADMIN_API;
 const adminbaseUrl = "http://localhost:4002"
 const addproduct = "http://localhost:4000/"
@@ -37,6 +37,8 @@ if(localStorage.getItem("seller_data") !== null){
 
 const HeaderAuth = axios.create({
     baseURL : sellerbaseUrl,
+    withCredentials: true,
+
     headers:{
         Authorization : `Bearer ${sellerToken}`
     }

@@ -1,5 +1,6 @@
 import { lazy } from "react";
 
+
 // home
 const Home = lazy(() => import("./pages/sellerHome/SellerHome.js"));
 // login
@@ -26,7 +27,8 @@ const Orders = lazy(() => import("./pages/orders/Orders.js"));
 const Payments = lazy(() => import("./pages/payments/Payments.jsx"));
 const SellerGallery = lazy(() => import("./pages/seller-gallery/SellerGallery.js"));
 const AddProducts = lazy(() => import("./pages/add-product/AddProducts.jsx"));
-const SellerProfile = lazy(() => import ("./pages/seller-profile/SellerProfile.js"));  
+const SellerProfile = lazy(() => import("./pages/seller-profile/SellerProfile.js"));
+const AddImages = lazy(() => import("./pages/add-images/AddImages.jsx"));
 
 
 // rotuing
@@ -132,4 +134,13 @@ export const routes = [
     name: "seller-profile",
     component: SellerProfile,
   },
+
+  //add images
+  {
+    path: "/add-images",
+    exact: true,
+    name: "add-images",
+    component: AddImages,
+  },
+
 ];
