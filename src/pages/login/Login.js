@@ -17,6 +17,7 @@ function Login() {
   const login = async () => {
     try {
       setLoader(true);
+      
       const response = await sellerApi.post("api/seller/login", values, {
         withCredentials: true,
       });
