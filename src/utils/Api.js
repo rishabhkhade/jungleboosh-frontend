@@ -8,7 +8,7 @@ const sellerbaseUrl = process.env.REACT_APP_SELLER_API;
 // const adminbaseUrl = process.env.REACT_APP_ADMIN_API;
 const adminbaseUrl = "http://localhost:4002"
 
-
+ 
 const sellerApi = axios.create({
     baseURL:sellerbaseUrl,
     withCredentials: true,
