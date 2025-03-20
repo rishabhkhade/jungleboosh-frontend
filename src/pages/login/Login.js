@@ -17,26 +17,25 @@ function Login() {
   const login = async () => {
     try {
       setLoader(true);
-      
+  
       const response = await sellerApi.post("api/seller/login", values, {
-        withCredentials: true,
-       
+        // withCredentials: true, // ✅ Ensures cookies are sent & received
       });
-
-
+  
       if (response.status === 200) {
-        localStorage.setItem("seller_Data", JSON.stringify(response.data));
-        localStorage.setItem("firstLogin", "true");
+      
+        localStorage.setItem("seller_Data", JSON.stringify(response.data.data));
+  
         setUser(response.data.data);
         navigate("/dashboard", { replace: true });
       }
     } catch (error) {
-      if (error.response.status === 400) {
+      if (error.response?.status === 400) {
         setErrors({
           email: "email is incorrect",
         });
       }
-      if (error.response.data.message === "Incorrect email or password") {
+      if (error.response?.data?.message === "Incorrect email or password") {
         setErrors({
           password: "password is incorrect",
         });
@@ -45,6 +44,7 @@ function Login() {
       setLoader(false);
     }
   };
+  
 
   const formObj = { email: "", password: "" };
 
