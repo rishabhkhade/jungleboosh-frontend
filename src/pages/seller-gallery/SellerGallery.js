@@ -41,7 +41,7 @@ function SellerGallery() {
             </div>
 
 
-            {isPopupOpen && <AddImages onClose={() => setIsPopupOpen(false)} onUpload={handleImageUpload} />}
+            {isPopupOpen && <AddImages onClose={() => setIsPopupOpen(true)} onUpload={handleImageUpload} />}
 
 
             {activeTab === "photos" && (
