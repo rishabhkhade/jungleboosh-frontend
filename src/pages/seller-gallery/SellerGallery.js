@@ -10,20 +10,44 @@ function SellerGallery() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [uploadedImages, setUploadedImages] = useState([]);
 
-
-  const handleImageUpload = (newImages) => {
-    setUploadedImages((prev) => [...prev, ...newImages]); // Append new images
-    setIsPopupOpen(false); // Close popup after uploading
+  const handleImageUpload = async () => {
+    if (selectedImages.length === 0) return;
+  
+    const formData = new FormData();
+    formData.append("sellerId", "2"); // Replace with dynamic sellerId if needed
+  
+    selectedImages.forEach((image) => {
+      formData.append("image", image); // Append multiple files
+    });
+  
+    try {
+      const response = await fetch("https://seller.jungleboosh.com/api/seller/addGallery", {
+        method: "POST",
+        body: formData,
+      }); 
+  
+      const result = await response.json();
+      if (response.ok) {
+        alert("Images uploaded successfully!");
+        onUpload(result.data); // Update gallery with new images from API response
+      } else {
+        alert("Upload failed: " + result.message);
+      }
+    } catch (error) {
+      console.error("Error uploading images:", error);
+      alert("Error uploading images. Please try again.");
+    }
   };
+  
+
   return (
     <>
       <Card>
         <Header_label />
-
-        <div class="sellergallery-parent parent">
-          <div class="sellergallery-cont cont">
-            <div class="tabs">
-              <div class="tabs-labels">
+        <div className="sellergallery-parent parent">
+          <div className="sellergallery-cont cont">
+            <div className="tabs">
+              <div className="tabs-labels">
                 <span
                   className={activeTab === "photos" ? "active" : ""}
                   onClick={() => setActiveTab("photos")}
@@ -31,8 +55,8 @@ function SellerGallery() {
                   Photos
                 </span>
               </div>
-              <div class={`underline ${activeTab}`}></div>
-              <div class="btn" onClick={() => setIsPopupOpen(true)}>
+              <div className={`underline ${activeTab}`}></div>
+              <div className="btn" onClick={() => setIsPopupOpen(true)}>
                 <span>
                   <MdAdd />
                 </span>
@@ -40,10 +64,10 @@ function SellerGallery() {
               </div>
             </div>
 
+            {/* Add Images Popup */}
+            {isPopupOpen && <AddImages onClose={() => setIsPopupOpen(false)} onUpload={handleImageUpload} />}
 
-            {isPopupOpen && <AddImages onClose={() => setIsPopupOpen(true)} onUpload={handleImageUpload} />}
-
-
+            {/* Display Uploaded Images */}
             {activeTab === "photos" && (
               <div className="gallery-grid">
                 {uploadedImages.length === 0 ? (
