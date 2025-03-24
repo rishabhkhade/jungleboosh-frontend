@@ -68,11 +68,17 @@
                         width: 100%;
                         display: flex;
                         gap: calc(var(--unit));
+                        flex-direction: column;
 
                         .form-row {
-                            display: flex;
+
                             width: 100%;
 
+                        }
+
+                        .form-row1 {
+                            display: flex;
+                            gap: calc(var(--unit));
                         }
 
                         label {
@@ -144,6 +150,65 @@
 
 
         }
+
+        .account-profile {
+            border: 1px solid rgba(0, 0, 0, 0.178);
+            padding: 20px;
+            border-radius: calc(var(--unit) / 2);
+            width: 100%;
+
+
+            .account-profile-main {
+                display: flex;
+                flex-direction: column;
+                gap: calc(var(--unit));
+
+                .top-account-profile {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                .bottom-account-profile {
+                    display: flex;
+
+                    form {
+                        width: 100%;
+                        display: flex;
+                        gap: calc(var(--unit));
+                        flex-direction: column;
+
+                        .form-row {
+                            display: flex;
+                            width: 100%;
+
+                        }
+
+                        .form-row1{
+                            display: flex;
+                            gap: calc(var(--unit));
+                        }
+
+                        label {
+                            width: 100%;
+                        }
+
+                        input {
+                            padding: 10px;
+                            border: 1px solid rgba(0, 0, 0, 0.267);
+                            border-radius: calc(var(--unit) / 2);
+                            width: 100%;
+                        }
+                    }
+
+
+                }
+            }
+
+
+
+        }
+
 
 
         .right-seller-profile {

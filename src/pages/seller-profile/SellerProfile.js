@@ -40,6 +40,53 @@ function SellerProfile() {
                                     <form action="">
                                         <div class="form-row">
                                             <label for="">
+                                                <p>Full Name</p>
+                                                <input type="text" />
+                                            </label>
+                                        </div>
+
+                                        <div class="form-row1">
+                                            <label for="">
+                                                <p>Email</p>
+                                                <input type="text" />
+                                            </label>
+
+                                            <label for="">
+                                                <p>Phone</p>
+                                                <input type="text" />
+                                            </label>
+                                        </div>
+
+                                        <div class="form-row1">
+                                            <label for="">
+                                                <p>Password</p>
+                                                <input type="text" />
+                                            </label>
+
+                                            <label for="">
+                                                <p>Confirm Password</p>
+                                                <input type="text" />
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="business-profile">
+                            <div class="business-profile-main">
+                                <div class="top-business-profile">
+                                    <h4>Business Information</h4>
+                                    <div class="right-seller-profile">
+                                        <span>Edit</span>
+                                        <span><RiEdit2Line /></span>
+                                    </div>
+                                </div>
+                                <div class="bottom-business-profile">
+                                    <form action="">
+                                        <div class="form-row">
+                                            <label for="">
                                                 <p>First Name</p>
                                                 <input type="text" />
                                             </label>
@@ -67,40 +114,49 @@ function SellerProfile() {
                         </div>
 
 
-                        <div class="business-profile">
-                        <div class="business-profile-main">
-                                <div class="top-business-profile">
-                                    <h4>Business Information</h4>
+                        <div class="account-profile">
+                            <div class="account-profile-main">
+                                <div class="top-account-profile">
+                                    <h4>Account Details</h4>
                                     <div class="right-seller-profile">
                                         <span>Edit</span>
                                         <span><RiEdit2Line /></span>
                                     </div>
                                 </div>
-                                <div class="bottom-business-profile">
+                                <div class="bottom-account-profile">
                                     <form action="">
-                                        <div class="form-row">
+                                        <div class="form-row ">
                                             <label for="">
-                                                <p>First Name</p>
-                                                <input type="text"  />
-                                            </label>
-
-                                            <label for="">
-                                                <p>First Name</p>
+                                                <p>Account Holder Name</p>
                                                 <input type="text" />
                                             </label>
                                         </div>
 
-                                        <div class="form-row">
+                                        <div class="form-row1">
                                             <label for="">
-                                                <p>Email</p>
+                                                <p>Bank name</p>
                                                 <input type="text" />
                                             </label>
 
                                             <label for="">
-                                                <p>Phone</p>
+                                                <p>Branch name</p>
                                                 <input type="text" />
                                             </label>
                                         </div>
+
+                                        <div class="form-row1">
+                                            <label for="">
+                                                <p>Account no.</p>
+                                                <input type="text" />
+                                            </label>
+
+                                            <label for="">
+                                                <p>Ifsc code</p>
+                                                <input type="text" />
+                                            </label>
+                                        </div>
+
+
                                     </form>
                                 </div>
                             </div>
